@@ -1,6 +1,7 @@
 # Báo cáo tuần 1
 ## Những công việc đã làm
   - Tìm hiểu bài báo về dataset 1M ảnh người nổi tiếng
+  - Tìm hiểu bài báo về DSFD tuy nhiên không hiểu được nhiều
   - Tìm hiểu Tensorflow và thử áp dụng object detection nhận diện các lá bài
 
 ## Kết quả
