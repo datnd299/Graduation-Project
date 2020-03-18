@@ -10,20 +10,11 @@
  - Sử dụng học không có giám sát để phát hiện các điểm bất thường trên bề mặt kim loại (nhận diện trên hình ảnh có cấu trúc) (Anomaly Detection using Deep Learning based Image Completion)
  - Sử dụng mạng mới AnoGAN để phát hiện sai khác (Unsupervised Anomaly Detection with Generative Adversarial Networks to Guide Marker Discovery) - bài này em không hiểu nhưng có code chạy thử trong nhận diện sai khác chữ viết em thấy cũng chạy được
  - Một số phương pháp khác như Fisher Vector, FV + SVM, Siamese Architecture nhưng tỏ ra không hiệu quả khi xuất hiện những điểm bất thường nhỏ trên ảnh
- - 
-### Tìm hiểu Tensorflow và thử áp dụng object detection nhận diện các lá bài
-- Một thư viện mã nguồn mở dễ sử dụng, nhiều tutorial có sẵn, cộng đồng hỗ trợ đông đảo, có thể triển khai trên nhiều nền tảng
-- Chạy thử tutorial bước đầu đã có kết quả
-- Các bước đã thực hiện
-  - Cài đặt các thư viện, driver cho GPU NVidia, cài đặt Anaconda và Virtual Environment, cài đặt Tensorflow-GPU lên môi trường ảo
-  - Sử dụng project mẫu của Tensorflow về object detection
-  - Thu thập hình ảnh và dán nhãn bẳng tay sử dụng [LabelImg](https://github.com/tzutalin/labelImg#installation)
-  - Khởi tạo, cài đặt tham số training data
-  - Training (trong 3h bằng GPU)
-  - Export inference graph
-  - Test, kết quả [tại đây](https://github.com/datnd299/Graduation-Project/tree/master/Week1/Ket%20qua)
+ - Xếp chồng 2 hình ảnh (ảnh gốc + ảnh chụp tại thời điểm) sau đó dùng object detetion để tìm điểm khác biệt áp dụng vào bài toán tìm các trang sách bị sửa đổi (Spot the Difference by Object Detection) em thấy bài này ý tưởng dễ hiểu, phù hợp với bài toán của em, không có code mẫu, chi tiết tại [File pptx](https://github.com/datnd299/Graduation-Project/blob/master/Week2/w2.pptx)
+### Phân tích cấu trúc, chức năng, use case của hệ thống
+- Chi tiết tại [File docx](https://github.com/datnd299/Graduation-Project/blob/master/Week2/w2.docx)
 
 ## Công việc tuần tới
-- Tiếp tục tìm hiểu Tensorflow, cải thiện các chức năng, độ chính xác của nhận diện cho phù hợp với bài toán
-- Tiếp tục tìm hiểu các thuật ngữ, bài toán cơ bản trong deep learning
-- Phân tích chức năng, use cases của hệ thống sẽ làm
+- Tiếp tục tìm hiểu bài toán phát hiện sai khác
+- Phân tích mở rộng hệ thống
+- Dựng các thành phần cơ bản trước của hệ thống
