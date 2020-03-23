@@ -10,6 +10,7 @@ export default new Router({
       redirect: "/dashboard",
       component: () => import("@/views/theme/Base"),
       children: [
+        
         {
           path: "/dashboard",
           name: "dashboard",
@@ -38,7 +39,7 @@ export default new Router({
     },
     {
       path:'/*',
-redirect:'/404'
+      redirect:'/404'
     }
     
   ]

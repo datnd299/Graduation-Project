@@ -1,0 +1,39 @@
+{
+  "header": {
+    "self": {},
+    "items":[
+      {
+        "title": "Dashboards",
+        "root": true,
+        "page": "dashboard",
+        "translate": "MENU.DASHBOARD"
+      }
+    ]
+  },
+  "aside": {
+    "self": {},
+    "items":[
+      {
+        "title": "Dashboards",
+        "root": true,
+        "page": "dashboard",
+        "translate": "MENU.DASHBOARD"
+      },
+      {
+        "section":"Admin"
+      },
+      {
+        "title": "Bên thuê",
+        "root": true,
+        "page": "admin/party-a",
+        "translate": "MENU.PARTY_A"
+      },
+      {
+        "title": "Đối tác",
+        "root": true,
+        "page": "dashboard",
+        "translate": "MENU.PARTY_B"
+      }
+    ]
+  }
+}

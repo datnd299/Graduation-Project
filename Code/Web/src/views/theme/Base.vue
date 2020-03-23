@@ -25,6 +25,7 @@
             v-bind:class="{ 'kt-container--fluid': contentFluid }"
           >
             <transition name="fade-in-up">
+              fsdf
               <router-view></router-view>
             </transition>
           </div>
