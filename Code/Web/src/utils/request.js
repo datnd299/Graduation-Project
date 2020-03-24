@@ -11,7 +11,8 @@ var getToken = function(){
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://localhost:8086/api/v1/', // url = base url + request url
+  // baseURL: 'http://localhost:8086/api/v1/', // url = base url + request url
+  baseURL: 'https://signboard-mn.herokuapp.com/api/v1/', // url = base url + request url
   withCredentials: false, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
