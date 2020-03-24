@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+
 import VueToast from 'vue-toast-notification';
 import Vue from 'vue';
 Vue.use(VueToast);
@@ -14,7 +14,7 @@ const service = axios.create({
   // baseURL: 'http://localhost:8086/api/v1/', // url = base url + request url
   baseURL: 'https://signboard-mn.herokuapp.com/api/v1/', // url = base url + request url
   withCredentials: false, // send cookies when cross-domain requests
-  timeout: 5000 // request timeout
+  timeout: 50000 // request timeout
 })
 
 // request interceptor
@@ -62,15 +62,7 @@ service.interceptors.response.use(
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
         // to re-login
-        MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
-          confirmButtonText: 'Re-Login',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
-        })
+        
       }
       return Promise.reject(res.message || 'error')
     } else {
@@ -79,11 +71,13 @@ service.interceptors.response.use(
   },
   error => {
     console.log('err' + error) // for debug
-    Message({
-      message: error.message,
+    Vue.$toast.open({
+      message: error.message || 'error',
       type: 'error',
-      duration: 5 * 1000
-    })
+      position:'top-right',
+      duration:'3000'
+      // all other options
+  });
     return Promise.reject(error)
   }
 )

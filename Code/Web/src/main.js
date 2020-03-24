@@ -5,6 +5,7 @@ import store from "./store";
 import ApiService from "./common/api.service";
 import MockService from "./common/mock/mock.service";
 import { VERIFY_AUTH } from "./store/auth.module";
+import '@/permission' 
 
 Vue.config.productionTip = false;
 
