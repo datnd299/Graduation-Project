@@ -44,7 +44,7 @@ export default new Router({
     },
     {
       path:'/login',
-      component: () => import("@/views/theme/BlankWrapper.vue"),
+      component: () => import("@/views/pages/auth/Login2.vue"),
       name:'login'
       
     },

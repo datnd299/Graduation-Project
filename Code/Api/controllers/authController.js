@@ -20,12 +20,12 @@ exports.login = async (req, res, next) => {
             email,
             password
         } = req.body;
-
+        
         // 1) check if email and password exist
         if (!email || !password) {
             return next(new AppError(404, 'fail', 'Please provide email or password'), req, res, next);
         }
-
+        
         // 2) check if user exist and password is correct
         const user = await User.findOne({
             email

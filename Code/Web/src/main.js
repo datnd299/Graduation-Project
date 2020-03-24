@@ -17,6 +17,9 @@ import "perfect-scrollbar";
 // Vue 3rd party plugins
 import i18n from "./common/plugins/vue-i18n";
 import vuetify from "./common/plugins/vuetify";
+import VueToast from 'vue-toast-notification';
+// Import any of available themes
+import 'vue-toast-notification/dist/theme-default.css';
 import "./common/plugins/bootstrap-vue";
 import "./common/plugins/perfect-scrollbar";
 import "./common/plugins/highlight-js";
@@ -44,5 +47,6 @@ new Vue({
   store,
   i18n,
   vuetify,
+  VueToast,
   render: h => h(App)
 }).$mount("#app");

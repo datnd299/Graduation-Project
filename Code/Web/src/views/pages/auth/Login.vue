@@ -2,15 +2,17 @@
   <div>
     <!--begin::Head-->
     <div class="kt-login__head">
-      <span class="kt-login__signup-label">{{
-        $t("AUTH.GENERAL.NO_ACCOUNT")
-      }}</span
+      <span class="kt-login__signup-label">
+        <!-- {{$t("AUTH.GENERAL.NO_ACCOUNT")}} -->
+        admin
+        </span
       >&nbsp;&nbsp;
       <router-link
         class="kt-link kt-login__signup-link"
         :to="{ name: 'register' }"
       >
-        {{ $t("AUTH.GENERAL.SIGNUP_BUTTON") }}
+        <!-- {{ $t("AUTH.GENERAL.SIGNUP_BUTTON") }} -->
+        admin
       </router-link>
     </div>
     <!--end::Head-->
@@ -89,7 +91,7 @@
               id="kt_submit"
               class="btn btn-primary btn-elevate kt-login__btn-primary"
             >
-              {{ $t("AUTH.LOGIN.BUTTON") }}
+              <!-- {{ $t("AUTH.LOGIN.BUTTON") }} -->
             </b-button>
           </div>
           <!--end::Action-->
@@ -167,6 +169,9 @@ export default {
         minLength: minLength(3)
       }
     }
+  },
+  created(){
+
   },
   methods: {
     validateState(name) {

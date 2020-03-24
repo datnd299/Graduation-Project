@@ -14,6 +14,8 @@
 // Main demo style scss
 @import "assets/sass/style.vue";
 
+
+
 // Check documentation for RTL css
 /*@import "assets/css/style.vue.rtl";*/
 

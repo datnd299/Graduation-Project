@@ -1,5 +1,6 @@
 import ApiService from "@/common/api.service";
 import JwtService from "@/common/jwt.service";
+import { login } from "@/api/users";
 
 // action types
 export const VERIFY_AUTH = "verifyAuth";
@@ -30,15 +31,27 @@ const getters = {
 
 const actions = {
   [LOGIN](context, credentials) {
-    return new Promise(resolve => {
-      ApiService.post("login", credentials)
-        .then(({ data }) => {
-          context.commit(SET_AUTH, data);
-          resolve(data);
-        })
-        .catch(({ response }) => {
-          context.commit(SET_ERROR, response.data.errors);
-        });
+    return new Promise((resolve, reject) => {
+      console.log(context);
+      
+      
+      // login.post("login", credentials)
+      //   .then(({ data }) => {
+      //     context.commit(SET_AUTH, data);
+      //     resolve(data);
+      //   })
+      //   .catch(({ response }) => {
+      //     context.commit(SET_ERROR, response.data.errors);
+      //   });
+      login({ email: credentials.email, password: credentials.password }).then(response => {
+    console.log(response);
+    
+        
+      
+        resolve();
+      }).catch(error => {
+        reject(error);
+      });
     });
   },
   [LOGOUT](context) {
