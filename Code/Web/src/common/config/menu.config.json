@@ -23,16 +23,47 @@
         "section":"Admin"
       },
       {
-        "title": "Bên thuê",
+        "title": "QL Bên thuê",
         "root": true,
         "page": "admin/party-a",
         "translate": "MENU.PARTY_A"
       },
       {
-        "title": "Đối tác",
+        "title": "QL Đối tác",
         "root": true,
         "page": "dashboard",
         "translate": "MENU.PARTY_B"
+      },
+      
+      {
+        "section":"Bên thuê"
+      },
+      {
+        "title": "QL Hình ảnh",
+        "root": true,
+        "page": "dashboard",
+        "translate": "QL Hình ảnh"
+      },
+      {
+        "title": "QL Đối tác",
+        "root": true,
+        "page": "dashboard",
+        "translate": "QL Đối tác"
+      },
+      {
+        "title": "Báo cáo",
+        "root": true,
+        "page": "dashboard",
+        "translate": "Báo cáo"
+      },
+      {
+        "section":"Đối tác"
+      },
+      {
+        "title": "QL Hình ảnh",
+        "root": true,
+        "page": "dashboard",
+        "translate": "QL Hình ảnh"
       }
     ]
   }

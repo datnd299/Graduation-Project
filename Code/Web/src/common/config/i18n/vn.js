@@ -11,8 +11,8 @@ export const locale = {
       FEATURES: "Features",
       APPS: "Apps",
       DASHBOARD: "Trang chủ",
-      PARTY_A:"Bên thuê",
-        PARTY_B:"Đối tác bên thuê"
+      PARTY_A:"QL Bên thuê",
+      PARTY_B:"QL Đối tác bên thuê"
     },
   };
   

@@ -6,7 +6,10 @@
   >
     <div class="kt-header-mobile__logo">
       <a href="/">
-        <img alt="Logo" :src="headerLogo" />
+        <div class="logo" style="    font-size: 20px;
+    font-weight: bold;
+    color: white;
+">SignboardMn</div>
       </a>
     </div>
     <div class="kt-header-mobile__toolbar">
@@ -71,3 +74,6 @@ export default {
   }
 };
 </script>
+<style lang="css">
+ 
+</style>

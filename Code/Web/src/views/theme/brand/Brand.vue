@@ -3,7 +3,9 @@
   <div class="kt-aside__brand kt-grid__item" id="kt_aside_brand">
     <div class="kt-aside__brand-logo">
       <router-link to="/">
-        <img :src="siteLogo()" alt="" />
+        <div class="logo" style="    font-size: 20px;
+    font-weight: bold;
+    color: white;">SignboardMn</div>
       </router-link>
     </div>
     <div class="kt-aside__brand-tools" v-if="allowMinimize">

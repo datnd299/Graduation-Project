@@ -10,16 +10,15 @@
     item-key="name"
     class="elevation-1"
   >
-    <template v-slot:item.com_acc="{ item }">
+    <template v-slot:item.acc_ac="{ item }">
       <v-btn-toggle v-model="toggle_none" 
        dense color="#033"
           >
-          <router-link :to="'/admin/party-a/'+item.com_id+'/users'">
+          <!-- <router-link :to="'/admin/party-a/'+item.com_id+'/users'">
             <v-btn small>
             <i class="fas fa-users"></i>
-            <!-- <v-icon>fas fa-users</v-icon> -->
           </v-btn>
-          </router-link>
+          </router-link> -->
           
 
           <v-btn small>
@@ -43,20 +42,21 @@ export default {
         singleSelect: false,
         selected: [],
         headers: [
-          
-          { text: 'Tên', value: 'com_name' },
-          { text: 'Địa chỉ', value: 'com_addr' },
-          { text: 'Số điện thoại', value: 'com_phone' },
-          { text: 'Email', value: 'com_email' },
-          { text: 'Actions', value: 'com_acc' },
+          { text: 'TK', value: 'acc_name' },
+          { text: 'Tên', value: 'acc_fullname' },
+          { text: 'Số điện thoại', value: 'acc_phone' },
+          { text: 'Email', value: 'accemail' },
+          { text: 'Actions', value: 'acc_ac' },
         ],
         desserts: [
          {
-           com_id:1,
-           com_name:'Công ty 1',
-           com_addr:'17 Giải phóng, Hai Bà Trưng, Hà Nội',
-           com_phone:'0123456412',
-           com_email:'ct1@ct1.com'
+           acc_id:1,
+           acc_name:'admin1',
+           acc_fullname:'Công ty 1',
+           acc_phone:'0123456412',
+           acc_email:'ct1@ct1.com',
+           acc_role:1,
+           acc_status:2
          }
         ],
       }
@@ -68,7 +68,9 @@ export default {
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
       { title: "Admin", route: "" },
-      { title: "QL Bên thuê", route: "party-a" }
+      { title: "QL Bên thuê", route: "/admin/party-a" },
+      { title: "Công ty 1", route: "/admin/party-a/1" },
+      { title: "Tài khoản", route: "/admin/party-a/1/users" }
     ]);
   }
 };

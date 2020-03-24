@@ -78,9 +78,7 @@ export default {
   },
   mounted() {
     // check if current user is authenticated
-    if (!this.isAuthenticated) {
-      this.$router.push({ name: "login" });
-    }
+   
 
     // Simulate the delay page loading
     setTimeout(() => {
@@ -134,7 +132,8 @@ export default {
      * @returns {boolean}
      */
     toolbarDisplay() {
-      return !!this.layoutConfig("toolbar.display");
+      return false;
+      // return !!this.layoutConfig("toolbar.display");
     },
 
     /**

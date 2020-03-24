@@ -5,7 +5,7 @@
       :style="{ backgroundImage: `url(${backgroundImage})` }"
     >
       <h3 class="kt-head__title">
-        User Notifications
+        Thông báo
         <span class="ml-2 btn btn-success btn-sm btn-bold btn-font-md"
           >23 new</span
         >
