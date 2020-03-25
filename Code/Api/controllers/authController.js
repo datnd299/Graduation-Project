@@ -3,6 +3,7 @@ const {
 } = require('util');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
+const AccessToken = require('../models/access/token');
 const AppError = require('../utils/appError');
 
 
@@ -34,10 +35,13 @@ exports.login = async (req, res, next) => {
         if (!user || !await user.correctPassword(password, user.password)) {
             return next(new AppError(401, 'fail', 'Email or Password is wrong'), req, res, next);
         }
-
         // 3) All correct, send jwt to client
         const token = createToken(user.id);
+        await AccessToken.create({
+            token :token,
+            user : user
 
+        })
         // Remove the password from the output 
         user.password = undefined;
 
