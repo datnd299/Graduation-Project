@@ -55,6 +55,7 @@ const actions = {
     });
   },
   [LOGOUT](context) {
+    RemoveToken();
     context.commit(PURGE_AUTH);
   },
   [REGISTER](context, credentials) {
@@ -112,7 +113,7 @@ const mutations = {
     state.isAuthenticated = false;
     state.user = {};
     state.errors = {};
-    RemoveToken();
+    
     JwtService.destroyToken();
   }
 };
