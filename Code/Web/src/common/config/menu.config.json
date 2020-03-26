@@ -31,7 +31,7 @@
       {
         "title": "QL Đối tác",
         "root": true,
-        "page": "dashboard",
+        "page": "admin/party-b",
         "translate": "MENU.PARTY_B"
       },
       

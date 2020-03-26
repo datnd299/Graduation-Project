@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
         validate: [validator.isEmail, ' Please provide a valid email']
 
     },
+    status:{
+        type: Number,
+        default:1
+    },
     
 });
 

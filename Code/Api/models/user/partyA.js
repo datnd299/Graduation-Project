@@ -17,8 +17,7 @@ const partyASchema = new mongoose.Schema({
     },
     phone:{
         type:String,
-        required :true,
-        unique:true
+    
     },
     province:{
         type:String,
@@ -32,9 +31,12 @@ const partyASchema = new mongoose.Schema({
     industry:{
         type: String,
     },
-    accs:[{ type: Schema.ObjectId, ref: "User" }]
-
-});
+    accs:[{ type: Schema.ObjectId, ref: "Account" }]
+    ,status:{
+        type: Number,
+        default:1
+    },
+},{timestamps:true});
 
 
 const PartyA = mongoose.model('PartyA', partyASchema);

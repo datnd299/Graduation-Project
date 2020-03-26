@@ -26,7 +26,9 @@ import "./common/plugins/perfect-scrollbar";
 import "./common/plugins/highlight-js";
 import "@babel/polyfill";
 import "@mdi/font/css/materialdesignicons.css";
-
+import DLoading from '@/views/theme/components/DLoading.vue'
+import './utils/g-filter'
+Vue.component('d-loading', DLoading);
 // API service init
 ApiService.init();
 

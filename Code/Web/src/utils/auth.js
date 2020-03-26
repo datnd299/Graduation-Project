@@ -4,6 +4,8 @@ const TokenKey = 's_token'
 const NToken = 's_ntoken'
 const IDUserKey = 's_uid'
 const nameKey = 's_name'
+const role = 's_role'
+
     // const otcKey = 'otc'
     // const employeeCodeKey = 'employee-code'
     // const adminKey = 'admin'
@@ -56,4 +58,17 @@ export function SetName(name) {
 
 export function RemoveName() {
     return Cookies.remove(nameKey)
+}
+
+
+export function GetRole() {
+    return Cookies.get(role)
+}
+
+export function SetRole(name) {
+    return Cookies.set(role, name,{ expires: 365 })
+}
+
+export function RemoveRole() {
+    return Cookies.remove(role)
 }

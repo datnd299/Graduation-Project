@@ -2,16 +2,15 @@ import axios from 'axios'
 
 import VueToast from 'vue-toast-notification';
 import Vue from 'vue';
+import {GetToken} from '@/utils/auth';
 Vue.use(VueToast);
 
-import store from '@/store'
-var getToken = function(){
-    return 'a'
-}
+
+
 
 // create an axios instance
 const service = axios.create({
-  // baseURL: 'http://localhost:8086/api/v1/', // url = base url + request url
+  //baseURL: 'http://localhost:8086/api/v1/', // url = base url + request url
   baseURL: 'https://signboard-mn.herokuapp.com/api/v1/', // url = base url + request url
   withCredentials: false, // send cookies when cross-domain requests
   timeout: 50000 // request timeout
@@ -22,12 +21,14 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
 
-    if (store.getters.token) {
+    //if (store.getters.token) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      config.headers['X-Token'] = getToken()
-    }
+      console.log(GetToken());
+      
+      config.headers['Authorization'] = "Bearer " + GetToken()
+    //}
     return config
   },
   error => {
@@ -51,7 +52,7 @@ service.interceptors.response.use(
         message: res.message || 'error',
         type: 'error',
         position:'top-right',
-        duration:'3000'
+        duration:3000
         // all other options
     });
       
@@ -75,7 +76,7 @@ service.interceptors.response.use(
       message: error.message || 'error',
       type: 'error',
       position:'top-right',
-      duration:'3000'
+      duration:3000
       // all other options
   });
     return Promise.reject(error)

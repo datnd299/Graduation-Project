@@ -7,3 +7,35 @@ export function login(data) {
     data: data
   })
 }
+export function signupPartyA(data) {
+  return request({
+    url: 'users/signup/party-a',
+    method: 'post',
+    data: data
+  })
+}
+
+export function signupPartyB(data) {
+  return request({
+    url: 'users/signup/party-B',
+    method: 'post',
+    data: data
+  })
+}
+export function changePassword(data) {
+  return request({
+    url: 'users/change-password',
+    method: 'post',
+    data: data
+  })
+}
+export function createPAAccount(data) {
+  return request({
+    url: 'users/create-pa-account',
+    method: 'post',
+    data: data
+  })
+}
+
+
+

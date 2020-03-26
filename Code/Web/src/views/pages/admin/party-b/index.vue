@@ -16,7 +16,7 @@
       <v-btn-toggle
        dense color="#033"
           >
-          <router-link :to="'/admin/party-a/'+item._id+'/users'">
+          <router-link :to="'/admin/party-a/'+item['_id']+'/users'">
             <v-btn small>
             <i class="fas fa-users"></i>
             <!-- <v-icon>fas fa-users</v-icon> -->
@@ -38,7 +38,7 @@
 <script>
 
 import { SET_BREADCRUMB } from "@/store/breadcrumbs.module";
-import {getPartyAs} from '@/api/admin/users'
+import {getPartyBs} from '@/api/admin/users'
 export default {
   data() {
     return {
@@ -62,7 +62,7 @@ export default {
   methods:{
     fetchData(){
       this.isLoading = true;
-      getPartyAs().then(res=>{
+      getPartyBs().then(res=>{
         console.log(res);
         this.desserts = res.data;
         this.isLoading = false;

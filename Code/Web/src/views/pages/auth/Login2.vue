@@ -9,7 +9,7 @@
             <v-col cols="12" xs="0" sm="6" md="6">
               <div
                 style="background-image: url(https://cdn.shopify.com/s/files/1/1991/1709/products/Conected-tile-800x800.jpg?v=1575931838); height:100%;
-              padding:20px"
+              padding:20px;background-repeat: repeat;"
               >
                 <img src="/assets/media/logos/logo-mini-md.png" alt />
                 <span style="font-size: 30px;

@@ -27,6 +27,11 @@ export default new Router({
               component: () => import("@/views/pages/admin/party-a/index.vue")
             },
             {
+              path: "party-b",
+              name: "admin-party-a-list",
+              component: () => import("@/views/pages/admin/party-b/index.vue")
+            },
+            {
               path: "party-a/:id",
               redirect:'party-a/:id/users',
               component: ()=> import("@/views/theme/BlankWrapper.vue"),

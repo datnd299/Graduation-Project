@@ -8,6 +8,11 @@ const accSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please fill your name']
     },
+    acc_name:{
+        type: String,
+        required: [true, 'Please fill acc name'],
+        unique:true,
+    },
     email: {
         type: String,
         required: [true, 'Please fill your email'],
@@ -41,9 +46,9 @@ const accSchema = new mongoose.Schema({
     },
     status: {
         type: Number,
-        default: true,
+        default: 1,
         select: false
-    }
+    },
 });
 
 // encrypt the password using 'bcryptjs'

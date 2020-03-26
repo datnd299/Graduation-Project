@@ -1,7 +1,7 @@
 import ApiService from "@/common/api.service";
 import JwtService from "@/common/jwt.service";
 import { login } from "@/api/users";
-import { SetToken,RemoveToken } from '@/utils/auth'
+import { SetToken,RemoveToken,SetRole } from '@/utils/auth'
 
 // action types
 export const VERIFY_AUTH = "verifyAuth";
@@ -45,8 +45,10 @@ const actions = {
       //     context.commit(SET_ERROR, response.data.errors);
       //   });
       login({ email: credentials.email, password: credentials.password }).then(response => {
-    
+        console.log(response);
+        
         SetToken(response.token);
+        SetRole(response.data.acc.role)
       
         resolve();
       }).catch(error => {

@@ -32,7 +32,7 @@
                 </div>
 
                 <b-form-group id="example-input-group-1" label label-for="example-input-1">
-                  <b-form-input
+                  <b-form-input placeholder="Email hoặc tài khoản đăng nhập"
                     id="example-input-1"
                     name="example-input-1"
                     v-model="$v.form.email.$model"
@@ -77,7 +77,7 @@ import { mapState } from "vuex";
 import { LOGIN, LOGOUT } from "@/store/auth.module";
 
 import { validationMixin } from "vuelidate";
-import { email, minLength, required } from "vuelidate/lib/validators";
+import {  minLength, required } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
@@ -86,8 +86,8 @@ export default {
     return {
       // Remove this dummy login info
       form: {
-        email: "datnd@gm.com",
-        password: "12"
+        email: "datnd",
+        password: "1"
       }
     };
   },
@@ -95,7 +95,6 @@ export default {
     form: {
       email: {
         required,
-        email
       },
       password: {
         required,
