@@ -108,21 +108,21 @@ exports.changePass = async (req, res, next) => {
 exports.signup = async (req, res, next) => {
 
     try {
-        const user = await User.create({
+        const user = await Account.create({
             name: req.body.name,
             email: req.body.email,
+            acc_name:req.body.email,
             password: req.body.password,
+            role:'admin',
             passwordConfirm: req.body.passwordConfirm,
-            role: req.body.role,
         });
 
-        const token = createToken(user.id);
+
 
         user.password = undefined;
 
         res.status(201).json({
             status: 'success',
-            token,
             data: {
                 user
             }
