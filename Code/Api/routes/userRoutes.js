@@ -6,6 +6,8 @@ const authController = require('./../controllers/authController');
 
 router.post('/login', authController.login);
 router.post('/signup', authController.signup);
+router.post('/signup/party-a', userController.partyASignUp);
+router.post('/signup/party-b', userController.partyBSignUp);
 
 // Protect all routes after this middleware
 router.use(authController.protect);

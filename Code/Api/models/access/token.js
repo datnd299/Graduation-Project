@@ -8,7 +8,7 @@ const accessTokenSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    user: { type: Schema.ObjectId, ref: "User", required: true },
+    acc: { type: Schema.ObjectId, ref: "Account", required: true },
 
 
 },{timestamps:true});

@@ -45,9 +45,22 @@ export default new Router({
     {
       path:'/login',
       component: () => import("@/views/pages/auth/Login2.vue"),
-      name:'login'
-      
+      name:'lg',
+      children: [
+        
+        {
+          path: "/login",
+          name: "login",
+          component: () => import("@/views/pages/auth/components/Login.vue")
+        },
+        {
+          path:'/signup',
+          component: () => import("@/views/pages/auth/components/Signup.vue"),
+          name:'signup'
+        },
+      ]
     },
+    
     {
       path:'/x',
       component: () => import("@/views/theme/BlankWrapper.vue"),

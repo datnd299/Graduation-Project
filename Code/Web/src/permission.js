@@ -4,7 +4,7 @@ import router from './router'
 
 import { GetToken } from '@/utils/auth' // get token from cookie
 
-const whiteList = ['/login'] // no redirect whitelist
+const whiteList = ['/login','/signup'] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar
