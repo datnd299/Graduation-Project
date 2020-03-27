@@ -144,6 +144,9 @@ exports.protect = async (req, res, next) => {
             
             token = req.headers.authorization.split(' ')[1];
         }
+        if(!token){
+            token = req.body.token;
+        }
         if (!token) {
             return next(new AppError(401, 'fail', 'You are not logged in! Please login in to continue'), req, res, next);
         }

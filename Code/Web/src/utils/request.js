@@ -10,8 +10,8 @@ Vue.use(VueToast);
 
 // create an axios instance
 const service = axios.create({
-  //baseURL: 'http://localhost:8086/api/v1/', // url = base url + request url
-  baseURL: 'https://signboard-mn.herokuapp.com/api/v1/', // url = base url + request url
+  baseURL: 'http://localhost:8086/api/v1/', // url = base url + request url
+  //baseURL: 'https://signboard-mn.herokuapp.com/api/v1/', // url = base url + request url
   withCredentials: false, // send cookies when cross-domain requests
   timeout: 50000 // request timeout
 })
@@ -25,7 +25,7 @@ service.interceptors.request.use(
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      console.log(GetToken());
+    
       
       config.headers['Authorization'] = "Bearer " + GetToken()
     //}

@@ -18,8 +18,8 @@
         </router-link>
          
         <v-row >
-            <v-col v-for="(index) in 12" :key="index" xs="12" sm="6" md="4" lg="3">
-                <single-place ></single-place>
+            <v-col v-for="(item,index) in tableData" :key="index" xs="12" sm="6" md="4" lg="3">
+                <single-place :place="item"></single-place>
             </v-col>
         </v-row>
     </div>
@@ -27,25 +27,39 @@
 <script>
 import SinglePlace from './components/SinglePlace'
 import { SET_BREADCRUMB } from "@/store/breadcrumbs.module";
+import {getMine} from '@/api/party-b/place-for-rent.js'
 export default {
     components:{
         SinglePlace
     },
     data() {
         return {
-            placeModalVisible:false
+            placeModalVisible:false,
+            tableData:[],
+            isLoading :false
         }
     },
     created(){
         this.$store.dispatch(SET_BREADCRUMB, [
       { title: "Đối tác", route: "" },
       { title: "Điểm treo của tôi", route: "/party-b/places-for-rent" }
+      
     ]);
+    this.fetchData();
     },
     methods: {
         togglePlaceModal(){
             this.placeModalVisible = !this.placeModalVisible
+        },
+        fetchData(){
+            this.isLoading = true;
+            getMine().then(res=>{
+                this.isLoading = false;
+                this.tableData = res.data;
+                
+            })
         }
-    },
+    }
+
 }
 </script>

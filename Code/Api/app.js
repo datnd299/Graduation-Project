@@ -8,11 +8,16 @@ const cors = require('cors');
 
 
 const userRoutes = require('./routes/userRoutes');
-const adminUserRoute = require('./routes/admin/user');
+const placeForRentRoutes = require ('./routes/party-b/placeForRentRoutes');
+const fileRoutes = require ('./routes/file/fileRoutes');
+
+const adminUserRoute = require('./routes/admin/adminUserRoutes');
 const globalErrHandler = require('./controllers/errorController');
 const AppError = require('./utils/appError');
 const app = express();
 var serveStatic = require('serve-static');
+const fileUpload = require('express-fileupload');
+
 app.use(serveStatic(__dirname + "/web"));
 // Allow Cross-Origin requests
 app.use(cors());
@@ -34,10 +39,10 @@ app.use(express.json({
 }));
 
 var bodyParser = require('body-parser');
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
-
+app.use(fileUpload());
 // Data sanitization against Nosql query injection
 app.use(mongoSanitize());
 
@@ -52,6 +57,9 @@ app.use(hpp());
 app.use('/api/v1/users', userRoutes);
 
 app.use('/api/v1/admin/users', adminUserRoute);
+app.use('/api/v1/party-b',placeForRentRoutes);
+app.use('/api/v1/file',fileRoutes);
+
 
 // handle undefined Routes
 app.use('*', (req, res, next) => {
