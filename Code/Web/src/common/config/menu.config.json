@@ -60,6 +60,12 @@
         "section":"Đối tác"
       },
       {
+        "title": "Điểm treo của bạn",
+        "root": true,
+        "page": "party-b/places-for-rent",
+        "translate": "Điểm treo của bạn"
+      },
+      {
         "title": "QL Hình ảnh",
         "root": true,
         "page": "dashboard",

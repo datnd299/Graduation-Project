@@ -44,6 +44,24 @@ export default new Router({
             }
           ]
           
+        },
+        {
+          path: "/party-b",
+          name: "party-b",
+          component: ()=> import("@/views/theme/BlankWrapper.vue"),
+          children: [
+            {
+              path: "places-for-rent",
+              name: "places-for-rent",
+              component: () => import("@/views/pages/party-b/place-for-rent/index.vue")
+            },
+            {
+              path: "new-place-for-rent",
+              name: "new-place-for-rent",
+              component: () => import("@/views/pages/party-b/place-for-rent/components/PlaceInfoEditable.vue")
+            },
+            
+          ]
         }
       ]
     },

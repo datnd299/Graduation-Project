@@ -19,7 +19,7 @@
         </a>
       </div>
       <div class="kt-footer__menu">
-        <a
+        <!-- <a
           href="#"
   
           class="kt-footer__menu-link kt-link"
@@ -30,12 +30,12 @@
        
           class="kt-footer__menu-link kt-link"
           >Team</a
-        >
+        > -->
         <a
           href="#"
        
           class="kt-footer__menu-link kt-link"
-          >Contact</a
+          >Graduation-Project</a
         >
       </div>
     </div>

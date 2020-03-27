@@ -7,6 +7,8 @@ import MockService from "./common/mock/mock.service";
 import { VERIFY_AUTH } from "./store/auth.module";
 import '@/permission' 
 
+import * as VueGoogleMaps from 'vue2-google-maps'
+
 Vue.config.productionTip = false;
 
 // Global 3rd party plugins
@@ -29,6 +31,16 @@ import "@mdi/font/css/materialdesignicons.css";
 import DLoading from '@/views/theme/components/DLoading.vue'
 import './utils/g-filter'
 Vue.component('d-loading', DLoading);
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyDwn1LVzfBeHNGrXB8g5DbG6AvIb_3Xap8',
+    libraries: 'places', // This is required if you use the Autocomplete plugin
+
+  },
+
+  
+});
 // API service init
 ApiService.init();
 

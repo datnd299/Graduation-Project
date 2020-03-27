@@ -79,3 +79,14 @@
       opacity: 1;
     }
   }
+
+  .image-input-preview img{
+    border: 1px solid #b2bec3;
+    height: 90px;
+    object-fit: contain;
+    width: 90px;
+    border-radius: 5px;
+    padding: 3px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
