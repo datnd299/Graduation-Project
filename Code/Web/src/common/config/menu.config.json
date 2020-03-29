@@ -1,4 +1,6 @@
+
 {
+  "role": "1 Admin, 2 AdminA 3 Em A, 4 B",
   "header": {
     "self": {},
     "items":[
@@ -17,59 +19,77 @@
         "title": "Dashboards",
         "root": true,
         "page": "dashboard",
-        "translate": "MENU.DASHBOARD"
+        "translate": "MENU.DASHBOARD",
+        "role":"1,2,3,4"
       },
       {
-        "section":"Admin"
+        "section":"Admin",
+        "role":"1"
       },
       {
         "title": "QL Bên thuê",
         "root": true,
         "page": "admin/party-a",
-        "translate": "MENU.PARTY_A"
+        "translate": "MENU.PARTY_A",
+        "role":"1"
       },
       {
         "title": "QL Đối tác",
         "root": true,
         "page": "admin/party-b",
-        "translate": "MENU.PARTY_B"
+        "translate": "MENU.PARTY_B",
+        "role":"1"
       },
       
       {
-        "section":"Bên thuê"
+        "section":"Bên thuê",
+        "role":"2,3"
+      },
+      {
+        "title": "Tài khoản",
+        "root": true,
+        "page": "party-a/accounts",
+        "translate": "Tài khoản",
+        "role":"2"
       },
       {
         "title": "QL Hình ảnh",
         "root": true,
         "page": "dashboard",
-        "translate": "QL Hình ảnh"
+        "translate": "QL Hình ảnh",
+        "role":"2"
       },
       {
         "title": "QL Đối tác",
         "root": true,
         "page": "dashboard",
-        "translate": "QL Đối tác"
+        "translate": "QL Đối tác",
+        "role":"2"
       },
       {
         "title": "Báo cáo",
         "root": true,
         "page": "dashboard",
-        "translate": "Báo cáo"
+        "translate": "Báo cáo",
+        "role":"2"
       },
       {
-        "section":"Đối tác"
+        "section":"Đối tác",
+        "role":"4"
       },
       {
         "title": "Điểm treo của bạn",
         "root": true,
         "page": "party-b/places-for-rent",
-        "translate": "Điểm treo của bạn"
+        "translate": "Điểm treo của bạn",
+        "role":"4"
       },
       {
         "title": "QL Hình ảnh",
         "root": true,
         "page": "dashboard",
-        "translate": "QL Hình ảnh"
+        "translate": "QL Hình ảnh",
+        "role":"4"
       }
     ]
   }

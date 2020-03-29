@@ -46,6 +46,18 @@ export default new Router({
           
         },
         {
+          path: "/party-a",
+          name: "party-a",
+          component: ()=> import("@/views/theme/BlankWrapper.vue"),
+          children: [
+            {
+              path: "accounts",
+              name: "party-a-accounts",
+              component: () => import("@/views/pages/party-a/accounts/index.vue")
+            }]
+          
+        },
+        {
           path: "/party-b",
           name: "party-b",
           component: ()=> import("@/views/theme/BlankWrapper.vue"),

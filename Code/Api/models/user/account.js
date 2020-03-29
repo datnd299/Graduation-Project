@@ -46,14 +46,15 @@ const accSchema = new mongoose.Schema({
     },
     status: {
         type: Number,
-        default: 1,
-        select: false
+        default: 1
     },
 });
 
 // encrypt the password using 'bcryptjs'
 // Mongoose -> Document Middleware
 accSchema.pre('save', async function (next) {
+    console.log('sfd');
+    
     // check the password if it is modified
     if (!this.isModified('password')) {
         return next();

@@ -10,6 +10,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
 const placeForRentRoutes = require ('./routes/party-b/placeForRentRoutes');
 const fileRoutes = require ('./routes/file/fileRoutes');
+const pAAcountRoute = require('./routes/party-a/accountRoutes');
 
 const adminUserRoute = require('./routes/admin/adminUserRoutes');
 const globalErrHandler = require('./controllers/errorController');
@@ -59,6 +60,8 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/admin/users', adminUserRoute);
 app.use('/api/v1/party-b',placeForRentRoutes);
 app.use('/api/v1/file',fileRoutes);
+app.use('/api/v1/party-a/accounts',pAAcountRoute);
+
 
 
 // handle undefined Routes
