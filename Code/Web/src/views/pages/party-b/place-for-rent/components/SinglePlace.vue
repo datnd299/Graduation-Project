@@ -62,6 +62,7 @@
   </v-card>
 </template>
 <script>
+import {BASE_API} from '@/utils/base'
 export default {
   props:{
     place:{
@@ -77,7 +78,7 @@ export default {
         console.log(this.place);
         
         if(this.place&&this.place.imgs&&this.place.imgs.length>0){
-          return 'http://localhost:8086/api/v1/file/get/'+this.place.imgs[0]
+          return BASE_API+'file/get/'+this.place.imgs[0]
         }
         return 'sdf'
       }

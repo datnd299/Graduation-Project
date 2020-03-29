@@ -58,3 +58,29 @@ exports.getMine = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.getByParty = async (req, res, next) => {
+    try {
+        var id = req.body.p_id;
+        var ptB = await PartyB.findById(id);
+        if(!ptB){
+            return next(new AppError(200, 'fail', 'Không có đơn vị này'), req, res, next);
+        }
+        
+        const plLst = await PlaceForRent.find({
+            owner:ptB._id
+        });
+        ptB['places'] = plLst;
+
+        res.status(200).json({
+            status: 'success',
+            data: {pt_b:ptB,
+            places:plLst}
+            
+        });
+
+
+    } catch (error) {
+        next(error);
+    }
+};

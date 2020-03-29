@@ -86,7 +86,7 @@ export default {
     return {
       // Remove this dummy login info
       form: {
-        email: "datnd",
+        email: "doitac@gm.com",
         password: "1"
       }
     };

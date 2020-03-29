@@ -56,6 +56,11 @@ export default new Router({
               component: () => import("@/views/pages/party-b/place-for-rent/index.vue")
             },
             {
+              path: ":id/places",
+              name: "places-for-rent-of-party",
+              component: () => import("@/views/pages/party-b/place-for-rent/PartyPlaces.vue")
+            },
+            {
               path: "new-place-for-rent",
               name: "new-place-for-rent",
               component: () => import("@/views/pages/party-b/place-for-rent/components/PlaceInfoEditable.vue")

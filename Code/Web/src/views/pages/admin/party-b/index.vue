@@ -16,16 +16,16 @@
       <v-btn-toggle
        dense color="#033"
           >
-          <router-link :to="'/admin/party-a/'+item['_id']+'/users'">
-            <v-btn small>
-            <i class="fas fa-users"></i>
+          <router-link :to="'/party-b/'+item['_id']+'/places'">
+            <v-btn small color="primary">
+            <i class="fas fa-sign" style="color:white"></i>
             <!-- <v-icon>fas fa-users</v-icon> -->
           </v-btn>
           </router-link>
           
 
-          <v-btn small>
-            <i class="fas fa-times"></i>
+          <v-btn depressed  small color="red" text-color="white">
+            <i class="fas fa-times" style="color:white"></i>
             <!-- <v-icon style="color:red">fas fa-times</v-icon> -->
           </v-btn>
           

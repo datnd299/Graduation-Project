@@ -67,6 +67,28 @@ exports.getPartyAAccs = async (req, res, next) => {
    }
 }
 
+exports.approveParty = async (req, res, next) => {
+    try {
+        var pId = req.body.p_id;
+        var status = req.body.status;
+        var ptA = await PartyA.findById(pId);
+        if(!ptA){
+            return next(new AppError(200, 'fail', 'Không có đơn vị này'), req, res, next);
+        }
+        ptA.status = status;
+        await ptA.save()
+       res.status(200).json({
+           status: 'success',
+           data: ptA
+       });
+
+
+   } catch (error) {
+       next(error);
+   }
+}
+
+
 exports.partyASignUp = async (req, res, next) => {
     const sessionA = await Account.startSession();
     sessionA.startTransaction();

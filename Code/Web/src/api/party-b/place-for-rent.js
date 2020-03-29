@@ -14,3 +14,12 @@ export function getMine(data) {
       data: data,
     })
   }
+  export function getByParty(data) {
+    return request({
+      url: 'party-b/place-for-rent/get-by-party',
+      method: 'post',
+      data: data,
+    })
+  }
+
+ 

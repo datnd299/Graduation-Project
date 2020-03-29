@@ -5,12 +5,13 @@ import Vue from 'vue';
 import {GetToken} from '@/utils/auth';
 Vue.use(VueToast);
 
-
+import {BASE_API} from './base'
 
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://localhost:8086/api/v1/', // url = base url + request url
+  // baseURL: 'http://localhost:8086/api/v1/', // url = base url + request url
+  baseURL: BASE_API,
   //baseURL: 'https://signboard-mn.herokuapp.com/api/v1/', // url = base url + request url
   withCredentials: false, // send cookies when cross-domain requests
   timeout: 50000 // request timeout

@@ -14,6 +14,7 @@ router.post('/partyas', userController.getAllPartyA);
 
 router.post('/partybs', userController.getAllPartyB);
 router.post('/party-a/get-accs', userController.getPartyAAccs);
+router.post('/party-a/approve-party', userController.approveParty);
  router.use(authController.restrictTo('admin'));
 
 

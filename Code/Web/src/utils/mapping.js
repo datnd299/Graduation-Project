@@ -16,7 +16,23 @@ const RoleMap={
         color:'orange darken-3'
     }
 }
+const PartyStatusMap={
+    1:{
+        text:'Mới tạo',
+        color:'blue-grey lighten-1'
+    },
+    2:{
+        text:'Đã kích hoạt',
+        color:'green'
+    },
+    0:{
+        text:'Hủy',
+        color:'red'
+    },
+    
+}
 
 module.exports={
-    RoleMap:RoleMap
+    RoleMap:RoleMap,
+    PartyStatusMap:PartyStatusMap
 }

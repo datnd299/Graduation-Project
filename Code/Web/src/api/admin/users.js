@@ -22,4 +22,12 @@ export function getPartyBs(data) {
       data: data
     })
   }
+  export function approvePartyA(data) {
+    return request({
+      url: 'admin/users/party-a/approve-party',
+      method: 'post',
+      data: data
+    })
+  }
 
+  

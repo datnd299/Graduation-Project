@@ -30,6 +30,7 @@ import "@babel/polyfill";
 import "@mdi/font/css/materialdesignicons.css";
 import DLoading from '@/views/theme/components/DLoading.vue'
 import './utils/g-filter'
+import 'datejs'
 Vue.component('d-loading', DLoading);
 
 Vue.use(VueGoogleMaps, {

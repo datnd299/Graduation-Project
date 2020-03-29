@@ -1,5 +1,6 @@
-import {RoleMap} from './mapping'
+import {RoleMap,PartyStatusMap} from './mapping'
 import Vue from "vue";
+
 Vue.filter('roleStatusText', function(role) {
    if(RoleMap[role]){
        return RoleMap[role].text;
@@ -12,3 +13,17 @@ Vue.filter('roleStatusColor', function(role) {
     }
     return 'grey'
 })
+
+Vue.filter('partyStatusText', function(role) {
+    if(PartyStatusMap[role]){
+        return PartyStatusMap[role].text;
+    }
+    return PartyStatusMap[1].text;
+ });
+
+ Vue.filter('partyStatusColor', function(role) {
+     if(PartyStatusMap[role]){
+         return PartyStatusMap[role].color;
+     }
+     return PartyStatusMap[1].color;
+ })
