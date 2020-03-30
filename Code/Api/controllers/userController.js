@@ -218,6 +218,7 @@ exports.createNewPAAccount = async (req, res, next) => {
             password: password,
             role:role,
             passwordConfirm: password_confirm,
+            status:2
         });
         ptA.accs.push(acc);
         await ptA.save();
@@ -240,7 +241,7 @@ exports.createNewPAAccount = async (req, res, next) => {
         res.status(200).json({
             status: 'success',
             data: {
-                ptA
+                acc
             }
         });
 
@@ -252,6 +253,29 @@ exports.createNewPAAccount = async (req, res, next) => {
         next(err);
     }
 };
+
+exports.approveAcc = async (req, res, next) => {
+    try {
+        var aId = req.body.id;
+        var status = req.body.status;
+        var acc = await Account.findById(aId);
+
+        if(!acc){
+            return next(new AppError(200, 'fail', 'Không có tk này'), req, res, next);
+        }
+        acc.status = status;
+        await Account.findByIdAndUpdate(acc._id,{status:status})
+
+       res.status(200).json({
+           status: 'success',
+           data: acc
+       });
+
+
+   } catch (error) {
+       next(error);
+   }
+}
 
 
 exports.getAllUsers = base.getAll(Account);

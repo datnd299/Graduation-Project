@@ -29,5 +29,13 @@ export function getPartyBs(data) {
       data: data
     })
   }
+  export function approveAcc(data) {
+    return request({
+      url: 'admin/users/approve-acc',
+      method: 'post',
+      data: data
+    })
+  }
+  
 
   

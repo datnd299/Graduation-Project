@@ -50,6 +50,8 @@ const userSchema = new mongoose.Schema({
 // Mongoose -> Document Middleware
 userSchema.pre('save', async function (next) {
     // check the password if it is modified
+    console.log('a');
+    
     if (!this.isModified('password')) {
         return next();
     }

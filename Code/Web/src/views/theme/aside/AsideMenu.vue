@@ -12,6 +12,7 @@ import KTMenuItem from "@/views/theme/aside/MenuItem.vue";
 import KTMenuSection from "@/views/theme/aside/MenuSection.vue";
 import menuConfig from "@/common/config/menu.config.json";
 
+import {GetRole} from '@/utils/auth';
 export default {
   name: "KTAsideMenu",
   components: {
@@ -19,8 +20,22 @@ export default {
     KTMenuSection
   },
   computed: {
-    menuItems: () => {
-      return menuConfig.aside.items;
+    menuItems () {
+      var role = GetRole()
+      if(role=="admin"){
+        role = "1";
+      }else if(role =="partyAAdmin"){
+        role ="2";
+      }else if(role =="partyAEm"){
+        role = "3";
+      }else{
+        role = "4";
+      }
+      console.log(role);
+      
+      return menuConfig.aside.items.filter(e=>{
+        return e.role.includes(role)
+      });
     }
   }
 };
