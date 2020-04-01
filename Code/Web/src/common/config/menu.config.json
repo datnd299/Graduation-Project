@@ -52,27 +52,7 @@
         "translate": "Tài khoản",
         "role":"2"
       },
-      {
-        "title": "QL Hình ảnh",
-        "root": true,
-        "page": "dashboard",
-        "translate": "QL Hình ảnh",
-        "role":"2"
-      },
-      {
-        "title": "QL Đối tác",
-        "root": true,
-        "page": "dashboard",
-        "translate": "QL Đối tác",
-        "role":"2"
-      },
-      {
-        "title": "Báo cáo",
-        "root": true,
-        "page": "dashboard",
-        "translate": "Báo cáo",
-        "role":"2"
-      },
+
       {
         "section":"Đối tác",
         "role":"4"

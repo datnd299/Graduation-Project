@@ -23,8 +23,7 @@
            <v-text-field
             v-model="form.email"
             :counter="20"
-            
-            autocomplete="off"
+           
             label="Email"
             name="sdf"
             dense

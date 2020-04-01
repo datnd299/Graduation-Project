@@ -97,8 +97,8 @@ export default {
     return {
       // Remove this dummy login info
       form: {
-        email: "doitac@gm.com",
-        password: "1"
+        email: "",
+        password: ""
       }
     };
   },
