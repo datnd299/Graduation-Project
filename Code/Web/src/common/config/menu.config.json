@@ -89,7 +89,18 @@
         "root": true,
         "page": "dashboard",
         "translate": "QL Hình ảnh",
-        "role":"4"
+        "role":"5"
+      },
+      {
+        "section":"Tài khoản",
+        "role":"1,2,3,4"
+      },
+      {
+        "title": "Thông tin cá nhân",
+        "root": true,
+        "page": "my-info",
+        "translate": "Thông tin cá nhân",
+        "role":"1,2,3,4"
       }
     ]
   }

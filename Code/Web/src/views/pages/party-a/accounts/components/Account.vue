@@ -23,6 +23,7 @@
            <v-text-field
             v-model="form.email"
             :counter="20"
+            
             autocomplete="off"
             label="Email"
             name="sdf"
@@ -66,7 +67,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn outlined  color="red darken-1"  @click="$emit('close')">Đóng</v-btn>
-          <v-btn outlined  color="green darken-1"  @click="createAcc">Tạo mới</v-btn>
+          <v-btn outlined  color="green darken-1" :loading="updating"  @click="createAcc">Tạo mới</v-btn>
         </v-card-actions>
       </v-card>
 </template>
@@ -82,7 +83,8 @@ export default {
                 password:'',
                 passwordConfirm:'',
                 role:'partyAEm'
-            }
+            },
+            updating:false
         }
     },
     methods:{

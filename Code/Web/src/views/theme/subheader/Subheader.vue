@@ -37,12 +37,13 @@
       </div>
       <div class="kt-subheader__toolbar">
         <div class="kt-subheader__wrapper">
-          <a href="#" class="btn kt-subheader__btn-primary">
-            Actions &nbsp;
-            <!--<i class="flaticon2-calendar-1"></i>-->
-          </a>
+          <router-link to="/qr-scanner" class="btn kt-subheader__btn-primary">
+          <i class="fas fa-qrcode"></i> &nbsp;
+            <span>QR</span> &nbsp;
+            
+          </router-link>
 
-          <div
+          <!-- <div
             class="dropdown dropdown-inline"
             v-b-tooltip.hover.left="'Quick actions'"
           >
@@ -59,12 +60,12 @@
                 src="@/assets/media/icons/svg/Files/File-plus.svg"
                 alt=""
               />
-              <!--<i class="flaticon2-plus"></i>-->
+             
             </a>
             <div
               class="dropdown-menu dropdown-menu-fit dropdown-menu-md dropdown-menu-right"
             >
-              <!--begin::Nav-->
+              
               <ul class="kt-nav">
                 <li class="kt-nav__head">
                   Add anything or jump to:
@@ -114,9 +115,9 @@
                   >
                 </li>
               </ul>
-              <!--end::Nav-->
+             
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

@@ -45,13 +45,14 @@
    
       Chưa cho thuê
     </v-chip>
-
+        <router-link :to="'/place/'+place._id+'/details'">
       <v-btn
         color="purple"
         text
       >
         Chi tiết
       </v-btn>
+      </router-link>
 
       <v-spacer></v-spacer>
 

@@ -2,7 +2,7 @@
   <!-- begin:: Header Topbar -->
   <div class="kt-header__topbar">
     <!--begin: Search -->
-    <div
+    <!-- <div
       class="kt-header__topbar-item kt-header__topbar-item--search"
       id="kt_quick_search_toggle"
     >
@@ -22,11 +22,11 @@
       >
         <KTSearchDefault></KTSearchDefault>
       </div>
-    </div>
+    </div> -->
     <!--end: Search -->
 
     <!--begin: Notifications -->
-    <div class="kt-header__topbar-item" id="kt_notification_toggle">
+    <!-- <div class="kt-header__topbar-item" id="kt_notification_toggle">
       <div class="kt-header__topbar-wrapper" data-toggle="dropdown">
         <span class="kt-header__topbar-icon kt-pulse kt-pulse--brand">
           <img
@@ -46,11 +46,11 @@
           <KTDropdownNotification></KTDropdownNotification>
         </form>
       </div>
-    </div>
+    </div> -->
     <!--end: Notifications -->
 
     <!--begin: Quick Actions -->
-    <div class="kt-header__topbar-item">
+    <!-- <div class="kt-header__topbar-item">
       <div
         class="kt-header__topbar-wrapper"
         id="kt_quick_action_toggle"
@@ -71,11 +71,11 @@
       >
         <KTDropdownQuickAction></KTDropdownQuickAction>
       </div>
-    </div>
+    </div> -->
     <!--end: Quick Actions -->
 
     <!--begin: My Cart -->
-    <div class="kt-header__topbar-item">
+    <!-- <div class="kt-header__topbar-item">
       <div
         class="kt-header__topbar-wrapper"
         id="kt_my_cart_toggle"
@@ -96,11 +96,11 @@
       >
         <KTDropdownMyCart></KTDropdownMyCart>
       </div>
-    </div>
+    </div> -->
     <!--end: My Cart -->
 
     <!--begin: Quick panel toggler -->
-    <div
+    <!-- <div
       class="kt-header__topbar-item kt-header__topbar-item--quick-panel"
       v-b-tooltip.hover.bottom="'Quick panel'"
     >
@@ -112,7 +112,7 @@
           alt=""
         />
       </span>
-    </div>
+    </div> -->
     <!--end: Quick panel toggler -->
 
     <!--begin: Language bar -->
@@ -146,7 +146,7 @@
       >
         <div class="kt-header__topbar-user">
           <span class="kt-header__topbar-welcome kt-hidden-mobile">Hi,</span>
-          <span class="kt-header__topbar-username kt-hidden-mobile">Sean</span>
+          <span class="kt-header__topbar-username kt-hidden-mobile">{{getName}}</span>
           <img
             class="kt-hidden"
             alt="Pic"
@@ -155,7 +155,7 @@
           <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
           <span
             class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold"
-            >S</span
+            >{{getName?getName.substring(0,1):''}}</span
           >
         </div>
       </div>
@@ -163,7 +163,7 @@
         class="dropdown-menu dropdown-menu-fit dropdown-menu-xl dropdown-menu-right"
         v-on:click.stop
       >
-        <KTDropdownUser></KTDropdownUser>
+        <KTDropdownUser :name="getName"></KTDropdownUser>
       </div>
     </div>
     <!--end: User Bar -->
@@ -172,13 +172,14 @@
 </template>
 
 <script>
-import KTSearchDefault from "@/views/theme/topbar/SearchDefault.vue";
-import KTDropdownNotification from "@/views/theme/topbar/DropdownNotification.vue";
-import KTDropdownQuickAction from "@/views/theme/topbar/DropdownQuickAction.vue";
-import KTDropdownMyCart from "@/views/theme/topbar/DropdownMyCart.vue";
+// import KTSearchDefault from "@/views/theme/topbar/SearchDefault.vue";
+// import KTDropdownNotification from "@/views/theme/topbar/DropdownNotification.vue";
+// import KTDropdownQuickAction from "@/views/theme/topbar/DropdownQuickAction.vue";
+// import KTDropdownMyCart from "@/views/theme/topbar/DropdownMyCart.vue";
 import KTDropdownLanguage from "@/views/theme/topbar/DropdownLanguage.vue";
 import KTDropdownUser from "@/views/theme/topbar/DropdownUser.vue";
 import i18nService from "@/common/i18n.service.js";
+import { GetName } from '@/utils/auth'
 
 export default {
   name: "KTTopbar",
@@ -189,10 +190,10 @@ export default {
     };
   },
   components: {
-    KTSearchDefault,
-    KTDropdownNotification,
-    KTDropdownQuickAction,
-    KTDropdownMyCart,
+    // KTSearchDefault,
+    // KTDropdownNotification,
+    // KTDropdownQuickAction,
+    // KTDropdownMyCart,
     KTDropdownLanguage,
     KTDropdownUser
   },
@@ -206,6 +207,14 @@ export default {
   computed: {
     getLanguageFlag() {
       return this.onLanguageChanged();
+    },
+    getName(){
+      if(GetName){
+        return GetName();
+      }else{
+        return ''
+      }
+      
     }
   }
 };

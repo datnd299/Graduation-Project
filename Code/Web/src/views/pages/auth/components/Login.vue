@@ -16,13 +16,24 @@
               </v-list-item-content>
 
               <b-form class="kt-form" @submit.stop.prevent="onSubmit">
-                <div role="alert" class="alert alert-info">
-                  <div class="alert-text">
-                    Use account
-                    <strong>admin@demo.com</strong> and password
-                    <strong>demo</strong> to continue.
-                  </div>
-                </div>
+                 <div role="alert" class="alert alert-info">
+            <div class="alert-text">
+              Tài khoản admin <strong>admin@demo.com</strong> mật khẩu
+              <strong>admin</strong>
+            </div>
+          </div>
+          <div role="alert" class="alert alert-info">
+            <div class="alert-text">
+              Tài khoản bên thuê <strong>benthue@demo.com</strong> mật khẩu
+              <strong>benthue</strong>
+            </div>
+          </div>
+          <div role="alert" class="alert alert-info">
+            <div class="alert-text">
+              Tài khoản đối tác <strong>doitac@demo.com</strong> mật khẩu
+              <strong>doitac</strong>
+            </div>
+          </div>
                 <div
                   role="alert"
                   v-bind:class="{ show: errors.length }"
@@ -171,3 +182,8 @@ export default {
   }
 };
 </script>
+<style lang="css" scoped>
+.alert.alert-info strong{
+  color: #55efc4;
+}
+</style>

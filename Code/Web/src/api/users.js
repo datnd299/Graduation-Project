@@ -37,5 +37,21 @@ export function createPAAccount(data) {
   })
 }
 
+export function getMyInfo(data) {
+  return request({
+    url: 'users/my-info',
+    method: 'post',
+    data: data
+  })
+}
+
+export function updateAcc(data) {
+  return request({
+    url: 'users/update-my-info',
+    method: 'post',
+    data: data
+  })
+}
+
 
 

@@ -41,7 +41,7 @@ export function GetUID() {
 }
 
 export function SetUID(idUser) {
-    return Cookies.set(IDUserKey, idUser)
+    return Cookies.set(IDUserKey, idUser,{ expires: 365 })
 }
 
 export function RemoveUID() {

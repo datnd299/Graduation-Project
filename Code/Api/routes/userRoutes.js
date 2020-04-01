@@ -13,7 +13,11 @@ router.post('/signup/party-b', userController.partyBSignUp);
 // Protect all routes after this middleware
  router.use(authController.protect);
 
-router.delete('/deleteMe', userController.deleteMe);
+
+router.post('/my-info',userController.getMyInfo)
+router.post('/update-my-info', userController.updateMyAcc);
+
+
 
 // Only admin have permission to access for the below APIs
 router.use(authController.restrictTo('partyAAdmin'));
@@ -27,11 +31,5 @@ router
     .route('/')
     .get(userController.getAllUsers);
 
-
-router
-    .route('/:id')
-    .get(userController.getUser)
-    .patch(userController.updateUser)
-    .delete(userController.deleteUser);
 
 module.exports = router;

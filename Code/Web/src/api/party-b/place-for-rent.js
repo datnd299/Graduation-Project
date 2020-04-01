@@ -22,4 +22,20 @@ export function getMine(data) {
     })
   }
 
+  export function getDetail(data){
+    return request({
+      url: 'party-b/place-for-rent/get-details',
+      method: 'post',
+      data: data,
+    })
+  }
+
+  export function genNewCode(data){
+    return request({
+      url: 'party-b/place-for-rent/gen-new-code',
+      method: 'post',
+      data: data,
+    })
+  }
+  
  

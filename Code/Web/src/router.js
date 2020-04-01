@@ -14,7 +14,19 @@ export default new Router({
         {
           path: "/dashboard",
           name: "dashboard",
-          component: () => import("@/views/pages/Dashboard.vue")
+          component: () => import("@/views/pages/Dashboard2.vue")
+        },
+        {
+          path: "/other",
+          name: "other",
+          component: ()=> import("@/views/theme/BlankWrapper.vue"),
+          children:[
+            {
+              path: "/my-info",
+              name: "my-info",
+              component: () => import("@/views/pages/other/UserInfo.vue")
+            }
+          ]
         },
         {
           path: "/admin",
@@ -77,9 +89,15 @@ export default new Router({
               name: "new-place-for-rent",
               component: () => import("@/views/pages/party-b/place-for-rent/components/PlaceInfoEditable.vue")
             },
+            {
+              path: "/place/:id/details",
+              name: "place-details",
+              component: () => import("@/views/pages/party-b/place-for-rent/components/PlaceDetails.vue")
+            },
             
           ]
-        }
+        },
+        
       ]
     },
     {
@@ -100,7 +118,18 @@ export default new Router({
         },
       ]
     },
-    
+    {
+      path:'/qr-scanner',
+      component: () => import("@/views/theme/Base.vue"),
+      children: [
+        
+        {
+          path: "/qr-scanner",
+          name: "qr-scanner",
+          component: () => import("@/views/pages/qr/index.vue")
+        }
+      ]
+    },
     {
       path:'/x',
       component: () => import("@/views/theme/BlankWrapper.vue"),
@@ -110,7 +139,8 @@ export default new Router({
           path: "/x/t",
           name: "dashboard",
           component: () => import("@/views/pages/admin/party-a/index.vue")
-        }
+        },
+        
       ]
     },
        

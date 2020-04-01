@@ -42,30 +42,30 @@
       <v-btn-toggle
        dense color="#033"
           >
-          <router-link :to="'/admin/party-a/'+item._id+'/places'">
+          <!-- <router-link :to="'/admin/party-a/'+item._id+'/places'">
             <v-btn small color="teal accent-4">
             <i class="fas fa-sign" style="color:white"></i>
-            <!-- <v-icon>fas fa-users</v-icon> -->
+           
           </v-btn>
-          </router-link>
+          </router-link> -->
           <router-link :to="'/admin/party-a/'+item._id+'/users'">
             <v-btn small color="primary">
             <i class="fas fa-users" style="color:white"></i>
-            <!-- <v-icon>fas fa-users</v-icon> -->
+         
           </v-btn>
           </router-link>
-          <router-link :to="'/admin/party-a/'+item._id+'/partners'">
+          <!-- <router-link :to="'/admin/party-a/'+item._id+'/partners'">
             <v-btn small color="blue">
             <i class="fas fa-briefcase" style="color:white"></i>
-            <!-- <v-icon>fas fa-users</v-icon> -->
+          
           </v-btn>
           </router-link>
           <router-link :to="'/admin/party-a/'+item._id+'/places'">
             <v-btn small color="teal accent-4">
             <i class="fas fa-sign" style="color:white"></i>
-            <!-- <v-icon>fas fa-users</v-icon> -->
+        
           </v-btn>
-          </router-link>
+          </router-link> -->
           
           
           

@@ -67,7 +67,7 @@ exports.getPartyAAccs = async (req, res, next) => {
    }
 }
 
-exports.approveParty = async (req, res, next) => {
+exports.approvePartyA = async (req, res, next) => {
     try {
         var pId = req.body.p_id;
         var status = req.body.status;
@@ -80,6 +80,26 @@ exports.approveParty = async (req, res, next) => {
        res.status(200).json({
            status: 'success',
            data: ptA
+       });
+
+
+   } catch (error) {
+       next(error);
+   }
+}
+exports.approvePartyB = async (req, res, next) => {
+    try {
+        var pId = req.body.p_id;
+        var status = req.body.status;
+        var ptB = await PartyB.findById(pId);
+        if(!ptB){
+            return next(new AppError(200, 'fail', 'Không có đơn vị này'), req, res, next);
+        }
+        ptB.status = status;
+        await ptB.save()
+       res.status(200).json({
+           status: 'success',
+           data: ptB
        });
 
 
@@ -269,6 +289,81 @@ exports.approveAcc = async (req, res, next) => {
        res.status(200).json({
            status: 'success',
            data: acc
+       });
+
+
+   } catch (error) {
+       next(error);
+   }
+}
+
+exports.getMyInfo = async (req, res, next) => {
+    try {
+        
+        var acc = req.acc;
+        var ptA = null;
+        var ptB = null;
+        if(acc.role.includes('partyA')){
+            ptA = await PartyA.findOne({accs:acc._id});
+        }
+
+        if(acc.role.includes('partyB')){
+             ptB = await PartyB.findOne({ "accs": acc._id });
+        }
+
+       res.status(200).json({
+           status: 'success',
+           data: {
+               acc,
+               ptA,
+               ptB
+           }
+       });
+
+
+   } catch (error) {
+       next(error);
+   }
+}
+
+exports.updateMyAcc = async (req, res, next) => {
+    try {
+        
+        var acc = req.acc;
+        
+        const nAcc = await Account.findById(acc._id).select('+password');
+  
+        
+
+        
+
+        if(req.body.change_pass){
+            if(req.body.password!=req.body.password_confirm){
+                return next(new AppError(200, 'fail', 'Mật khẩu mới không khớp'), req, res, next);
+            }
+            if (!nAcc || !await nAcc.correctPassword(req.body.old_pass, nAcc.password)) {
+                return next(new AppError(200, 'fail', 'Mật khẩu cũ không đúng'), req, res, next);
+            }
+            
+            nAcc.name = req.body.name;
+            nAcc.acc_name = req.body.acc_name;
+            nAcc.password = req.body.password;
+            nAcc.passwordConfirm = req.body.password;
+        }else{
+            
+            
+            nAcc.name = req.body.name;
+            nAcc.acc_name = req.body.acc_name;
+            nAcc.passwordConfirm = nAcc.password;
+           
+        }
+        await nAcc.save();
+
+       res.status(200).json({
+           status: 'success',
+           data: 
+               nAcc
+           
        });
 
 

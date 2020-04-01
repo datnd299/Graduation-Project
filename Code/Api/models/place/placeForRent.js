@@ -15,6 +15,10 @@ const placeForRentSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Hãy nhập tên']
     },
+    code:{
+        type: String,
+        unique:true
+    },
     address: {
         type: String,
         required:true,
