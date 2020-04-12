@@ -1,5 +1,5 @@
 <template>
-  <v-app class="v-wrap" xasdf>
+  <v-app class="v-wrap" xasdf style=" height: 100%;">
     <transition name="fade-in-up">
       <router-view></router-view>
     </transition>
@@ -20,5 +20,6 @@ export default {
 <style  >
 .v-wrap[xasdf] .v-application--wrap {
     min-height: unset;
+   
 }
 </style>

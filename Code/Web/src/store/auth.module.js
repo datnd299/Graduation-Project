@@ -1,7 +1,9 @@
 import ApiService from "@/common/api.service";
 import JwtService from "@/common/jwt.service";
-import { login } from "@/api/users";
-import { SetToken,RemoveToken,SetRole,SetName,SetUID } from '@/utils/auth'
+import { login,logout } from "@/api/users";
+import { SetToken,RemoveToken,SetRole,SetName,SetUID,GetNToken } from '@/utils/auth'
+
+
 
 // action types
 export const VERIFY_AUTH = "verifyAuth";
@@ -34,23 +36,16 @@ const actions = {
   [LOGIN](context, credentials) {
     return new Promise((resolve, reject) => {
       console.log(context);
-      
-      
-      // login.post("login", credentials)
-      //   .then(({ data }) => {
-      //     context.commit(SET_AUTH, data);
-      //     resolve(data);
-      //   })
-      //   .catch(({ response }) => {
-      //     context.commit(SET_ERROR, response.data.errors);
-      //   });
+
       login({ email: credentials.email, password: credentials.password }).then(response => {
         console.log(response);
         
         SetToken(response.token);
-        SetRole(response.data.acc.role)
-        SetName(response.data.acc.name)
-        SetUID(response.data.acc._id)
+        SetRole(response.data.acc.role);
+        SetName(response.data.acc.name);
+        SetUID(response.data.acc._id);
+        
+        
         resolve();
       }).catch(error => {
         reject(error);
@@ -58,6 +53,7 @@ const actions = {
     });
   },
   [LOGOUT](context) {
+    logout({ntoken:GetNToken()})
     RemoveToken();
     context.commit(PURGE_AUTH);
   },

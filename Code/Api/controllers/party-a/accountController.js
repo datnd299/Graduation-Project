@@ -29,7 +29,7 @@ exports.getAccs =async (req, res, next) => {
        
         
 
-        const ptA = await PartyA.findOne({ "accs": req.acc._id}).populate('accs');;
+        const ptA = await PartyA.findOne({ "accs": req.acc._id}).populate('accs');
         
 
 

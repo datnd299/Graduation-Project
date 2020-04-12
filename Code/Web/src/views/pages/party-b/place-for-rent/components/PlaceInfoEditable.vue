@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="mapModalVisible" persistent max-width="800">
       <v-card style="padding:10px">
-        <map-marker @picked="onLocationPicked" @canceled="onCanceled"></map-marker>
+        <map-marker :location="form" @picked="onLocationPicked" @canceled="onCanceled"></map-marker>
       </v-card>
     </v-dialog>
     <v-card class="mx-auto" style="padding:20px" outlined>

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const Account = require('../models/user/account');
 const AccessToken = require('../models/access/token');
 const AppError = require('../utils/appError');
-
+const NToken = require('../models/user/ntoken');
 
 const createToken = id => {
     return jwt.sign({
@@ -52,6 +52,30 @@ exports.login = async (req, res, next) => {
             data: {
                 acc
             }
+        });
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.logout = async (req, res, next) => {
+    try {
+        const {
+            ntoken,
+        } = req.body;
+        
+        
+        await NToken.deleteOne({
+            token :ntoken,
+        })
+        // Remove the password from the output 
+
+
+        res.status(200).json({
+            status: 'success',
+            
+            
         });
 
     } catch (err) {

@@ -23,6 +23,7 @@
           <div
             class="kt-container kt-grid__item kt-grid__item--fluid"
             v-bind:class="{ 'kt-container--fluid': contentFluid }"
+            
           >
             <transition name="fade-in-up">
               <router-view></router-view>

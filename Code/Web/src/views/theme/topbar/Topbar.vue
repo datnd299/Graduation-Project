@@ -26,8 +26,8 @@
     <!--end: Search -->
 
     <!--begin: Notifications -->
-    <!-- <div class="kt-header__topbar-item" id="kt_notification_toggle">
-      <div class="kt-header__topbar-wrapper" data-toggle="dropdown">
+    <div class="kt-header__topbar-item" id="kt_notification_toggle">
+      <!-- <div class="kt-header__topbar-wrapper" data-toggle="dropdown">
         <span class="kt-header__topbar-icon kt-pulse kt-pulse--brand">
           <img
             svg-inline
@@ -37,7 +37,7 @@
           />
           <span class="kt-pulse__ring"></span>
         </span>
-      </div>
+      </div> -->
       <div
         class="dropdown-menu dropdown-menu-fit dropdown-menu-xl dropdown-menu-right"
         v-on:click.stop
@@ -46,7 +46,7 @@
           <KTDropdownNotification></KTDropdownNotification>
         </form>
       </div>
-    </div> -->
+    </div>
     <!--end: Notifications -->
 
     <!--begin: Quick Actions -->
@@ -100,19 +100,30 @@
     <!--end: My Cart -->
 
     <!--begin: Quick panel toggler -->
-    <!-- <div
+    <div
       class="kt-header__topbar-item kt-header__topbar-item--quick-panel"
-      v-b-tooltip.hover.bottom="'Quick panel'"
     >
-      <span class="kt-header__topbar-icon" id="kt_quick_panel_toggler_btn">
+    
+          <span style="position:relative" class="kt-header__topbar-icon" id="kt_quick_panel_toggler_btn">
         <img
           svg-inline
           class="kt-svg-icon"
           src="@/assets/media/icons/svg/Layout/Layout-4-blocks.svg"
           alt=""
         />
+        <div  v-if="numNewNotification>0" style="height: 7px;
+    width: 7px;
+    background: red;
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    border-radius: 2px;">
+
+        </div>
       </span>
-    </div> -->
+      
+      
+    </div>
     <!--end: Quick panel toggler -->
 
     <!--begin: Language bar -->
@@ -173,7 +184,7 @@
 
 <script>
 // import KTSearchDefault from "@/views/theme/topbar/SearchDefault.vue";
-// import KTDropdownNotification from "@/views/theme/topbar/DropdownNotification.vue";
+import KTDropdownNotification from "@/views/theme/topbar/DropdownNotification.vue";
 // import KTDropdownQuickAction from "@/views/theme/topbar/DropdownQuickAction.vue";
 // import KTDropdownMyCart from "@/views/theme/topbar/DropdownMyCart.vue";
 import KTDropdownLanguage from "@/views/theme/topbar/DropdownLanguage.vue";
@@ -191,7 +202,7 @@ export default {
   },
   components: {
     // KTSearchDefault,
-    // KTDropdownNotification,
+    KTDropdownNotification,
     // KTDropdownQuickAction,
     // KTDropdownMyCart,
     KTDropdownLanguage,
@@ -215,6 +226,9 @@ export default {
         return ''
       }
       
+    },
+    numNewNotification(){
+      return this.$store.getters['settings/numNewNotification']
     }
   }
 };

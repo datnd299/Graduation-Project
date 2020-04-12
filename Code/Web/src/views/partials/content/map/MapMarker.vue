@@ -72,11 +72,19 @@ export default {
     };
   },
   props:{
-
+    location:{
+      type:Object
+    }
   },
   created() {
-     
+    if(this.location){
+      this.input.lat = this.location.location.lat;
+      this.input.lng = this.location.location.lng;
+     this.input.name = this.location.address;
+     this.center= { lat: this.location.location.lat, lng: this.location.location.lng };
+    }
   },
+
   methods: {
    mapClicked(e){
      var lat = e.latLng.lat();
@@ -93,7 +101,14 @@ export default {
    }
   },
   watch: {
-   
+   location(){
+      if(this.location){
+      this.input.lat = this.location.location.lat;
+      this.input.lng = this.location.location.lng;
+     this.input.name = this.location.address;
+     this.center= { lat: this.location.location.lat, lng: this.location.location.lng };
+    }
+    }
   }
 };
 </script>

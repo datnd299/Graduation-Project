@@ -85,7 +85,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import { LOGIN, LOGOUT } from "@/store/auth.module";
+import { LOGIN } from "@/store/auth.module";
 
 import { validationMixin } from "vuelidate";
 import {  minLength, required } from "vuelidate/lib/validators";
@@ -139,7 +139,6 @@ export default {
       const password = this.$v.form.password.$model;
 
       // clear existing errors
-      this.$store.dispatch(LOGOUT);
 
       // set spinner to submit button
       const submitButton = document.getElementById("kt_submit");

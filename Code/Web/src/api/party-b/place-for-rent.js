@@ -37,5 +37,29 @@ export function getMine(data) {
       data: data,
     })
   }
+  export function getMyPlacesRental(data){
+    return request({
+      url: 'party-b/place-for-rent/get-places-rental',
+      method: 'post',
+      data: data,
+    })
+  }
+  export function approvePlaceRental(data){
+    return request({
+      url: 'party-b/place-for-rent/approve-place-rental',
+      method: 'post',
+      data: data,
+    })
+  }
+
   
+
+  export function getPlaceRetailDetail(data){
+    return request({
+      url: 'party-a/places/get-details',
+      method: 'post',
+      data: data,
+    })
+  }
+
  

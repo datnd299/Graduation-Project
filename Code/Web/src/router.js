@@ -66,9 +66,47 @@ export default new Router({
               path: "accounts",
               name: "party-a-accounts",
               component: () => import("@/views/pages/party-a/accounts/index.vue")
-            }]
+            },
+            {
+              path: "places",
+              name: "party-a-places",
+              component: () => import("@/views/pages/party-a/places/index.vue")
+            },
+            {
+              path: "partner",
+              name: "party-a-partner",
+              component: () => import("@/views/pages/party-a/partners/index.vue")
+            },
+            {
+              path: "/party-a/places/map",
+              name: "party-a-places-map",
+              component: () => import("@/views/pages/party-a/places/MapView.vue")
+            },
+            {
+              path: "/party-a/tasks",
+              name: "party-a-tasks",
+              component: () => import("@/views/pages/tasks/PTATasks.vue")
+            },
+            {
+              path: "/party-a/signboards",
+              name: "party-a-signboards",
+              component: () => import("@/views/pages/party-a/signboards/index.vue")
+            },
+            {
+              path: "/party-a/signboards/new-signboard",
+              name: "party-a-signboards-new",
+              component: () => import("@/views/pages/party-a/signboards/components/SignboardDetail.vue")
+            },
+            {
+              path: "/party-a/tasks/new-task",
+              name: "party-a-task-new-task",
+              component: () => import("@/views/pages/tasks/task-detail/index.vue")
+            }
+            
+          ]
           
         },
+
         {
           path: "/party-b",
           name: "party-b",
@@ -79,6 +117,17 @@ export default new Router({
               name: "places-for-rent",
               component: () => import("@/views/pages/party-b/place-for-rent/index.vue")
             },
+            {
+              path: "places-rental",
+              name: "places-rental",
+              component: () => import("@/views/pages/party-b/place-rental/index.vue")
+            },
+            {
+              path: "places-rental/:id/details",
+              name: "places-rental-details",
+              component: () => import("@/views/pages/party-b/place-rental/PlaceRentalDetail.vue")
+            },
+            
             {
               path: ":id/places",
               name: "places-for-rent-of-party",

@@ -7,6 +7,13 @@ export function login(data) {
     data: data
   })
 }
+export function logout(data) {
+  return request({
+    url: 'users/logout',
+    method: 'post',
+    data: data
+  })
+}
 export function signupPartyA(data) {
   return request({
     url: 'users/signup/party-a',

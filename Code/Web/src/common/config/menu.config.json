@@ -52,7 +52,34 @@
         "translate": "Tài khoản",
         "role":"2"
       },
-
+      {
+        "title": "Đối tác",
+        "root": true,
+        "page": "party-a/partner",
+        "translate": "Đối tác",
+        "role":"2"
+      },
+      {
+        "title": "Biển quảng cáo",
+        "root": true,
+        "page": "party-a/signboards",
+        "translate": "Biển quảng cáo",
+        "role":"2"
+      },
+      {
+        "title": "Điểm treo",
+        "root": true,
+        "page": "party-a/places",
+        "translate": "Điểm treo",
+        "role":"2"
+      },
+      {
+        "title": "Nhiệm vụ",
+        "root": true,
+        "page": "party-a/tasks",
+        "translate": "Nhiệm vụ",
+        "role":"2"
+      },
       {
         "section":"Đối tác",
         "role":"4"
@@ -62,6 +89,13 @@
         "root": true,
         "page": "party-b/places-for-rent",
         "translate": "Điểm treo của bạn",
+        "role":"4"
+      },
+      {
+        "title": "Hợp đồng thuê",
+        "root": true,
+        "page": "party-b/places-rental",
+        "translate": "Hợp đồng thuê",
         "role":"4"
       },
       {

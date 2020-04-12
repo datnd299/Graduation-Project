@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="mapModalVisible" persistent max-width="800">
       <v-card style="padding:10px">
-        <map-marker @picked="onLocationPicked" @canceled="onCanceled"></map-marker>
+        <map-marker :location="form" @picked="onLocationPicked" @canceled="onCanceled"></map-marker>
       </v-card>
     </v-dialog>
     <v-card class="mx-auto" style="padding:20px" outlined>
@@ -149,18 +149,18 @@
               </template>
 
               <div>sfd</div>
-            </v-menu> -->
+            </v-menu>-->
 
             <v-row>
-                <v-col v-for="(item, index) in placeB.imgs" :key="index"  xs="12" sm="6" md="4" lg="4" >
-                    <v-img :src="getFile(item)" ></v-img>
-                </v-col>
+              <v-col v-for="(item, index) in placeB.imgs" :key="index" xs="12" sm="6" md="4" lg="4">
+                <v-img :src="getFile(item)"></v-img>
+              </v-col>
             </v-row>
           </div>
         </div>
         <div style="text-align:right">
           <v-btn
-            v-if="isMineB"
+            v-if="!getAdmin.includes('partyA')"
             style="margin-top:20px"
             color="indigo"
             dark
@@ -168,7 +168,7 @@
             @click="createPlace"
             :loading="loading"
           >Sửa địa điểm</v-btn>
-           <v-btn
+          <v-btn
             v-else
             style="margin-top:20px"
             color="indigo"
@@ -179,92 +179,102 @@
           >Yêu cầu làm đối tác</v-btn>
         </div>
         <div v-show="showYCA" class="scale-up-ver-top">
-            <p class="display-1 text--primary">
-        Nhập thông tin bạn đề nghị
-      </p>
-            <v-form ref="form2" >
-        <v-text-field
-       
-          outlined
-          v-model="form2.name"
-          :counter="150"
-          label="Tên địa điểm"
-          required
-        ></v-text-field>
-        <div>
-          <v-text-field
-          
-            outlined
-            v-model="form2.address"
-            label="Địa chỉ"
-            required
-          >
-            <v-btn
-              style="height: 56px;
+          <p class="display-1 text--primary">Nhập thông tin bạn đề nghị</p>
+          <v-form ref="form2">
+            <v-text-field
+              outlined
+              v-model="form2.name"
+              :counter="150"
+              label="Tên địa điểm"
+              required
+            ></v-text-field>
+            <div>
+              <v-text-field outlined v-model="form2.address" label="Địa chỉ" required>
+                <v-btn
+                  style="height: 56px;
     margin-top: -17px;"
-              slot="append-outer"
-              color="purple"
-              dark
-              extra-large
-              @click="mapModalVisible=true"
-            >
-              <i style="font-size: 24px;" class="fas fa-map-marker-alt"></i>
-            </v-btn>
-          </v-text-field>
-          <v-row style="margin-top:-35px">
-            <v-col xs="12" sm="6">
-              <v-text-field
-              
-                dense
-                outlined
-                type="number"
-                v-model="form2.location.lat"
-                label="Lat"
-                required
-              ></v-text-field>
-            </v-col>
-            <v-col xs="12" sm="6">
-              <v-text-field
-            
-                dense
-                outlined
-                type="number"
-                v-model="form2.location.lng"
-                label="Lng"
-                required
-              ></v-text-field>
-            </v-col>
-          </v-row>
-        </div>
+                  slot="append-outer"
+                  color="purple"
+                  dark
+                  extra-large
+                  @click="mapModalVisible=true"
+                >
+                  <i style="font-size: 24px;" class="fas fa-map-marker-alt"></i>
+                </v-btn>
+              </v-text-field>
+              <v-row style="margin-top:-35px">
+                <v-col xs="12" sm="6">
+                  <v-text-field
+                    dense
+                    outlined
+                    type="number"
+                    v-model="form2.location.lat"
+                    label="Lat"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col xs="12" sm="6">
+                  <v-text-field
+                    dense
+                    outlined
+                    type="number"
+                    v-model="form2.location.lng"
+                    label="Lng"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </div>
 
-        <v-text-field
- 
-          outlined
-          type="number"
-          v-model="form2.price"
-          label="Chi phí đề nghị"
-          required
-        >
-          <v-select
-            style="margin-top: -17px;"
-     
-            :items="timeUnits"
-            v-model="form2.timeUnit"
-            label="Đơn vị"
-            outlined
-            slot="append-outer"
-          ></v-select>
-        </v-text-field>
+            <v-text-field
+              outlined
+              type="number"
+              v-model="form2.price"
+              label="Chi phí đề nghị"
+              required
+            >
+              <v-select
+                style="margin-top: -17px;"
+                :items="timeUnits"
+                v-model="form2.timeUnit"
+                label="Đơn vị"
+                outlined
+                slot="append-outer"
+              ></v-select>
+            </v-text-field>
+            <v-row>
+              <v-col cols="12" lg="6" sm="6">
+                <v-text-field
+                    dense
+                    outlined
+                    type="date"
+                    v-model="form2.start"
+                    label="Từ"
+                    required
+                  ></v-text-field>
+              </v-col>
+              <v-col cols="12" lg="6" sm="6">
+                <v-text-field
+                    dense
+                    outlined
+                    type="date"
+                    v-model="form2.end"
+                    label="Đến"
+                    required
+                  ></v-text-field>
+              </v-col>
+            </v-row>
+
             <div style="text-align:right">
-          <v-btn
-     
-            style="margin-top:20px"
-            color="indigo"
-            dark
-            large
-       >Gửi yêu cầu đến người cho thuê</v-btn>
-        </div>
-            </v-form>
+              <v-btn
+                @click="rentPlace()"
+                style="margin-top:20px"
+                color="indigo"
+                dark
+                large
+              >Gửi yêu cầu đến người cho thuê</v-btn>
+            </div>
+          </v-form>
         </div>
       </v-form>
     </v-card>
@@ -274,11 +284,13 @@
 import { SET_BREADCRUMB } from "@/store/breadcrumbs.module";
 import MapMarker from "@/views/partials/content/map/MapMarker.vue";
 import { upload } from "@/api/file/file";
+import { rentPlace } from "@/api/party-a/place.js";
 import {
   getDetail,
   createPlace,
   genNewCode
 } from "@/api/party-b/place-for-rent.js";
+import { GetRole } from "@/utils/auth";
 import { BASE_API } from "@/utils/base";
 export default {
   created() {},
@@ -294,6 +306,9 @@ export default {
         return "PLB-" + this.placeB.code;
       }
       return "";
+    },
+    getAdmin() {
+      return GetRole();
     }
   },
 
@@ -317,6 +332,14 @@ export default {
         .catch(() => {
           this.genning = false;
         });
+    },
+    rentPlace() {
+      var req = this.form2;
+      req.time_unit = this.form2.timeUnit;
+      req.p_id = this.pId;
+      rentPlace(req).then(res => {
+        console.log(res);
+      });
     },
     createPlace() {
       var formData = new FormData();
@@ -402,8 +425,8 @@ export default {
     onCanceled() {
       this.mapModalVisible = false;
     },
-    toogleYCAForm(){
-        this.showYCA = !this.showYCA;
+    toogleYCAForm() {
+      this.showYCA = !this.showYCA;
     }
   },
   data() {
@@ -414,7 +437,7 @@ export default {
       uploadVal: 0,
       genning: false,
       isMineB: false,
-      showYCA:false,
+      showYCA: false,
       timeUnits: [
         {
           text: "Ngày",
@@ -445,8 +468,8 @@ export default {
         price: null,
         files: null
       },
-      form2:{
-          name: "",
+      form2: {
+        name: "",
         address: "",
         location: {
           lat: null,
@@ -454,8 +477,10 @@ export default {
         },
         timeUnit: null,
         price: null,
-        files: null
-      },
+        files: null,
+        start:'',
+        end:''
+      }
     };
   }
 };

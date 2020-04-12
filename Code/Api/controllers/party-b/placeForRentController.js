@@ -19,7 +19,7 @@ exports.createNew = async (req, res, next) => {
                 address: req.body.address,
                 lat_lng: {
                     lat: req.body.location.lat,
-                    lng: req.body.location.lat,
+                    lng: req.body.location.lng,
                 },
                 price: req.body.price,
                 time_unit: req.body.time_unit,

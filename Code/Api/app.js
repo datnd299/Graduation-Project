@@ -11,6 +11,11 @@ const userRoutes = require('./routes/userRoutes');
 const placeForRentRoutes = require ('./routes/party-b/placeForRentRoutes');
 const fileRoutes = require ('./routes/file/fileRoutes');
 const pAAcountRoute = require('./routes/party-a/accountRoutes');
+const placeRoutes = require('./routes/party-a/placeRoutes')
+const partnerARoutes = require('./routes/party-a/partnerRoutes')
+const signboardRoutes = require('./routes/party-a/signboardRoutes')
+
+const notificationRoutes = require('./routes/notification/notificationRoutes');
 
 const adminUserRoute = require('./routes/admin/adminUserRoutes');
 const globalErrHandler = require('./controllers/errorController');
@@ -61,7 +66,10 @@ app.use('/api/v1/admin/users', adminUserRoute);
 app.use('/api/v1/party-b',placeForRentRoutes);
 app.use('/api/v1/file',fileRoutes);
 app.use('/api/v1/party-a/accounts',pAAcountRoute);
-
+app.use('/api/v1/party-a/places',placeRoutes);
+app.use('/api/v1/party-a/partners',partnerARoutes);
+app.use('/api/v1/party-a/signboards',signboardRoutes);
+app.use('/api/v1/ntf',notificationRoutes);
 
 
 // handle undefined Routes

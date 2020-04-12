@@ -9,12 +9,15 @@ router.post('/signup', authController.signup);
 router.post('/change-password', authController.changePass);
 router.post('/signup/party-a', userController.partyASignUp);
 router.post('/signup/party-b', userController.partyBSignUp);
-
+router.post('/logout', authController.logout);
 // Protect all routes after this middleware
  router.use(authController.protect);
 
 
+
+
 router.post('/my-info',userController.getMyInfo)
+
 router.post('/update-my-info', userController.updateMyAcc);
 
 
