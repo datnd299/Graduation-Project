@@ -11,3 +11,20 @@ function makeid(length) {
  module.exports.makeCode =()=>{
     return makeid(6);
 }
+
+module.exports.getSecond =(val,unit)=>{
+   if(unit=='second'){
+      return val;
+   }else  if(unit=='minute'){
+      return val*60;
+   }else  if(unit=='hour'){
+      return val*3600;
+   }else  if(unit=='day'){
+      return val*3600*24;
+   }else  if(unit=='month'||unit=='moth'){
+      return val*3600*24*30;
+   }else  if(unit=='year'){
+      return vaval*3600*24*30*365;
+   }
+
+}

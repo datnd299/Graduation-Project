@@ -78,7 +78,7 @@
         "root": true,
         "page": "party-a/tasks",
         "translate": "Nhiệm vụ",
-        "role":"2"
+        "role":"2,3"
       },
       {
         "section":"Đối tác",
@@ -96,6 +96,12 @@
         "root": true,
         "page": "party-b/places-rental",
         "translate": "Hợp đồng thuê",
+        "role":"4"
+      },{
+        "title": "Nhiệm vụ",
+        "root": true,
+        "page": "party-b/tasks",
+        "translate": "Nhiệm vụ",
         "role":"4"
       },
       {

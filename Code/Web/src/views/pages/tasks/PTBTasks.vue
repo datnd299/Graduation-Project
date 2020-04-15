@@ -129,10 +129,10 @@ export default {
         this.isAdmin = false;
       }
       this.$store.dispatch(SET_BREADCRUMB, [
-        { title: "Bên thuê", route: "/party-a" },
+        { title: "Đối tác", route: "/party-b" },
         {
-          title: this.isAdmin ? "Tất cả nhiệm vụ" : "Nhiệm vụ của tôi",
-          route: "/party-a/tasks"
+          title: "Nhiệm vụ của tôi",
+          route: "/party-b/tasks"
         }
       ]);
     });

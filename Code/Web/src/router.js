@@ -101,6 +101,11 @@ export default new Router({
               path: "/party-a/tasks/new-task",
               name: "party-a-task-new-task",
               component: () => import("@/views/pages/tasks/task-detail/index.vue")
+            },
+            {
+              path: "/party-a/tasks/:id/detail",
+              name: "party-a-task-detail",
+              component: () => import("@/views/pages/tasks/report-detail/index.vue")
             }
             
           ]
@@ -142,6 +147,11 @@ export default new Router({
               path: "/place/:id/details",
               name: "place-details",
               component: () => import("@/views/pages/party-b/place-for-rent/components/PlaceDetails.vue")
+            },
+            {
+              path: "tasks",
+              name: "party-b-task",
+              component: () => import("@/views/pages/tasks/PTBTasks.vue")
             },
             
           ]

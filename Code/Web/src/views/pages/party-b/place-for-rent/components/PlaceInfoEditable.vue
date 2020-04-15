@@ -60,8 +60,10 @@
         ></v-select>
      
         </v-text-field>
-        <div>
-          <v-file-input outlined accept="image/*" chips multiple v-model="form.files" label="Ảnh minh họa"></v-file-input>
+        <div style="width:100%">
+          <v-file-input outlined accept="image/*" chips multiple v-model="form.files" label="Ảnh điểm treo">
+          
+          </v-file-input>
           <div v-if="form.files" class="image-input-preview">
             <img v-for="(item, index) in form.files" :key="index" :src="getUrl(item)" alt />
           </div>

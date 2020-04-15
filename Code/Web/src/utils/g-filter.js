@@ -1,4 +1,4 @@
-import {RoleMap,PartyStatusMap,PlaceRentalStatusMap,TimeUnit} from './mapping'
+import {RoleMap,PartyStatusMap,PlaceRentalStatusMap,TimeUnit,TaskType,TaskStatus} from './mapping'
 import Vue from "vue";
 
 Vue.filter('roleStatusText', function(role) {
@@ -19,6 +19,20 @@ Vue.filter('partyStatusText', function(role) {
         return PartyStatusMap[role].text;
     }
     return PartyStatusMap[1].text;
+ });
+
+ Vue.filter('taskStatusColor', function(role) {
+     if(TaskStatus[role]){
+         return TaskStatus[role].color;
+     }
+     return TaskStatus[1].color;
+ })
+
+ Vue.filter('taskStatusText', function(role) {
+    if(TaskStatus[role]){
+        return TaskStatus[role].text;
+    }
+    return TaskStatus[1].text;
  });
 
  Vue.filter('partyStatusColor', function(role) {
@@ -42,6 +56,27 @@ Vue.filter('partyStatusText', function(role) {
      return PlaceRentalStatusMap[1].color;
  })
 
+
+ Vue.filter('taskTypeText', function(type) {
+    if(TaskType[type]){
+        return TaskType[type].text;
+    }
+    return '';
+ });
+
+ Vue.filter('taskTypeColor', function(type) {
+     if(TaskType[type]){
+         return TaskType[type].color;
+     }
+     return '';
+ })
+ Vue.filter('taskTypeIcon', function(type) {
+    if(TaskType[type]){
+        return TaskType[type].icon;
+    }
+    return '';
+})
+ 
  
  Vue.filter('timeUnitText', function(val) {
     if(TimeUnit[val]){

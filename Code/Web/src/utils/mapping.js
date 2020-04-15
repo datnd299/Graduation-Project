@@ -86,7 +86,7 @@ const SmallTimeUnit={
         text:'Tuần',
         color:'green'
     },
-    'moth':{
+    'month':{
         text:'Tháng',
         color:'orange darken-2'
     },
@@ -106,7 +106,7 @@ const TaskType={
     },
     'fee':{
         text:'Chi trả',
-        color:'red',
+        color:'light-blue darken-1',
         icon:'far fa-money-bill-alt'
     },
     'report':{
@@ -114,6 +114,20 @@ const TaskType={
         color:'orange darken-2',
         icon:'fas fa-camera-retro'
     }, 
+}
+const TaskStatus={
+    1:{
+        text:'Mới tạo',
+        color:'blue-grey lighten-1'
+    },
+    2:{
+        text:'Đã kích hoạt',
+        color:'green'
+    },
+    0:{
+        text:'Hủy',
+        color:'red'
+    }
 }
 const RepeatType={
     'repeat':{
@@ -135,5 +149,6 @@ module.exports={
     TimeUnit:TimeUnit,
     TaskType:TaskType,
     RepeatType:RepeatType,
-    SmallTimeUnit:SmallTimeUnit
+    SmallTimeUnit:SmallTimeUnit,
+    TaskStatus:TaskStatus
 }
