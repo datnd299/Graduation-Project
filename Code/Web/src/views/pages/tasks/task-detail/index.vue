@@ -110,7 +110,7 @@
               v-model="form.start"
               dense
               outlined
-              type="datetime-local"
+              :type="(form.typeRepeat=='repeat'?'time':'datetime-local')"
               label="Thực hiện từ"
               required
             ></v-text-field>
@@ -120,7 +120,7 @@
               v-model="form.end"
               dense
               outlined
-              type="datetime-local"
+              :type="(form.typeRepeat=='repeat'?'time':'datetime-local')"
               label="Đến"
               required
             ></v-text-field>
