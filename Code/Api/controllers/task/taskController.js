@@ -73,7 +73,8 @@ exports.createNew = async (req, res, next) => {
 
 exports.getAllOfMyPT = async (req, res, next) => {
     try {
-
+        console.log(req.body);
+        
         var acc = req.acc;
         var ptA = null;
         var ptB = null;

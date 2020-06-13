@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.image.SteganoActivity">
+
+    <Button
+        android:id="@+id/btnChoose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chọn"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="242dp" />
+
+    <ImageView
+        android:id="@+id/imgV"
+        android:layout_width="163dp"
+        android:layout_height="134dp"
+        app:srcCompat="@drawable/ic_account_box_24px"
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="42dp" />
+    <TextView
+        android:id="@+id/txtImgV"
+        android:text="Ảnh gốc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+
+    <EditText
+        android:id="@+id/edtKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="393dp" />
+
+    <EditText
+        android:id="@+id/edtText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="321dp" />
+
+    <Button
+        android:id="@+id/btnEx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Encode"
+        tools:layout_editor_absoluteX="62dp"
+        tools:layout_editor_absoluteY="483dp" />
+    <ImageView
+        android:id="@+id/imgEx"
+        android:layout_width="163dp"
+        android:layout_height="134dp"
+        app:srcCompat="@drawable/ic_account_box_24px"
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="42dp" />
+    <TextView
+        android:id="@+id/txtImgEx"
+        android:text="Ảnh Encoded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <Button
+        android:id="@+id/btnDecode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Decode"
+        tools:layout_editor_absoluteX="62dp"
+        tools:layout_editor_absoluteY="483dp" />
+
+    <ImageView
+        android:id="@+id/imgDecoded"
+        android:layout_width="163dp"
+        android:layout_height="134dp"
+        app:srcCompat="@drawable/ic_account_box_24px"
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="42dp" />
+    <TextView
+        android:id="@+id/txtImgDecoded"
+        android:text="Ảnh Decoded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+        android:id="@+id/txtMess"
+        android:text="kết quả"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </TextView>
+</LinearLayout>
