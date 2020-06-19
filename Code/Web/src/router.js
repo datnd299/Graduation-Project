@@ -68,6 +68,11 @@ export default new Router({
               component: () => import("@/views/pages/party-a/accounts/index.vue")
             },
             {
+              path: "chat",
+              name: "chat",
+              component: () => import("@/views/pages/chat/index.vue")
+            },
+            {
               path: "places",
               name: "party-a-places",
               component: () => import("@/views/pages/party-a/places/index.vue")
@@ -117,6 +122,11 @@ export default new Router({
           name: "party-b",
           component: ()=> import("@/views/theme/BlankWrapper.vue"),
           children: [
+            {
+              path: "chat",
+              name: "chat",
+              component: () => import("@/views/pages/chat/index.vue")
+            },
             {
               path: "places-for-rent",
               name: "places-for-rent",

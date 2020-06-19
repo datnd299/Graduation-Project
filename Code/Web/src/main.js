@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+
 import ApiService from "./common/api.service";
 import MockService from "./common/mock/mock.service";
 import { VERIFY_AUTH } from "./store/auth.module";
@@ -21,6 +22,8 @@ import "perfect-scrollbar";
 import i18n from "./common/plugins/vue-i18n";
 import vuetify from "./common/plugins/vuetify";
 import VueToast from 'vue-toast-notification';
+import VueLodash from 'vue-lodash'
+import lodash from 'lodash'
 // Import any of available themes
 import 'vue-toast-notification/dist/theme-default.css';
 import "./common/plugins/bootstrap-vue";
@@ -35,6 +38,31 @@ import DisableAutocomplete from 'vue-disable-autocomplete';
 
 Vue.use(DisableAutocomplete);
 Vue.component('d-loading', DLoading);
+Vue.use(VueLodash, { lodash: lodash })
+
+import VueSocketIO from 'vue-socket.io'
+import SocketIO from "socket.io-client"
+
+
+const socketInstance = SocketIO('http://localhost:8086', {
+  transports: ['websocket']
+});
+socketInstance.on('newMessageSended', () => {
+  console.log("connected");
+})
+Vue.use(new VueSocketIO({
+    debug: true,
+    connection: socketInstance,
+    
+    vuex: {
+        store,
+        actionPrefix: 'SOCKET_',
+        mutationPrefix: 'SOCKET_'
+    },
+     //Optional options
+}))
+console.log("imports done...");
+
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -61,11 +89,23 @@ router.beforeEach((to, from, next) => {
   }, 100);
 });
 
-new Vue({
+const vue = new Vue({
   router,
   store,
   i18n,
   vuetify,
   VueToast,
+  sockets:{
+    connect() {
+      console.log("socket connected...")
+    },
+    disconnected() {
+      console.log("socket disconnected...")
+    }
+  },
   render: h => h(App)
-}).$mount("#app");
+});
+vue.$mount("#app");
+
+
+

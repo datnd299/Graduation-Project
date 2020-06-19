@@ -53,6 +53,13 @@
         "role":"2"
       },
       {
+        "title": "Tin nhắn",
+        "root": true,
+        "page": "party-a/chat",
+        "translate": "Tin nhắn",
+        "role":"2,3"
+      },
+      {
         "title": "Đối tác",
         "root": true,
         "page": "party-a/partner",
@@ -73,6 +80,7 @@
         "translate": "Điểm treo",
         "role":"2"
       },
+
       {
         "title": "Nhiệm vụ",
         "root": true,
@@ -82,6 +90,13 @@
       },
       {
         "section":"Đối tác",
+        "role":"4"
+      },
+      {
+        "title": "Tin nhắn",
+        "root": true,
+        "page": "party-b/chat",
+        "translate": "Tin nhắn",
         "role":"4"
       },
       {

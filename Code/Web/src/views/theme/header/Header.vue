@@ -39,12 +39,17 @@ import KTMenu from "@/assets/js/menu.js";
 import KTOffcanvas from "@/assets/js/offcanvas.js";
 import KTHeaderMenu from "@/views/theme/header/HeaderMenu.vue";
 import KTTopbar from "@/views/theme/topbar/Topbar.vue";
-
+import {GetToken} from '@/utils/auth';
 export default {
   name: "KTHeader",
   components: {
     KTHeaderMenu,
     KTTopbar
+  },
+  created(){
+    // this.$socket.on('connect', function(){
+  this.$socket.emit('authenticate', {token: GetToken()});
+// });
   },
   mounted() {
     new KTOffcanvas(this.$refs["kt_header_menu_wrapper"], {

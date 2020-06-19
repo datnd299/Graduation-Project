@@ -4,8 +4,10 @@ const PlaceForRent = require('../../models/place/placeForRent');
 const PartyA = require('../../models/user/partyA');
 const PartyB = require('../../models/user/partyB');
 const notificationController = require('../../controllers/notification/notificationController')
+const {changeAlias} = require('../../utils/index')
 exports.getPartner = async (req, res, next) => {
     try {
+        var q = req.body.q;
         const ptA = await PartyA.findOne({ "accs": req.acc._id});
         
         ptB = await PlaceRental.aggregate([
@@ -40,9 +42,23 @@ exports.getPartner = async (req, res, next) => {
                 
             }
         })
+        var pt = [];
+        if(q&&q.length>0){
+            ptB.forEach((e,i)=>{
+            
+              
+                
+                if(changeAlias(e.name+e.address+e.district+e.email+e.phone+e.province).includes(changeAlias(q))){
+                    pt.push(e)
+                }
+            })
+            
+        }else{
+            pt=ptB;
+        }
         res.status(200).json({
             status: 'success',
-            data: ptB
+            data: pt
         });
 
 

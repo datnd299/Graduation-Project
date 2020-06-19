@@ -36,7 +36,7 @@ exports.getMine = async (req, res, next) => {
         if(acc.role.includes('partyA')){
             acc.ptA = await PartyA.findOne({accs:acc._id});
         }else if(acc.role.includes('partyB')){
-            console.log(acc._id);
+         
             
             acc.ptB = await PartyB.findOne({accs:acc._id});
             data = await Notification.find();
