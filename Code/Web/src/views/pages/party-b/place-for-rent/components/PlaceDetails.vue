@@ -339,6 +339,12 @@ export default {
       req.p_id = this.pId;
       rentPlace(req).then(res => {
         console.log(res);
+        this.$toast.open({
+      message: "Đã gửi yêu cầu thuê",
+      type: 'success',
+      position:'top-right',
+      duration:3000
+  });
       });
     },
     createPlace() {

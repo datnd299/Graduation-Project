@@ -3,6 +3,22 @@ const base = require('./baseController');
 const PartyA = require('../models/user/partyA');
 const AppError = require('../utils/appError');
 const PartyB = require('../models/user/partyB');
+const Socket = require('../models/access/socket')
+const mongoose = require('mongoose');
+var setting = require("./../setting");
+// var os = require('os');
+var osu = require('node-os-utils')
+var cpu = osu.cpu
+var os = osu.os
+var mem = osu.mem
+const util = require('util')
+const getSize = require('get-folder-size');
+const fs = require('fs');
+const { cpuUsage } = require('process');
+function getFolderSize(){
+    
+}
+
 exports.deleteMe = async (req, res, next) => {
     try {
         await User.findByIdAndUpdate(req.user.id, {
@@ -12,6 +28,62 @@ exports.deleteMe = async (req, res, next) => {
         res.status(204).json({
             status: 'success',
             data: null
+        });
+
+
+    } catch (error) {
+        next(error);
+    }
+};
+exports.getSystemInfo = async (req, res, next) => {
+    try {
+        var mongoStats = await mongoose.connection.db.stats()
+        
+     var cpuPercentage = await   cpu.usage();
+     var cpuModal =cpu.model();
+     
+
+     var memInfo = await mem.info()
+  
+  var fileFolder = setting.PROJECT_DIR + '/files/';
+  const fileFolderSizePromise = util.promisify(getSize)
+  var fileFolderSize =await fileFolderSizePromise(fileFolder);
+  const readdirPromise = util.promisify(fs.readdir)
+  var files = await readdirPromise(fileFolder);
+
+  
+  
+  var ptACount = await PartyA.where({ status: { $ne: 0 } }).estimatedDocumentCount();
+  var ptBCount = await PartyB.where({ status: { $ne: 0 } }).estimatedDocumentCount();
+  var accCount = await Account.where({ status: { $ne: 0 } }).estimatedDocumentCount();
+  var online = await Socket.find().distinct('acc');
+
+  
+  var info = {
+    db:mongoStats,
+    cpu:{
+        model:cpuModal,
+        use:cpuPercentage,
+        free:100-cpuPercentage
+    },
+    mem:memInfo,
+    file:{
+        size:(fileFolderSize / 1024 / 1024).toFixed(2) + ' MB',
+        count:files.length
+    },
+    user:{
+        a:ptACount,
+        b:ptBCount,
+        acc:accCount,
+        online:online.length
+    }
+}
+
+  
+
+        res.status(200).json({
+            status: 'success',
+            data: info
         });
 
 

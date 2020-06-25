@@ -21,7 +21,7 @@
       
     <v-card-actions>
      
-        <router-link :to="'#'">
+        <router-link :to="'/party-a/signboards/'+signboard._id">
       <v-btn
         color="purple"
         text

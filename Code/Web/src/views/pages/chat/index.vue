@@ -25,7 +25,7 @@
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-text="item.name"></v-list-item-title>
-              <v-list-item-subtitle v-text="'46 - Lò Đúc - Fogyma'"></v-list-item-subtitle>
+              <v-list-item-subtitle v-text="item.address"></v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>

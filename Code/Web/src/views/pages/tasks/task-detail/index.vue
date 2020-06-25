@@ -110,8 +110,8 @@
               v-model="form.start"
               dense
               outlined
-              :type="(form.typeRepeat=='repeat'?'time':'datetime-local')"
-              label="Thực hiện từ"
+              :type="((form.typeRepeat=='repeat'&&form.type=='report')?'date':'datetime-local')"
+              :label="((form.typeRepeat=='repeat'&&form.type=='report')?'Lặp lại từ':'Thực hiện từ')"
               required
             ></v-text-field>
           </v-col>
@@ -120,7 +120,7 @@
               v-model="form.end"
               dense
               outlined
-              :type="(form.typeRepeat=='repeat'?'time':'datetime-local')"
+              :type="((form.typeRepeat=='repeat'&&form.type=='report')?'date':'datetime-local')"
               label="Đến"
               required
             ></v-text-field>
@@ -176,14 +176,19 @@ export default {
           random: false,
           remindBeforeVal: 60,
           remindBeforeUnit: "minute",
-          timeToComplete: 60
+          timeToComplete: 60,
+          start:null,
+          end:null
         }
       }
     };
   },
   methods: {
     createTask() {
-      createNew(this.form);
+      createNew(this.form).then(res=>{
+        console.log(res);
+        this.$router.push('/party-a/tasks')
+      });
     },
     timeUnitSelectChanged(pl) {
       if (pl.times) {

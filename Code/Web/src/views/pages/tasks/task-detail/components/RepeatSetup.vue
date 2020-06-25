@@ -38,10 +38,8 @@
         <v-text-field v-if="detail.random" v-model="detail.timeToComplete" label="Thực hiện trong vòng" type="Number" outlined>
           <span slot="append">Phút</span>
         </v-text-field>
-      </div>
-    </div>
-    <v-text-field v-model="detail.remindBeforeVal" label="Thông báo trước" type="Number" outlined>
-      <v-select style="margin-top: -17px;"
+        <v-text-field v-if="detail.random" v-model="detail.remindBeforeVal" label="Thông báo trước" type="Number" outlined>
+      <v-select  style="margin-top: -17px;"
           :items="timeSmallUnitSelect"
           v-model="detail.remindBeforeUnit"
           label="Đơn vị"
@@ -49,6 +47,30 @@
            slot="append-outer" 
         ></v-select>
     </v-text-field>
+      </div>
+    </div>
+    <v-row>
+          <v-col xs="12" sm="6">
+            <v-text-field
+              v-model="detail.start"
+              dense
+              outlined
+              :type="'time'"
+              label="Bắt đầu từ"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col xs="12" sm="6">
+            <v-text-field
+              v-model="detail.end"
+              dense
+              outlined
+              :type="'time'"
+              label="Đến"
+              required
+            ></v-text-field>
+          </v-col>
+        </v-row>
     </div>
  
 </template>

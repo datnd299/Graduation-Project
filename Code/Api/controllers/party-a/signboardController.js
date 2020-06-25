@@ -33,6 +33,28 @@ exports.createNew = async (req, res, next) => {
         next(error);
     }
 };
+exports.allSignboardsReport = async (req, res, next) => {
+    try {
+
+        var acc = req.acc;
+        var ptA = await PartyA.findOne({ "accs": acc._id });
+        if (!ptA) {
+            return next(new AppError(200, 'fail', 'Bạn không phải đối tác'), req, res, next);
+        }
+        const sbs = await Signboard.find({
+            owner:ptA._id
+        })
+
+        res.status(200).json({
+            status: 'success',
+            data: sbs
+        });
+
+
+    } catch (error) {
+        next(error);
+    }
+};
 exports.getMine = async (req, res, next) => {
     try {
 
@@ -45,6 +67,29 @@ exports.getMine = async (req, res, next) => {
             owner:ptA._id
         })
 
+        res.status(200).json({
+            status: 'success',
+            data: sbs
+        });
+
+
+    } catch (error) {
+        next(error);
+    }
+};
+exports.getByID = async (req, res, next) => {
+    try {
+
+        var acc = req.acc;
+        var ptA = await PartyA.findOne({ "accs": acc._id });
+        if (!ptA) {
+            return next(new AppError(200, 'fail', 'Bạn không phải đối tác'), req, res, next);
+        }
+        const sbs = await Signboard.findById(req.body.id);
+        if(!sbs){
+            return next(new AppError(200, 'fail', 'Biển không tồn tại'), req, res, next);
+        }
+        sbs.code = sbs.code.substr(26);
         res.status(200).json({
             status: 'success',
             data: sbs

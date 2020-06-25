@@ -11,11 +11,13 @@
       <setup-task :task="task" v-if="task.type=='setup'"></setup-task>
       <fee-task :task="task" v-if="task.type=='fee'"></fee-task>
       <check-task :task="task" v-if="task.type=='check'"></check-task>
+      <report-task :task="task" v-if="task.type=='report'"></report-task>
     </v-card>
     <div style="margin-top:10px" v-if="task">
         <setup-report :task="task" v-if="task.type=='setup'"></setup-report>
         <fee-report :task="task" v-if="task.type=='fee'"></fee-report>
         <check-report :task="task" v-if="task.type=='check'"></check-report>
+        <report-report :task="task" v-if="task.type=='report'"></report-report>
     </div>
     
   </div>
@@ -30,6 +32,9 @@ import FeeReport from './components/FeeReport'
 
 import CheckTask from './components/CheckTask'
 import CheckReport from './components/CheckReport'
+
+import ReportTask from './components/ReportTask'
+import ReportReport from './components/ReportReport'
 import {BASE_API} from '@/utils/base'
 
 import { SET_BREADCRUMB } from "@/store/breadcrumbs.module";
@@ -45,11 +50,13 @@ export default {
       FeeTask,
       FeeReport,
       CheckTask,
-      CheckReport
+      CheckReport,
+      ReportTask,
+      ReportReport
   },
   data() {
     return {
-      task: null,
+      task: {},
       isLoading:false
     };
   },

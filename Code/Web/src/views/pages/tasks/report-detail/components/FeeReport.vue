@@ -13,20 +13,39 @@
         </v-btn>
         <span> - Số tiền: </span>
         <span>{{pl.pl.amount|numberF}}</span>
-        <v-btn style="color: white" class="ma-2" tile color="indigo" small>
+        <v-btn style="color: white;float:right" class="ma-2" tile color="indigo" small>
           <v-icon dense x-small="">far fa-check-square</v-icon>
         </v-btn>
+        <div>
+          <span>Nhân viên đã xác nhận:</span> <v-checkbox class="shrink mr-2 mt-0" hide-details style="display: inline-block;" v-model="pl.pl.report.em_confirm"></v-checkbox>
+          <span>Ghi chú: </span>
+        </div> 
+        <div>
+          <span>Đối tác đã xác nhận:</span> <v-checkbox class="shrink mr-2 mt-0" hide-details style="display: inline-block;" v-model="pl.pl.report.pt_confirm"></v-checkbox>
+          <span>Ghi chú: </span>
+        </div>
     </div>
-        <v-text-field v-model="report.note" outlined label="Báo cáo"></v-text-field>
-        <div style="text-align:right"
+        <!-- <v-text-field v-model="report.note" outlined label="Báo cáo của nhân viên"></v-text-field> -->
+        <div 
         >
         <v-btn
+              color="red"
+              dark
+              class="ma-2"
+              large
+            
+            >
+              <v-icon small="" left>fas fa-ban</v-icon>&nbsp;  Không duyệt nhiệm vụ
+            </v-btn>
+    
+        <v-btn style="float:right"
               color="teal"
               dark
               class="ma-2"
               large
+            
             >
-              <v-icon small="">fas fa-paper-plane</v-icon>&nbsp; Báo cáo nhiệm vụ
+              <v-icon small="" left>fas fa-check-square</v-icon>&nbsp;  Duyệt nhiệm vụ
             </v-btn>
         </div>
     </v-card>
@@ -55,7 +74,7 @@ export default {
     };
   },
   created(){
-   this.task.fee_task.feeDetail.forEach(e => {
+   this.task.fee_task.fee_detail.forEach(e => {
       this.report.places.push({
         pl:e,
         status:1

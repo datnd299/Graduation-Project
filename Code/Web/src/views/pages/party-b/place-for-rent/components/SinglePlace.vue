@@ -27,8 +27,8 @@
       color="indigo darken-3"
       outlined
     >
-      <v-icon small left>fas fa-dollar-sign</v-icon>
-      {{place.price}} / {{place.time_unit}}
+      <v-icon small left>fas fa-money-bill</v-icon>
+      {{place.price|numberF}}đ / {{place.time_unit|timeUnitText}}
     </v-chip>
      </v-card-subtitle>
      

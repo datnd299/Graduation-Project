@@ -1,4 +1,4 @@
-import {RoleMap,PartyStatusMap,PlaceRentalStatusMap,TimeUnit,TaskType,TaskStatus} from './mapping'
+import {RoleMap,PartyStatusMap,PlaceRentalStatusMap,TimeUnit,TaskType,TaskStatus,RepeatType} from './mapping'
 import Vue from "vue";
 
 Vue.filter('roleStatusText', function(role) {
@@ -26,6 +26,20 @@ Vue.filter('partyStatusText', function(role) {
          return TaskStatus[role].color;
      }
      return TaskStatus[1].color;
+ })
+
+ Vue.filter('repeatTypeText', function(type) {
+    if(RepeatType[type]){
+        return RepeatType[type].text;
+    }
+    return RepeatType['once'].text;
+ });
+
+ Vue.filter('repeatTypeColor', function(type) {
+     if(RepeatType[type]){
+         return RepeatType[type].color;
+     }
+     return RepeatType['once'].color;
  })
 
  Vue.filter('taskStatusText', function(role) {

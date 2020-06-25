@@ -24,6 +24,8 @@
                 color="indigo"
                 hide-details
               ></v-checkbox>
+              <v-list-item-subtitle style="margin-left:20px">Chi phí: {{item.price|numberF}} / {{item.time_unit|timeUnitText}}</v-list-item-subtitle>
+              <v-list-item-subtitle style="margin-left:20px">Đã trả: 10,000,000đ</v-list-item-subtitle>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -43,8 +45,16 @@
         @closeclick="infoWinOpen=false"
       >
       <div v-if="currentPlace.start" style="width:250px;" class="info-window-content">
+        <div style="max-height:100px">
+              <img style="    max-height: 100px;
+    width: 100%;
+    object-fit: contain;" :src="getFile(currentPlace.imgs[0])" alt="">
+            </div>
           <div>
             <b>• {{currentPlace.name}}</b>
+          </div>
+          <div style="margin-left:10px" v-for="(sb, index) in currentPlace.signboards" :key="index">
+            <b>• {{sb.name}}</b>
           </div>
           <div>
             <b >• {{Date.parse(currentPlace.start).toString('dd/MM/yyyy')}} <i class="fas fa-arrow-right"></i> {{Date.parse(currentPlace.end).toString('dd/MM/yyyy')}}</b>
@@ -52,6 +62,9 @@
           <div>
             <b>• {{currentPlace.price|numberF}} / {{currentPlace.time_unit|timeUnitText}}</b>
           </div>
+          <div>
+              <b>• Đã trả: 5,000,000đ</b>
+            </div>
       </div>
       </gmap-info-window>
         <gmap-marker v-for="(item, index) in tableDataFiltered" :key="index"
@@ -65,6 +78,7 @@
 </template>
 <script>
 import { getPlaces } from "@/api/party-a/place";
+import { BASE_API } from "@/utils/base";
 export default {
   data() {
     return {
@@ -92,6 +106,9 @@ export default {
       }
   },
   methods:{
+    getFile(img) {
+      return BASE_API + "file/get/" + img;
+    },
       clickMarker(place,index){
           console.log(index);
           

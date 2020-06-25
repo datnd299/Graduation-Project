@@ -40,6 +40,13 @@
         "translate": "MENU.PARTY_B",
         "role":"1"
       },
+      {
+        "title": "Thông tin hệ thống",
+        "root": true,
+        "page": "admin/sysinfo",
+        "translate": "Thông tin hệ thống",
+        "role":"1"
+      },
       
       {
         "section":"Bên thuê",

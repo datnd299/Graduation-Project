@@ -16,8 +16,16 @@ exports.rentPlace = async (req, res, next) => {
         if (!pl) {
             return next(new AppError(200, 'fail', 'Không có mã này'), req, res, next);
         }
+        
         const ptA = await PartyA.findOne({ "accs": req.acc._id});
+        const plsRented = await PlaceRental.find({place_id:pl._id,$or:[ {'party_renter':ptA._id,status:{ $in: [1, -1] }}, {status:2} ]});
+        console.log(plsRented);
+        
+        if(plsRented.length>0){
+            return next(new AppError(200, 'fail', 'Bạn không thể yêu cầu thuê điểm treo này nữa'), req, res, next);
+        }
 
+        
         const plR = await PlaceRental.create({
             name: req.body.name,
           
@@ -102,6 +110,8 @@ exports.getMyPlaces = async (req, res, next) => {
             populate : {
               path : 'owner'
             }
+        }).populate({
+            path : 'signboards',
         })
           places.forEach(e=>{
               
@@ -120,7 +130,7 @@ exports.getDetail = async (req, res, next) => {
     try {
         
         
-        console.log(req.body.id );
+      
         
 
         places = await PlaceRental.findById(req.body.id).populate('party_renter').populate({

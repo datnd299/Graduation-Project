@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card class="mx-auto" style="padding:20px" outlined>
-      <v-list-item-title class="headline mb-1">Nhập thông tin điểm treo</v-list-item-title>
+      <v-list-item-title class="headline mb-1">Thông tin biển quảng cáo</v-list-item-title>
       <br />
       <br />
       <v-form ref="form">
@@ -9,6 +9,20 @@
 
         <v-text-field outlined type="text" v-model="form.code" label="Mã biển" required></v-text-field>
         <v-text-field outlined type="text" v-model="form.note" label="Ghi chú" required></v-text-field>
+        <v-row>
+        <v-col v-for="(img, index) in form.imgs" :key="index" xs="12" sm="6" md="4">
+          <v-card class="mx-auto" max-width="300" style="position:relative">
+            <v-img  class="white--text align-end" height="150" :src="getUrlImage(img)">
+        
+            </v-img>
+            <v-btn @click="removeImg(img)" style="position:absolute;top: 0;
+    right: 0;" icon color="red">
+              <v-icon>fas fa-times-circle</v-icon>
+              </v-btn>
+            
+          </v-card>
+        </v-col>
+      </v-row>
         <div>
           <v-file-input outlined accept="image/*" chips multiple v-model="form.files" label="Ảnh"></v-file-input>
           <div v-if="form.files" class="image-input-preview">
@@ -30,7 +44,12 @@
             large
             @click="createSignboard"
             :loading="loading"
-          >Thêm địa điểm</v-btn>
+          ><template v-if="id">
+            Sửa thông tin
+          </template>
+          <template v-else>
+            Thêm biển quảng cáo
+          </template> </v-btn>
         </div>
       </v-form>
     </v-card>
@@ -38,22 +57,28 @@
 </template>
 <script>
 import { SET_BREADCRUMB } from "@/store/breadcrumbs.module";
-import { createNew } from "@/api/party-a/signboard";
+import { createNew,getSignboardByID } from "@/api/party-a/signboard";
 import { upload } from "@/api/file/file";
+import {BASE_API} from '@/utils/base'
 export default {
   data() {
     return {
+      id:null,
       form: {
         name: "",
         code: "",
         note:"",
-        files:null
+        files:null,
+        imgs:[]
       },
       uploading: false,
       loading: false
     };
   },
   created() {
+    this.id = this.$route.params.id;
+    this.fetchInfo();
+    
     this.$store.dispatch(SET_BREADCRUMB, [
       { title: "Bên thuê", route: "/party-a" },
       { title: "Biển quảng cáo", route: "/party-a/signboards" },
@@ -61,6 +86,27 @@ export default {
     ]);
   },
   methods: {
+    removeImg(img){
+      this.form.imgs.splice(this.form.imgs.indexOf(img), 1);
+    },
+    getUrlImage(img){
+      return BASE_API+'file/get/'+img
+    },
+    fetchInfo(){
+      if(this.id){
+        getSignboardByID({
+        id:this.id
+      }).then(res=>{
+        this.form.name = res.data.name;
+        this.form.code = res.data.code;
+        this.form.note = res.data.note;
+        this.form.imgs = res.data.imgs;
+        console.log(res);
+        
+      })
+      }
+      
+    },
     getUrl(file) {
       return URL.createObjectURL(file);
     },

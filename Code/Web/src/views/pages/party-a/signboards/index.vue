@@ -1,10 +1,18 @@
 <template>
   <div>
-    <router-link to="/party-a/signboards/new-signboard">
+    <div>
+      <router-link to="/party-a/signboards/new-signboard">
       <v-btn large color="primary">
-        <i class="fas fa-plus"></i> &nbsp; &nbsp; Thêm biển quảng cáo
+        <v-icon small="" left="">fas fa-plus</v-icon>Thêm biển quảng cáo
       </v-btn>
     </router-link>
+    <router-link style="float:right" to="/party-a/report/signboards">
+      <v-btn large color="primary">
+        <v-icon small="" left="">fas fa-scroll</v-icon>Bản đồ biển quảng cáo
+      </v-btn>
+    </router-link>
+    </div>
+    
     <v-row >
             <v-col v-for="(item,index) in tableData" :key="index" xs="12" sm="6" md="4" lg="3">
                 <single-signboard :signboard="item"></single-signboard>

@@ -1,11 +1,19 @@
 <template>
   <div>
-    <router-link to="/party-a/places/map" >
+    <div>
+      <router-link to="/qr-scanner">
+      <v-btn large color="primary">
+        <v-icon small="" left="">fas fa-plus</v-icon>Thêm điểm treo của đối tác
+      </v-btn>
+    </router-link>
+<router-link style="float:right" to="/party-a/places/map" >
       
       <v-btn large color="primary">
-      Map
+      Bản đồ điểm treo
     </v-btn>
     </router-link>
+    </div>
+    
     <v-data-table style="margin-top:10px"
       :loading="isLoading"
       :headers="headers"
@@ -39,6 +47,12 @@
           <router-link :to="'/party-b/places-rental/'+item._id+'/details'">
             <v-btn depressed small color="blue darken-1" text-color="white">
               <i class="fas fa-ellipsis-h" style="color:white"></i>
+              <!-- <v-icon style="color:red">fas fa-times</v-icon> -->
+            </v-btn>
+          </router-link>
+          <router-link :to="'/party-a/report/place/'+item._id+'/tasks'">
+            <v-btn depressed small color="purple" text-color="white">
+              <i class="fas fa-file-medical-alt" style="color:white"></i>
               <!-- <v-icon style="color:red">fas fa-times</v-icon> -->
             </v-btn>
           </router-link>

@@ -44,6 +44,11 @@ export default new Router({
               component: () => import("@/views/pages/admin/party-b/index.vue")
             },
             {
+              path: "sysinfo",
+              name: "sysinfo",
+              component: () => import("@/views/pages/admin/sysinfo/index.vue")
+            },
+            {
               path: "party-a/:id",
               redirect:'party-a/:id/users',
               component: ()=> import("@/views/theme/BlankWrapper.vue"),
@@ -98,6 +103,11 @@ export default new Router({
               component: () => import("@/views/pages/party-a/signboards/index.vue")
             },
             {
+              path: "/party-a/signboards/:id",
+              name: "party-a-signboards-detail",
+              component: () => import("@/views/pages/party-a/signboards/components/SignboardDetail.vue")
+            },
+            {
               path: "/party-a/signboards/new-signboard",
               name: "party-a-signboards-new",
               component: () => import("@/views/pages/party-a/signboards/components/SignboardDetail.vue")
@@ -111,7 +121,19 @@ export default new Router({
               path: "/party-a/tasks/:id/detail",
               name: "party-a-task-detail",
               component: () => import("@/views/pages/tasks/report-detail/index.vue")
+            },
+            {
+              path: "/party-a/report/signboards",
+              name: "party-a-report-signboards",
+              component: () => import("@/views/pages/party-a/report/signboards/ReportAll.vue")
+            },
+            {
+              path: "/party-a/report/place/:id/tasks",
+              name: "party-a-report-place-task",
+              component: () => import("@/views/pages/party-a/report/tasks/PlaceXTaskReport.vue")
             }
+
+            
             
           ]
           

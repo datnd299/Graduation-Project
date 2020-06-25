@@ -35,17 +35,22 @@ const placeRentalSchema = new mongoose.Schema({
     }],
     start:{
         type:Date,
+        required:true
     },
     end:{
-        type:Date
+        type:Date,
+        required:true
     },
+    signboards:[{
+         type: Schema.ObjectId, ref: "Signboard" 
+    }],
     place_id:{ type: Schema.ObjectId, ref: "PlaceForRent" },
     account_renter:{ type: Schema.ObjectId, ref: "Account" },
     party_renter:{ type: Schema.ObjectId, ref: "PartyA" },
     status:{
         type: Number,
-        default:1
-    },
+        default:1 //1 đang chờ xác nhận, 2 xác nhận, -1 yêu càu hủy, 0 hủy, 3 hết hạn
+    }, 
 },{timestamps:true});
 
 

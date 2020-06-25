@@ -29,6 +29,14 @@ export function getPartyBs(data) {
       data: data
     })
   }
+  export function getSysinfo(data) {
+    return request({
+      url: 'admin/users/sysinfo',
+      method: 'post',
+      data: data
+    })
+  }
+  
   export function approvePartyB(data) {
     return request({
       url: 'admin/users/party-b/approve-party',

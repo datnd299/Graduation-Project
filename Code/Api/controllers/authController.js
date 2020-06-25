@@ -199,8 +199,7 @@ exports.protect = async (req, res, next) => {
 exports.restrictTo = (...roles) => {
     return (req, res, next) => {
         if (!roles.includes(req.acc.role)) {
-            console.log(roles);
-            console.log(req.acc.role);
+           
             
             
             return next(new AppError(403, 'fail', 'You are not allowed to do this action'), req, res, next);

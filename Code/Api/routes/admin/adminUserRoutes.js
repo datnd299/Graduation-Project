@@ -12,6 +12,8 @@ const authController = require('../../controllers/authController');
 router.use(authController.restrictTo('admin'));
 router.post('/partyas', userController.getAllPartyA);
 
+router.post('/sysinfo', userController.getSystemInfo);
+
 router.post('/partybs', userController.getAllPartyB);
 router.post('/party-a/get-accs', userController.getPartyAAccs);
 

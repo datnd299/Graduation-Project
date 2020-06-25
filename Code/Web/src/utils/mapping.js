@@ -31,6 +31,26 @@ const PartyStatusMap={
     },
     
 }
+const TaskStatusMap={
+    1:{
+        text:'Mới tạo',
+        color:'blue-grey lighten-1'
+    },
+
+    2:{
+        text:'Đã báo cáo',
+        color:'blue'
+    },
+    3:{
+        text:'Đã duyệt',
+        color:'green'
+    },
+    0:{
+        text:'Không duyệt',
+        color:'red'
+    },
+    
+}
 const PlaceRentalStatusMap={
     1:{
         text:'Đang yêu cầu',
@@ -48,6 +68,10 @@ const PlaceRentalStatusMap={
         text:'Hủy',
         color:'red'
     },
+    '-1':{
+        text:'Yêu cầu hủy',
+        color:'red'
+    }
     
 }
 const TimeUnit={
@@ -115,20 +139,20 @@ const TaskType={
         icon:'fas fa-camera-retro'
     }, 
 }
-const TaskStatus={
-    1:{
-        text:'Mới tạo',
-        color:'blue-grey lighten-1'
-    },
-    2:{
-        text:'Đã kích hoạt',
-        color:'green'
-    },
-    0:{
-        text:'Hủy',
-        color:'red'
-    }
-}
+// const TaskStatus={
+//     1:{
+//         text:'Mới tạo',
+//         color:'blue-grey lighten-1'
+//     },
+//     2:{
+//         text:'Đã kích hoạt',
+//         color:'green'
+//     },
+//     0:{
+//         text:'Hủy',
+//         color:'red'
+//     }
+// }
 const RepeatType={
     'repeat':{
         text:'Lặp lại',
@@ -141,6 +165,46 @@ const RepeatType={
         icon:'fas fa-dice-one'
     },
 }
+const ColorLst=[
+    {
+        name:'red',
+        code:'#F44336'
+    },
+    {
+        name:'teal',
+        code:'#009688'
+    },
+    {
+        name:'pink',
+        code:'#E91E63'
+    },
+    {
+        name:'purple',
+        code:'#9C27B0'
+    },
+    {
+        name:'blue',
+        code:'#2196F3'
+    },
+    {
+        name:'deep-purple',
+        code:'#673AB7'
+    },
+    
+    {
+        name:'cyan darken-4',
+        code:'#006064'
+    },
+    {
+        name:'lime',
+        code:'#CDDC39'
+    },
+    {
+        name:'brown ',
+        code:'#795548'
+    },
+
+]
 
 module.exports={
     RoleMap:RoleMap,
@@ -150,5 +214,6 @@ module.exports={
     TaskType:TaskType,
     RepeatType:RepeatType,
     SmallTimeUnit:SmallTimeUnit,
-    TaskStatus:TaskStatus
+    TaskStatus:TaskStatusMap,
+    ColorLst:ColorLst
 }

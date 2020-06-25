@@ -19,6 +19,13 @@
       <template v-slot:item.accs="{ item }">
         <span>{{accsOfMision(item)}}</span>
       </template>
+      <template v-slot:item.status="{ item }">
+        <v-chip class="ma-2" :color="item.status|taskStatusColor" label text-color="white">
+            <!-- <v-icon dense small left>{{task.status|taskTypeIcon}}</v-icon> -->
+            {{item.status|taskStatusText}}
+          </v-chip>
+        
+      </template>
       <template
         v-slot:item.times="{ item }"
       >{{Date.parse(item.start).toString('dd/MM/yy HH:mm')}} - {{Date.parse(item.end).toString('dd/MM/yy HH:mm')}}</template>
@@ -58,12 +65,8 @@ export default {
         { text: "Loại nhiệm vụ", value: "type", align: "center" },
         { text: "Người thực hiện", value: "accs" },
         { text: "Thời gian thực hiện", value: "times" },
-        {
-          text: "Người tạo",
-          align: "start",
-          value: "name"
-        },
-        { text: "Trạng thái", value: "province" },
+        
+        { text: "Trạng thái", value: "status" },
         { text: "Links", value: "com_link", align: "center" },
         { text: "Acctions", value: "com_ac", align: "center" }
       ],
@@ -73,7 +76,7 @@ export default {
   methods: {
     placesOfMision(task) {
       if (task.type == "setup") {
-        return task.setup_task.place_rental.name;
+        return task.setup_task.place_rental.name??'';
       } else if (task.type == "check") {
         return task.check_task.place_rental
           .map(function(item) {
@@ -81,13 +84,13 @@ export default {
           })
           .join(", ");
       } else if (task.type == "fee") {
-        return task.fee_task.feeDetail
+        return task.fee_task.fee_detail
           .map(function(item) {
             return item["place_rental"].name;
           })
           .join(", ");
       } else if (task.type == "report") {
-        return task.report_task.place_rental.name;
+        return task.report_task.place_rental.name??'';
       } else {
         return "";
       }

@@ -15,3 +15,17 @@ export function getSignboards(data) {
       data: data,
     })
   }
+  export function getSignboardByID(data) {
+    return request({
+      url: 'party-a/signboards/get-by-id',
+      method: 'post',
+      data: data,
+    })
+  }
+  export function allSignboardsReport(data) {
+    return request({
+      url: 'party-a/signboards/report/all',
+      method: 'post',
+      data: data,
+    })
+  }
