@@ -44,7 +44,7 @@ import VueSocketIO from 'vue-socket.io'
 import SocketIO from "socket.io-client"
 
 
-const socketInstance = SocketIO('http://localhost:8086', {
+const socketInstance = SocketIO('http://103.35.64.5:8086', {
   transports: ['websocket']
 });
 socketInstance.on('newMessageSended', () => {
