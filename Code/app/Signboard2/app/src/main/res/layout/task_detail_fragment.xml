@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFF"
+    android:id="@+id/taskDetailFragment"
+    tools:context=".ui.tasks.detail.ReportTaskDetail">
+    <LinearLayout
+
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.card.MaterialCardView
+            android:padding="5dp"
+            android:layout_margin="8dp"
+
+            android:background="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nhiệm vụ báo cáo"
+                    android:gravity="center_horizontal" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/txtPlaceName"
+                        android:text="Điểm treo: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/txtStatus"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chưa thực hiện"></TextView>
+                </RelativeLayout>
+                <TextView
+                    android:text="Biển quảng cáo: "
+                    android:id="@+id/txtSignboardName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <ImageView
+                    android:id="@+id/txtSignboardImg"
+                    android:src="@drawable/ic_account_box_24px"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+
+                </ImageView>
+                <TextView
+                    android:text="Bên thuê:"
+                    android:id="@+id/txtptAName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:text="Thực hiện từ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <com.google.android.material.textview.MaterialTextView
+                    android:text="Loại nhiẹm vụ"
+                    android:id="@+id/txtRepeatType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/loutRepeatDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Chi tiết lặp lại"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+                    <TextView
+                        android:id="@+id/txtRepeatFz"
+                        android:text="chu kì lặp lại"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+                    <TextView
+                        android:text="Báo trước 60 phút - Yêu cầu hoàn thành trong 60 phút"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textAlignment="center"
+                    android:textSize="18dp"
+
+                    android:text="Báo cáo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                </TextView>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:text="Chất lượng biển thế nào: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+<!--                    <RatingBar-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_marginLeft="155dp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:scaleX=".5"-->
+<!--                        android:scaleY=".5"-->
+<!--                        android:numStars="5"-->
+<!--                        android:max="5"-->
+<!--                        android:stepSize="1"-->
+<!--                        android:rating="3"-->
+<!--                        android:transformPivotX="0dp"-->
+<!--                        android:transformPivotY="0dp"-->
+
+<!--                        android:layout_height="wrap_content">-->
+<!--                    </RatingBar>-->
+                    <RatingBar
+                        android:layout_marginTop="10dp"
+                    android:layout_marginLeft="175dp"
+                        android:id="@+id/myRatingBar"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5"
+                        android:stepSize="1"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:isIndicator="false" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Có sự cố? "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+                   <com.google.android.material.checkbox.MaterialCheckBox
+                       android:layout_width="wrap_content"
+                       android:layout_height="30dp">
+
+                   </com.google.android.material.checkbox.MaterialCheckBox>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:text="Hình ảnh"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+                        <com.google.android.material.button.MaterialButton
+
+                            app:icon="@drawable/ic_camera"
+
+                            android:layout_marginTop="0dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="55dp"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.button.MaterialButton>
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/mRecyclerView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

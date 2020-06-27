@@ -1,0 +1,2 @@
+rootProject.name='Signboard2'
+include ':app'
