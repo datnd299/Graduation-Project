@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jimp": "^0.13.0"
+    "jimp": "^0.13.0",
+    "md5": "^2.2.1",
+    "node-gzip": "^1.1.2"
   }
 }
