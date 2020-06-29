@@ -22,3 +22,10 @@ export function getById(data) {
     data: data
   })
 }
+export function approveTask(data) {
+  return request({
+    url: 'tasks/approve',
+    method: 'post',
+    data: data
+  })
+}

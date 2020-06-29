@@ -4,7 +4,10 @@ const latLngSchema = require('../other/latLng')
 
 const imageSchema = new mongoose.Schema({
     name:{type:String,required:true},
-    lat_lng:{type:latLngSchema},
+    lat_lng:{type:latLngSchema,default:{
+        lat:null,
+        lng:null
+    }},
     time:{type:Date},
     device:{type:String},
     hidden_info:{type:String},

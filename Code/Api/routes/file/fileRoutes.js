@@ -8,6 +8,7 @@ const authController = require('./../../controllers/authController');
 
 
 router.post('/upload', fileController.upload);
+router.post('/upload-ste/1', fileController.uploadSte);
 
 router.get('/get/:file', fileController.getFile);
 

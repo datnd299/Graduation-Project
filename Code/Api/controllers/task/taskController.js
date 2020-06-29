@@ -86,6 +86,98 @@ exports.createNew = async (req, res, next) => {
         next(error);
     }
 };
+exports.reportTask = async (req, res, next) => {
+ 
+    try {
+        var task = await Task.findById(req.body.id);
+        if(task.status!=1&&task.status!=2){
+            return next(new AppError(200, 'fail', 'Nhiệm vụ này không thể báo cáo'), req, res, next);
+        }
+        task.status = 2;
+        if (task.type == "setup") {
+            // task.setup_task_report = {
+            //     new_lat_lng: {
+            //         lat: 21.045891, lng: 105.8672733
+            //     },
+            //     signboards: [{
+            //         s_id: mongoose.Types.ObjectId("5ef2f8ae5af936437832664a"),
+            //         imgs: [mongoose.Types.ObjectId("5ef22328a1e31a333ca4c71b"), mongoose.Types.ObjectId("5ef223849d8a3451c4f070fc")],
+            //     }
+            //     ],
+            //     note: "Nhiệm vụ hoàn thành123123",
+
+            // }
+            task.setup_task_report = req.body.report;
+            await task.save();
+        }
+        res.status(200).json({
+            status: 'success',
+            data: task
+        });
+
+        // var t = {
+        //     id: '5ef2fefc5af93643783266cf',
+        //     report: {
+        //         new_lat_lng: {
+        //             lat: 21.045891, lng: 105.8672733
+        //         },
+        //         signboards: [{
+        //             s_id: '5ef2f8ae5af936437832664a',
+        //             imgs: ['5ef22328a1e31a333ca4c71b', '5ef223849d8a3451c4f070fc'],
+        //         }
+        //         ],
+        //         note: "Nhiệm vụ hoàn thành123123",
+        //     }
+        // }
+
+    }
+    catch (error) {
+        next(error);
+    }
+}
+
+exports.approveTask = async (req, res, next) => {
+ 
+    try {
+        var task = await Task.findById(req.body.id);
+        task.status = req.body.status;
+
+
+        if (task.type == "setup") {
+            if(req.body.status==3){
+                var pl = await PlaceRental.findById(task.setup_task.place_rental);
+                pl.lat_lng.lat = task.setup_task_report.new_lat_lng.lat;
+                pl.lat_lng.lng = task.setup_task_report.new_lat_lng.lng;
+                await pl.save();
+            }
+            
+            await task.save();
+        }
+        res.status(200).json({
+            status: 'success',
+            data: task
+        });
+
+        // var t = {
+        //     id: '5ef2fefc5af93643783266cf',
+        //     report: {
+        //         new_lat_lng: {
+        //             lat: 21.045891, lng: 105.8672733
+        //         },
+        //         signboards: [{
+        //             s_id: '5ef2f8ae5af936437832664a',
+        //             imgs: ['5ef22328a1e31a333ca4c71b', '5ef223849d8a3451c4f070fc'],
+        //         }
+        //         ],
+        //         note: "Nhiệm vụ hoàn thành123123",
+        //     }
+        // }
+
+    }
+    catch (error) {
+        next(error);
+    }
+}
 
 exports.getAllOfMyPT = async (req, res, next) => {
     try {
@@ -142,7 +234,7 @@ exports.getAllOfMyPT = async (req, res, next) => {
                 path: 'report_task.place_rental',
                 populate: {
                     path: 'signboards',
-                   
+
                 }
             }).populate({
                 path: 'report_task.place_rental',
@@ -152,7 +244,7 @@ exports.getAllOfMyPT = async (req, res, next) => {
                         path: 'owner'
                     }
                 },
-                
+
             }).populate({
                 path: 'report_task_report.signboards.s_id'
             }).populate({
@@ -266,7 +358,7 @@ exports.getTaskById = async (req, res, next) => {
             path: 'report_task.place_rental',
             populate: {
                 path: 'signboards',
-               
+
             }
         }).populate({
             path: 'report_task.place_rental',
@@ -276,7 +368,7 @@ exports.getTaskById = async (req, res, next) => {
                     path: 'owner'
                 }
             },
-            
+
         }).populate({
             path: 'report_task_report.signboards.s_id'
         }).populate({
@@ -294,26 +386,26 @@ exports.getTaskById = async (req, res, next) => {
         // }
         //  await task.save()
 
-        
 
-            //     task.setup_task_report = {
-            //         new_lat_lng:{
-            //            lat:21.045891,lng:105.8672733
-            //         },
-            //         signboards:[{
-            //             s_id:mongoose.Types.ObjectId("5ef2f8ae5af936437832664a"),
-            // imgs:[mongoose.Types.ObjectId("5ef22328a1e31a333ca4c71b"),mongoose.Types.ObjectId("5ef223849d8a3451c4f070fc")],
-            // }
-            //         ],
-            //         note:"Nhiệm vụ hoàn thành",
 
-            //     }
-            //     await task.save();
+        //     task.setup_task_report = {
+        //         new_lat_lng:{
+        //            lat:21.045891,lng:105.8672733
+        //         },
+        //         signboards:[{
+        //             s_id:mongoose.Types.ObjectId("5ef2f8ae5af936437832664a"),
+        // imgs:[mongoose.Types.ObjectId("5ef22328a1e31a333ca4c71b"),mongoose.Types.ObjectId("5ef223849d8a3451c4f070fc")],
+        // }
+        //         ],
+        //         note:"Nhiệm vụ hoàn thành",
+
+        //     }
+        //     await task.save();
 
         // task.check_task_report = {
         //     note: 'Đã hoàn thành',
         //     place_rental: [
-                
+
         //         {
         //             pl_id: mongoose.Types.ObjectId("5ef2fabc5af9364378326657"),
         //             signboards: [{

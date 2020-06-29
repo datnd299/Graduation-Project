@@ -31,6 +31,21 @@ const PartyStatusMap={
     },
     
 }
+const SImageStatusMap={
+    1:{
+        text:'Đang xử lý',
+        color:'blue-grey lighten-1'
+    },
+    2:{
+        text:'Hợp lệ',
+        color:'green'
+    },
+    0:{
+        text:'Không hợp lệ',
+        color:'red'
+    },
+    
+}
 const TaskStatusMap={
     1:{
         text:'Mới tạo',
@@ -215,5 +230,6 @@ module.exports={
     RepeatType:RepeatType,
     SmallTimeUnit:SmallTimeUnit,
     TaskStatus:TaskStatusMap,
-    ColorLst:ColorLst
+    ColorLst:ColorLst,
+    SImageStatus:SImageStatusMap
 }

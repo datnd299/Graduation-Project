@@ -1,4 +1,4 @@
-import {RoleMap,PartyStatusMap,PlaceRentalStatusMap,TimeUnit,TaskType,TaskStatus,RepeatType} from './mapping'
+import {RoleMap,PartyStatusMap,PlaceRentalStatusMap,TimeUnit,TaskType,TaskStatus,RepeatType,SImageStatus} from './mapping'
 import Vue from "vue";
 
 Vue.filter('roleStatusText', function(role) {
@@ -91,13 +91,30 @@ Vue.filter('partyStatusText', function(role) {
     return '';
 })
  
- 
+Vue.filter('sImageStatusText', function(status) {
+    if(SImageStatus[status]){
+        return SImageStatus[status].text;
+    }
+    return SImageStatus[1].text;
+ });
+
+ Vue.filter('sImageStatusColor', function(status) {
+     if(SImageStatus[status]){
+         return SImageStatus[status].color;
+     }
+     return SImageStatus[1].color;
+ }) 
+
+
  Vue.filter('timeUnitText', function(val) {
     if(TimeUnit[val]){
         return TimeUnit[val].text;
     }
     return '---';
  });
+
+
+
  Vue.filter('numberF', function(val) {
    
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
