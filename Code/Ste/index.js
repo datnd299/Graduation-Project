@@ -40,7 +40,7 @@ function getHiddenData(message){
     }
 }
 
-Jimp.read('dat2.png').then(img => {
+Jimp.read('dat.png').then(img => {
     var byte = {
         val : 0x00,
         num : 0,
@@ -70,16 +70,22 @@ Jimp.read('dat2.png').then(img => {
             }
         } 
     }
+    console.log(message);
+    
     if(message){
         var usingRows = Math.ceil(Buffer.byteLength(message, 'utf8')*8/3/img.bitmap.width);
         var md5Val = md5Bitmap(img,usingRows);
+        console.log(md5Val);
+        
         var data = getHiddenData(message);
+        console.log(data.hash);
+        
         if(data.hash!=md5Val){
-            console.log("err"); 
+            console.log("err1"); 
         }else{
             console.log(data);
         }
     }else{
-        console.log("err");
+        console.log("err2");
     } 
   });

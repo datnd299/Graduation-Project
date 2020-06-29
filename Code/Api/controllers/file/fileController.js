@@ -116,7 +116,6 @@ async function handleFile (id,job,done){
     }else{
         sImage.status = 0;
     } 
-    console.log(sImage);
     
     await sImage.save();
     done();

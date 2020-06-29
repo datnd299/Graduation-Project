@@ -38,8 +38,8 @@
                 </v-col>
               </v-row>
               <b style="font-weight:bold">Đánh giá của nhân viên</b>
-              <v-rating background-color="orange lighten-3" color="orange"></v-rating>
-              <v-text-field dense outlined label="Nhận xét của nhân viên">
+              <v-rating background-color="orange lighten-3" readonly="" v-model="sb.rating" color="orange"></v-rating>
+              <v-text-field dense outlined v-model="sb.note"  readonly="" label="Nhận xét của nhân viên">
                 <v-btn style="
     margin-top: -4px;" slot="append-outer" color="indigo" dark>
                   <i style="font-size: 18px;" class="far fa-check-square"></i>

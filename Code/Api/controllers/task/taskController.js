@@ -88,6 +88,8 @@ exports.createNew = async (req, res, next) => {
 };
 exports.reportTask = async (req, res, next) => {
  
+    console.log(JSON.stringify(req.body));
+    
     try {
         var task = await Task.findById(req.body.id);
         if(task.status!=1&&task.status!=2){
@@ -95,19 +97,11 @@ exports.reportTask = async (req, res, next) => {
         }
         task.status = 2;
         if (task.type == "setup") {
-            // task.setup_task_report = {
-            //     new_lat_lng: {
-            //         lat: 21.045891, lng: 105.8672733
-            //     },
-            //     signboards: [{
-            //         s_id: mongoose.Types.ObjectId("5ef2f8ae5af936437832664a"),
-            //         imgs: [mongoose.Types.ObjectId("5ef22328a1e31a333ca4c71b"), mongoose.Types.ObjectId("5ef223849d8a3451c4f070fc")],
-            //     }
-            //     ],
-            //     note: "Nhiệm vụ hoàn thành123123",
-
-            // }
             task.setup_task_report = req.body.report;
+            await task.save();
+        }
+        if (task.type == "check") {
+            task.check_task_report = req.body;
             await task.save();
         }
         res.status(200).json({
@@ -148,6 +142,7 @@ exports.approveTask = async (req, res, next) => {
                 var pl = await PlaceRental.findById(task.setup_task.place_rental);
                 pl.lat_lng.lat = task.setup_task_report.new_lat_lng.lat;
                 pl.lat_lng.lng = task.setup_task_report.new_lat_lng.lng;
+                pl.signboards = task.setup_task.signboards;
                 await pl.save();
             }
             
@@ -407,10 +402,10 @@ exports.getTaskById = async (req, res, next) => {
         //     place_rental: [
 
         //         {
-        //             pl_id: mongoose.Types.ObjectId("5ef2fabc5af9364378326657"),
+        //             pl_id: "5ef2fabc5af9364378326657",
         //             signboards: [{
-        //                 s_id: mongoose.Types.ObjectId("5ef2f8ae5af936437832664a"),
-        //                 imgs: [mongoose.Types.ObjectId("5ef321f39b92a6224ca2eca4"), mongoose.Types.ObjectId("5ef321fe9b92a6224ca2eca5")],
+        //                 s_id: "5ef2f8ae5af936437832664a",
+        //                 imgs: ["5ef321f39b92a6224ca2eca4", "5ef321fe9b92a6224ca2eca5"],
         //                 rating:5,
         //                 note:'Đối tác thực hiện tốt việc treo biển',
         //             }]
