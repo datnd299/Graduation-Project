@@ -37,6 +37,45 @@ public class RepeatDetail {
         return id;
     }
 
+    public String getFzUnitString(){
+        if(getFzUnit().equals("moth")){
+            return "Tháng";
+        }
+        if(getFzUnit().equals("day")){
+            return "Ngày";
+        }
+        if(getFzUnit().equals("week")){
+            return "Tuần";
+        }
+        return "--";
+    }
+    public  String getFzValsString(){
+        if(getFzUnit().equals("moth")){
+            String str = "";
+            for (int i:getFzVals()) {
+                str+=(i+1)+", ";
+            }
+            if(str.length()>0){
+                str.substring(0, str.length() - 2);
+            }
+            return "Vào các ngày: "+str;
+        }
+        if(getFzUnit().equals("day")){
+            return "Mỗi: "+ 3+" ngày";
+        }
+        if(getFzUnit().equals("week")){
+            String str = "";
+            for (int i:getFzVals()) {
+                str+="Th "+(i+2)+", ";
+            }
+            if(str.length()>0){
+                str.substring(0, str.length() - 2);
+            }
+             return "Vào các thứ: "+str;
+        }
+        return "--";
+    }
+
     public void setId(String id) {
         this.id = id;
     }

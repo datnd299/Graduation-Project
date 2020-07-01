@@ -9,24 +9,29 @@
     android:paddingLeft="?listPreferredItemPaddingLeft"
     android:paddingRight="?listPreferredItemPaddingRight"
     android:paddingStart="?listPreferredItemPaddingLeft"
+    android:descendantFocusability="blocksDescendants"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
-        android:id="@+id/primary_action"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:id="@+id/imgTaskIcon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:scaleType="centerInside"
-        android:src="@drawable/ic_account_box_24px" />
+        android:src="@drawable/ic_cogs_solid" />
 
     <LinearLayout
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:id="@+id/lines_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignWithParentIfMissing="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="46dp"
         android:layout_toEndOf="@+id/primary_action"
         android:layout_toLeftOf="@+id/secondary_action"
         android:layout_toRightOf="@+id/primary_action"
@@ -36,6 +41,8 @@
         android:paddingTop="16dp">
 
         <TextView
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:id="@+id/txtTaskPlace"
             style="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="wrap_content"
@@ -44,6 +51,8 @@
             android:text="First Line" />
 
         <TextView
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:id="@+id/txtTime"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
@@ -53,15 +62,33 @@
     </LinearLayout>
 
     <!-- Can be replaced by a widget -->
-    <ImageView
-        android:id="@+id/secondary_action"
-        android:layout_width="40dp"
+    <Button
+        android:id="@+id/btnDetail"
+        android:text=".."
+        android:scaleX="0.75"
+        android:scaleY="0.75"
+        android:layout_marginEnd="-10dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_dashboard_black_24dp"/>
+        android:layout_marginRight="-10dp">
+
+    </Button>
+<!--    <ImageView-->
+<!--        android:focusable="false"-->
+<!--        android:focusableInTouchMode="false"-->
+<!--        android:id="@+id/secondary_action"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_marginLeft="16dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:scaleType="centerInside"-->
+<!--        android:src="@drawable/ic_dashboard_black_24dp"/>-->
 </RelativeLayout>

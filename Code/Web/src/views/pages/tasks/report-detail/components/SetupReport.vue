@@ -50,21 +50,12 @@
         <v-row>
           <v-col v-for="(img, index) in sb.imgs" :key="index" xs="12" sm="6" md="4">
             <ImageViewer :location="task.setup_task_report.new_lat_lng" :img="img"></ImageViewer>
-            
           </v-col>
         </v-row>
       </div>
 
       <v-text-field v-model="task.setup_task_report.note" outlined label="Báo cáo"></v-text-field>
-      <div>
-        <v-btn :loading="approving" @click="approve(0)" v-if="task.status>0" color="red" dark class="ma-2" large>
-          <v-icon small left>fas fa-ban</v-icon>&nbsp; Không duyệt nhiệm vụ
-        </v-btn>
-
-        <v-btn :loading="approving" @click="approve(3)" v-if="task.status==2" style="float:right" color="teal" dark class="ma-2" large>
-          <v-icon small left>fas fa-check-square</v-icon>&nbsp; Duyệt nhiệm vụ
-        </v-btn>
-      </div>
+      
     </v-card>
   </div>
 </template>

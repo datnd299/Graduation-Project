@@ -49,12 +49,14 @@ function getHiddenData(message){
   var hash = message.substr(message.indexOf('___')+3);
   var text = message.substring(0,message.indexOf('___'));
   var info = text.split("__");
+  console.log(info);
+  
   var gpsArr = info[2].split(",");
   return {
       hash:hash,
       text:text,
       device:info[0],
-      time:new Date(1593350106367),
+      time:new Date(Number(info[1])),
       lat: Number(gpsArr[0]),
       long:Number(gpsArr[1])
   }
@@ -96,12 +98,16 @@ async function handleFile (id,job,done){
         } 
     }
     if(message){
+      console.log(message);
+      
         var usingRows = Math.ceil(Buffer.byteLength(message, 'utf8')*8/3/img.bitmap.width);
         var md5Val = md5Bitmap(img,usingRows);
         var data = getHiddenData(message);
         if(data.hash!=md5Val){
           sImage.status = 0;
         }else{
+   
+          
           sImage.hidden_info = data.text;
           sImage.device = data.device;
           sImage.time = data.time;
@@ -161,8 +167,12 @@ for(let id in req.files){
   agenda.define('handle__image__'+newName,{priority: 'high'}, (job, done) => {
     handleFile(sImage._id,job,done);
   });
-  agenda.now('handle__image__'+newName);
-  agenda.start('handle__image__'+newName);
+  (async function() {
+    await agenda.start();
+    await agenda.schedule('in 0 seconds', 'handle__image__'+newName);
+  })();
+  // agenda.now('handle__image__'+newName);
+  // agenda.start('handle__image__'+newName);
   
   
   

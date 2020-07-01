@@ -33,10 +33,10 @@ public  class RequestInterceptor implements Interceptor {
         HttpUrl url = chain.request().url().newBuilder()
 
                 .build();
-        AddPostParamRequestBody newBody = new AddPostParamRequestBody(request.body(), "token", Constant.TOKEN);
+//        AddPostParamRequestBody newBody = new AddPostParamRequestBody(request.body(), "token", Constant.TOKEN);
 
         Request newRequest = request.newBuilder()
-                .method(request.method(),newBody)
+                .method(request.method(),request.body())
                 .addHeader("Authorization", "Bearer "+Constant.TOKEN)
                 .url(url)
                 .build();

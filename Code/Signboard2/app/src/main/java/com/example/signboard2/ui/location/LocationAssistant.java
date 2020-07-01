@@ -112,11 +112,11 @@ public class LocationAssistant
          * either switching off a running mock location app (on newer Android systems) or by disabling mock location
          * apps altogether. The latter can be done in the phone's development settings. You may show an appropriate
          * message and then use one of the provided OnClickListeners to jump to those settings.
-         *
-         * @param fromView   OnClickListener to use with a view (e.g. a button), jumps to the development settings
+         *  @param fromView   OnClickListener to use with a view (e.g. a button), jumps to the development settings
          * @param fromDialog OnClickListener to use with a dialog, jumps to the development settings
+         * @param location
          */
-        void onMockLocationsDetected(View.OnClickListener fromView, DialogInterface.OnClickListener fromDialog);
+        void onMockLocationsDetected(View.OnClickListener fromView, DialogInterface.OnClickListener fromDialog, Location location);
 
         /**
          * Called when an error has occurred.
@@ -498,7 +498,7 @@ public class LocationAssistant
                         .Secure.ALLOW_MOCK_LOCATION).equals("0")) {
             mockLocationsEnabled = true;
             if (listener != null)
-                listener.onMockLocationsDetected(onGoToDevSettingsFromView, onGoToDevSettingsFromDialog);
+                listener.onMockLocationsDetected(onGoToDevSettingsFromView, onGoToDevSettingsFromDialog, null);
         } else
             mockLocationsEnabled = false;
     }
@@ -690,7 +690,7 @@ public class LocationAssistant
 
         if (!allowMockLocations && !plausible) {
             if (listener != null) listener.onMockLocationsDetected(onGoToDevSettingsFromView,
-                    onGoToDevSettingsFromDialog);
+                    onGoToDevSettingsFromDialog,location);
             return;
         }
 

@@ -1,18 +1,26 @@
 package com.example.signboard2.utils.imagesteganographylibrary.Utils;
 
+import android.graphics.Bitmap;
+import android.os.Build;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+
+import androidx.annotation.RequiresApi;
 
 /*
 This class has methods used to compress and decompress encrypted message.
  */
 
-class Zipping {
+public class Zipping {
 
     final static String TAG = Zipping.class.getName();
 
@@ -41,6 +49,7 @@ class Zipping {
     @parameter : byte array
     @return : Uncompressed encrypted_message {String}
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static String decompress(byte[] compressed) throws Exception {
 
         ByteArrayInputStream bis = new ByteArrayInputStream(compressed);
@@ -63,5 +72,6 @@ class Zipping {
 
         return sb.toString();
     }
+
 
 }

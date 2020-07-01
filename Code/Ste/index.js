@@ -89,3 +89,12 @@ Jimp.read('dat.png').then(img => {
         console.log("err2");
     } 
   });
+
+  var t ={
+      id:"df",
+      report:[{
+          pl_id:"fd",
+          confirm:true,
+          note:"sdf"}
+      ]
+  }

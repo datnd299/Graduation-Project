@@ -4,10 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF"
     tools:context=".ui.tasks.TaskFragment">
-
     <ListView
         android:id="@+id/list_tasks"
+
+        android:clickable="false"
+        android:focusable="false"
+        android:descendantFocusability="blocksDescendants"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 

@@ -17,37 +17,14 @@
           <v-icon dense x-small="">far fa-check-square</v-icon>
         </v-btn>
         <div>
-          <span>Nhân viên đã xác nhận:</span> <v-checkbox class="shrink mr-2 mt-0" hide-details style="display: inline-block;" v-model="pl.pl.report.em_confirm"></v-checkbox>
-          <span>Ghi chú: </span>
+          <span>Nhân viên đã xác nhận:</span> <v-checkbox readonly="" class="shrink mr-2 mt-0" hide-details style="display: inline-block;" v-model="pl.pl.report.em_confirm"></v-checkbox>
+          <span>Ghi chú: {{pl.pl.report.em_note}}</span>
         </div> 
         <div>
-          <span>Đối tác đã xác nhận:</span> <v-checkbox class="shrink mr-2 mt-0" hide-details style="display: inline-block;" v-model="pl.pl.report.pt_confirm"></v-checkbox>
-          <span>Ghi chú: </span>
+          <span>Đối tác đã xác nhận:</span> <v-checkbox readonly="" class="shrink mr-2 mt-0" hide-details style="display: inline-block;" v-model="pl.pl.report.pt_confirm"></v-checkbox>
+          <span>Ghi chú: {{pl.pl.report.pt_note}}</span>
         </div>
     </div>
-        <!-- <v-text-field v-model="report.note" outlined label="Báo cáo của nhân viên"></v-text-field> -->
-        <div 
-        >
-        <v-btn
-              color="red"
-              dark
-              class="ma-2"
-              large
-            
-            >
-              <v-icon small="" left>fas fa-ban</v-icon>&nbsp;  Không duyệt nhiệm vụ
-            </v-btn>
-    
-        <v-btn style="float:right"
-              color="teal"
-              dark
-              class="ma-2"
-              large
-            
-            >
-              <v-icon small="" left>fas fa-check-square</v-icon>&nbsp;  Duyệt nhiệm vụ
-            </v-btn>
-        </div>
     </v-card>
   </div>
 </template>

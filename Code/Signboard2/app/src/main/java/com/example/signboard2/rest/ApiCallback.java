@@ -23,15 +23,20 @@ public abstract class ApiCallback<T extends Resp> implements Callback<T> {
 
     @Override
     public void onFailure(Call<T> call, Throwable t) {
-        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+        if(context!=null){
+            Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
         handleFailure(call,null,t);
     }
 
     @Override
     public void onResponse(Call<T> call, retrofit2.Response<T> response) {
         if (response.body().getStatus().equals("fail")) {
-            // [..do something with error]
-            Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
+           if(context!=null){
+               Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
+           }
+
             handleFailure(call,response,new Throwable(response.body().getMessage()));
         }
         else {

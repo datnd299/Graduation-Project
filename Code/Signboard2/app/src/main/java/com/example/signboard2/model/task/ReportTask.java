@@ -61,6 +61,13 @@ public class ReportTask {
     public String getRepeatType() {
         return repeatType;
     }
+    public String getRepeatTypeString(){
+        if(getRepeatType().equals("repeat")){
+            return "Lặp lại";
+        }else {
+            return "Một lần";
+        }
+    }
 
     public void setRepeatType(String repeatType) {
         this.repeatType = repeatType;

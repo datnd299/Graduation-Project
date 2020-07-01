@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     void handleView(){
         edtAcc = findViewById(R.id.edtAcc);
         edtPassword = findViewById(R.id.edtPassword);
-        btnLogin = findViewById(R.id.btnLogin);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     @Override
                     public void handleFailure(Call<AccountResponse> call, Response<AccountResponse> response, Throwable t) {
+                        Log.d("xxxx", response.message());
                     }
                 });
             }

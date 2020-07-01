@@ -47,6 +47,18 @@ const SImageStatusMap={
     
 }
 const TaskStatusMap={
+    '-3':{
+        text:'Hủy',
+        color:'orange'
+    },
+    '-2':{
+        text:'Đang ẩn',
+        color:'brown lighten-2'
+    },
+    '-1':{
+        text:'Nhiệm vụ gốc',
+        color:'purple darken-4'
+    },
     1:{
         text:'Mới tạo',
         color:'blue-grey lighten-1'

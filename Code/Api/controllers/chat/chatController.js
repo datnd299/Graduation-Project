@@ -38,6 +38,8 @@ exports.getMyRooms = async (req, res, next) => {
 };
 
 exports.getMessages = async (req, res, next) => {
+    console.log(req.body);
+    
     try {
   
        

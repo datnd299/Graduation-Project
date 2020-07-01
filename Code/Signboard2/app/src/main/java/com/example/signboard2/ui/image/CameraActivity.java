@@ -1,32 +1,24 @@
 package com.example.signboard2.ui.image;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.example.signboard2.R;
 import com.example.signboard2.ui.location.LocationAssistant;
 import com.example.signboard2.utils.Utils;
-
-import java.io.File;
 
 public class CameraActivity extends AppCompatActivity implements LocationAssistant.Listener  {
 
@@ -179,7 +171,7 @@ public class CameraActivity extends AppCompatActivity implements LocationAssista
     }
 
     @Override
-    public void onMockLocationsDetected(View.OnClickListener fromView, DialogInterface.OnClickListener fromDialog) {
+    public void onMockLocationsDetected(View.OnClickListener fromView, DialogInterface.OnClickListener fromDialog, Location location) {
         Log.d("xxxx", "onMockLocationsDetected: "+"dfs");
     }
 

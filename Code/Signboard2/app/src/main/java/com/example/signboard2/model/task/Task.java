@@ -219,10 +219,16 @@ public class Task {
         return  str;
     }
 
-    public String getTimesString(){
+    public String getStartTimesString(){
 
         Format formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String s = formatter.format(getStart());
+        return s;
+    }
+    public String getEndTimesString(){
+
+        Format formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String s = formatter.format(getEnd());
         return s;
     }
 

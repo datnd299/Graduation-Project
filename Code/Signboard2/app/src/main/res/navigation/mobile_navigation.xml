@@ -16,6 +16,11 @@
         android:name="com.example.signboard2.ui.tasks.TaskFragment"
         android:label="Nhiệm vụ"
         tools:layout="@layout/fragment_tasks" />
+    <fragment
+        android:id="@+id/navigation_chat"
+        android:name="com.example.signboard2.ui.chat.ChatRoomFragment"
+        android:label="Tin nhắn"
+        tools:layout="@layout/chat_fragment" />
 
     <fragment
         android:id="@+id/navigation_notifications"

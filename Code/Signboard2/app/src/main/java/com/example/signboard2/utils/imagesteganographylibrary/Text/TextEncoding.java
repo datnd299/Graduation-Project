@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 
 import com.example.signboard2.utils.imagesteganographylibrary.Text.AsyncTaskCallback.TextEncodingCallback;
 import com.example.signboard2.utils.imagesteganographylibrary.Utils.Utility;
 
+import java.io.File;
 import java.util.List;
+
+import androidx.annotation.RequiresApi;
 
 /**
  * In this class all those method in EncodeDecode class are used to encode secret message in image.
@@ -21,6 +25,7 @@ public class TextEncoding extends AsyncTask<ImageSteganography, Integer, ImageSt
     private static final String TAG = TextEncoding.class.getName();
 
     private final ImageSteganography result;
+
     //Callback interface for AsyncTask
     private final TextEncodingCallback callbackInterface;
     private int maximumProgress;
@@ -28,6 +33,7 @@ public class TextEncoding extends AsyncTask<ImageSteganography, Integer, ImageSt
 
     public TextEncoding(Activity activity, TextEncodingCallback callbackInterface) {
         super();
+
         this.progressDialog = new ProgressDialog(activity);
         this.callbackInterface = callbackInterface;
         //making result object
@@ -72,6 +78,7 @@ public class TextEncoding extends AsyncTask<ImageSteganography, Integer, ImageSt
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     protected ImageSteganography doInBackground(ImageSteganography... imageSteganographies) {
 
@@ -83,17 +90,8 @@ public class TextEncoding extends AsyncTask<ImageSteganography, Integer, ImageSt
 
             //getting image bitmap
             Bitmap bitmap = textStegnography.getImage();
+            File resultFile = EncodeDecode.encodeMessage(bitmap, textStegnography.getMessage(), new EncodeDecode.ProgressHandler() {
 
-            //getting height and width of original image
-            int originalHeight = bitmap.getHeight();
-            int originalWidth = bitmap.getWidth();
-
-            //splitting bitmap
-            List<Bitmap> src_list = Utility.splitImage(bitmap);
-
-            //encoding encrypted compressed message into image
-
-            List<Bitmap> encoded_list = EncodeDecode.encodeMessage(src_list, textStegnography.getEncrypted_message(), new EncodeDecode.ProgressHandler() {
 
                 //Progress Handler
                 @Override
@@ -115,18 +113,17 @@ public class TextEncoding extends AsyncTask<ImageSteganography, Integer, ImageSt
                 }
             });
 
-            //free Memory
-            for (Bitmap bitm : src_list)
-                bitm.recycle();
 
-            //Java Garbage collector
+
+
+//            bitmap.recycle();
+
             System.gc();
 
-            //merging the split encoded image
-            Bitmap srcEncoded = Utility.mergeImage(encoded_list, originalHeight, originalWidth);
 
-            //Setting encoded image to result
-            result.setEncoded_image(srcEncoded);
+
+//            result.setEncoded_image(resultBitmap);
+            result.setSavedFile(resultFile);
             result.setEncoded(true);
         }
 

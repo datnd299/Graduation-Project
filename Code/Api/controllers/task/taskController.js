@@ -1,12 +1,16 @@
 const AppError = require('./../../utils/appError');
 const PartyA = require('../../models/user/partyA');
+require('datejs');
 const PartyB = require('../../models/user/partyB');
 var mongoose = require('mongoose');
 const Signboard = require('../../models/signboard/signboard');
 const Task = require('../../models/task/task');
 const SImage = require('../../models/image/sImage');
 const { getSecond } = require('../../utils/index');
+const {sendNewTaskToB} = require('../../controllers/notification/notificationController')
 const PlaceRental = require('../../models/place/placeRental');
+
+const agenda = require('../../utils/agenda');
 exports.createNew = async (req, res, next) => {
     try {
 
@@ -58,6 +62,7 @@ exports.createNew = async (req, res, next) => {
                 repeat_type: req.body.typeRepeat,
             };
             if (taskInfo.report_task.repeat_type == 'repeat') {
+                taskInfo.status = -1;
                 var repeatDetail = req.body.repeatDetail;
                 fzVals = [];
                 if (repeatDetail.fzUnit == 'day') {
@@ -78,6 +83,10 @@ exports.createNew = async (req, res, next) => {
             }
         }
         var task = await Task.create(taskInfo);
+
+        if (task.type == 'report' && task.report_task.repeat_type == 'repeat') {
+            scheduleTask(task);
+        }
         res.status(200).json({
             status: 'success',
             data: task
@@ -87,12 +96,12 @@ exports.createNew = async (req, res, next) => {
     }
 };
 exports.reportTask = async (req, res, next) => {
- 
+
     console.log(JSON.stringify(req.body));
-    
+
     try {
         var task = await Task.findById(req.body.id);
-        if(task.status!=1&&task.status!=2){
+        if (task.status != 1 && task.status != 2) {
             return next(new AppError(200, 'fail', 'Nhiệm vụ này không thể báo cáo'), req, res, next);
         }
         task.status = 2;
@@ -104,47 +113,44 @@ exports.reportTask = async (req, res, next) => {
             task.check_task_report = req.body;
             await task.save();
         }
-        res.status(200).json({
-            status: 'success',
-            data: task
-        });
-
-        // var t = {
-        //     id: '5ef2fefc5af93643783266cf',
-        //     report: {
-        //         new_lat_lng: {
-        //             lat: 21.045891, lng: 105.8672733
-        //         },
-        //         signboards: [{
-        //             s_id: '5ef2f8ae5af936437832664a',
-        //             imgs: ['5ef22328a1e31a333ca4c71b', '5ef223849d8a3451c4f070fc'],
-        //         }
-        //         ],
-        //         note: "Nhiệm vụ hoàn thành123123",
-        //     }
-        // }
-
-    }
-    catch (error) {
-        next(error);
-    }
-}
-
-exports.approveTask = async (req, res, next) => {
- 
-    try {
-        var task = await Task.findById(req.body.id);
-        task.status = req.body.status;
-
-
-        if (task.type == "setup") {
-            if(req.body.status==3){
-                var pl = await PlaceRental.findById(task.setup_task.place_rental);
-                pl.lat_lng.lat = task.setup_task_report.new_lat_lng.lat;
-                pl.lat_lng.lng = task.setup_task_report.new_lat_lng.lng;
-                pl.signboards = task.setup_task.signboards;
-                await pl.save();
+        if (task.type == "report") {
+            task.report_task_report = req.body.report;
+            await task.save();
+        }
+        if (task.type == "fee") {
+            var isA = true;
+            if(req.acc.role.includes("partyB")){
+                isA = false;
             }
+  
+          
+            req.body.report.forEach(rp=>{
+               
+                
+                task.fee_task.fee_detail.forEach(fd=>{
+                    
+                    
+                    if(fd.place_rental._id.toString()==rp.pl_id){
+                        console.log('a');
+                        if (!fd.report.em_confirm||!fd.report.pt_confirm) {
+                            if(isA){
+                                fd.report.em_confirm = rp.confirm;
+                                fd.report.em_note = rp.note;
+                            }else{
+                                fd.report.pt_confirm = rp.confirm;
+                                fd.report.pt_note = rp.note;
+                            }
+                        }else{
+                            if(isA){
+                                fd.report.em_note = rp.note;
+                            }else{
+                                fd.report.pt_note = rp.note;
+                            }
+                        }
+                        
+                    }
+                })
+            })
             
             await task.save();
         }
@@ -174,19 +180,51 @@ exports.approveTask = async (req, res, next) => {
     }
 }
 
+exports.approveTask = async (req, res, next) => {
+
+    try {
+        var task = await Task.findById(req.body.id);
+        task.status = req.body.status;
+
+        if (req.body.status == 3) {
+            if (task.type == "setup") {
+                var pl = await PlaceRental.findById(task.setup_task.place_rental);
+                pl.lat_lng.lat = task.setup_task_report.new_lat_lng.lat;
+                pl.lat_lng.lng = task.setup_task_report.new_lat_lng.lng;
+                pl.signboards = task.setup_task.signboards;
+                await pl.save();
+            }
+        }
+
+        await task.save();
+        res.status(200).json({
+            status: 'success',
+            data: task
+        });
+
+        // var t = {
+        //     id: '5ef2fefc5af93643783266cf',
+        //     report: {
+        //         new_lat_lng: {
+        //             lat: 21.045891, lng: 105.8672733
+        //         },
+        //         signboards: [{
+        //             s_id: '5ef2f8ae5af936437832664a',
+        //             imgs: ['5ef22328a1e31a333ca4c71b', '5ef223849d8a3451c4f070fc'],
+        //         }
+        //         ],
+        //         note: "Nhiệm vụ hoàn thành123123",
+        //     }
+        // }
+
+    }
+    catch (error) {
+        next(error);
+    }
+}
+
 exports.getAllOfMyPT = async (req, res, next) => {
     try {
-
-        // SImage.create({
-        //     name:"a4505059-d218-44ca-9002-ec3a7cbf74f6___maxresdefault.jpg",
-        //     lat_lng:{
-        //         lat:21.0042788,
-        //         lng:105.8437013
-        //     },
-        //     time:new Date(),
-        //     device:"Xiaomi Mi 8 Lite",
-        //     hidden_info:"Xiaomi Mi 8 Lite_1592926934112_21.0042788,105.8437013"
-        // })
         var acc = req.acc;
         var ptA = null;
         var ptB = null;
@@ -295,14 +333,23 @@ exports.getAllOfMyPT = async (req, res, next) => {
                 }
             })
         } else {
-            task = await Task.find({ type: 'report' }).populate('acc_created').populate({
+            task = await Task.find({ type: {$in:['report','fee']},status : { $gt : -1} }).populate('acc_created').populate({
                 path: 'report_task.place_rental',
             }).populate({
                 path: 'report_task.place_rental.place_id',
+                // select:'owner',
+                match: { owner: ptB._id}
+            }).populate({
+                path: 'fee_task.fee_detail.place_rental',
+                populate:{
+                    path:'place_id'
+                }
             });
+           
         }
 
-
+        
+        
 
         res.status(200).json({
             status: 'success',
@@ -349,6 +396,9 @@ exports.getTaskById = async (req, res, next) => {
             path: 'fee_task.accs',
         }).populate({
             path: 'fee_task.fee_detail.place_rental',
+            populate:{
+                path:'place_id'
+            }
         }).populate({
             path: 'report_task.place_rental',
             populate: {
@@ -370,15 +420,7 @@ exports.getTaskById = async (req, res, next) => {
             path: 'report_task_report.signboards.imgs'
         })
 
-        // task.report_task_report = {
-        //     signboards: [{
-        //                 s_id: mongoose.Types.ObjectId("5ef2f8ae5af936437832664a"),
-        //                 imgs: [mongoose.Types.ObjectId("5ef322029b92a6224ca2eca6")],
-        //                 rating:5,
-        //                 note:'Biển tốt',
-        //             },
-        //         ]
-        // }
+        
         //  await task.save()
 
 
@@ -414,6 +456,25 @@ exports.getTaskById = async (req, res, next) => {
         // }
         // await task.save()
 
+        if(task.type=="fee"){
+            task = task.toObject();
+            if (req.acc.role.includes('partyB')) {
+                task.role = 'B'
+                ptB = await PartyB.findOne({ "accs": req.acc._id });
+            
+                task.fee_task.fee_detail=task.fee_task.fee_detail.filter((fd)=>{
+                          
+                            console.log(fd.place_rental.place_id.owner,ptB._id);
+                            
+                            return (fd.place_rental.place_id.owner==ptB._id.toString());
+                               
+                        })
+                    
+                
+            }else{
+                task.role = 'A'
+            }
+        }
         res.status(200).json({
             status: 'success',
             data: task,
@@ -425,6 +486,134 @@ exports.getTaskById = async (req, res, next) => {
 };
 
 
+async function scheduleTask(task, done) {
 
 
+    if (typeof task == 'string') {
+
+        task = await Task.findById(task);
+    }
+    var rootTask = task;
+    if(task.report_task.root_task){
+        rootTask = await Task.findById(task.report_task.root_task);
+    }
+    if(task.status!=-1){
+        if(task.status==-2){
+            task.status==1;
+            await task.save();
+        }
+        sendNewTaskToB(task.report_task.place_rental,task);
+     }
+    var newTask = new Task(rootTask);
+
+    newTask._id = mongoose.Types.ObjectId();
+    // newTask._id = mongoose.Types.ObjectId();
+    newTask.isNew = true;
+    var nextTaskDate = null;
+    console.log(task.status);
+
+
+    if (rootTask.report_task.repeat_type == 'repeat' && rootTask.status != 0 && rootTask.status != -3) {
+        newTask.report_task.root_task = rootTask._id;
+        var notiTime = null;
+        if (rootTask.report_task.repeat_detail.fz_unit == "moth") {
+            nextTaskDate = getNextDay(rootTask.report_task.repeat_detail.fz_vals);
+        }
+        if (rootTask.report_task.repeat_detail.fz_unit == "week") {
+            nextTaskDate = getNextWeekDay(rootTask.report_task.repeat_detail.fz_vals);
+            console.log(nextTaskDate.toString('dd/MM/yyyy'));
+
+        }
+        if (rootTask.report_task.repeat_detail.fz_unit == "day") {
+
+            nextTaskDate = getXNextDay(rootTask.report_task.repeat_detail.fz_vals);
+            console.log(nextTaskDate.toString('dd/MM/yyyy'));
+
+        }
+        if (rootTask.report_task.repeat_detail.random) {
+            newTask.start = randomDateBetweenTime(nextTaskDate, rootTask.report_task.repeat_detail.start, rootTask.report_task.repeat_detail.end);
+            newTask.end = new Date(newTask.start.getTime() + rootTask.report_task.repeat_detail.time_to_complete * 1000);
+            notiTime = (new Date(newTask.start.getTime() - +rootTask.report_task.repeat_detail.remind_before * 1000));
+            newTask.status = -2;
+
+        } else {
+            newTask.start = Date.parse(nextTaskDate.toString('yyyy-MM-dd') + ' ' + rootTask.report_task.repeat_detail.start);
+            newTask.end = Date.parse(nextTaskDate.toString('yyyy-MM-dd') + ' ' + rootTask.report_task.repeat_detail.end);
+            notiTime = (new Date(newTask.start.getTime() - 3600 * 1000));
+            newTask.status = 1;
+        }
+
+        await newTask.save();
+        var jobName = 'auto create task ' + Math.random().toString(36);
+        agenda.define(jobName, function (job, done) {
+
+            scheduleTask(newTask._id.toString(), done);
+        });
+        (async function () {
+              notiTime = (new Date((new Date()).getTime() + 2 * 1000));
+            await agenda.start();
+            await agenda.schedule(notiTime, jobName);
+
+        })();
+
+        
+        console.log('task created');
+    }
+
+
+    if (done) {
+        done();
+    }
+
+}
+
+
+
+function getNextDay(nextdayLst) {
+
+    var date = Date.today();
+    if (nextdayLst) {
+        for (let index = 0; index < 31; index++) {
+            date.addDays(1);
+            for (var d in nextdayLst) {
+                if (date.getDate() == nextdayLst[d]) {
+                    return date;
+                }
+            }
+
+        }
+    }
+    return null;
+}
+function getXNextDay(nextdayLst) {
+
+    var date = Date.today();
+    if (nextdayLst) {
+           return date.addDays(nextdayLst[0]);
+    }
+            
+    return null;
+}
+function getNextWeekDay(nextdayLst) {
+    var date = Date.today();
+    if (nextdayLst) {
+        nextdayLst = nextdayLst.sort();
+        for (let index = 0; index < 8; index++) {
+            date.addDays(1);
+            for (var d in nextdayLst) {
+                if (date.getDay() == nextdayLst[d] || (date.getDay() == 0 && nextdayLst[d] == 7)) {
+                    return date;
+                }
+            }
+
+        }
+    }
+    return null;
+}
+
+function randomDateBetweenTime(date, start, end) {
+    var min = Date.parse(date.toString('yyyy-MM-dd') + ' ' + start).getTime();
+    var max = Date.parse(date.toString('yyyy-MM-dd') + ' ' + end).getTime();
+    return new Date(Math.floor(Math.random() * (max - min + 1) + min));
+}
 

@@ -5,7 +5,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,7 +12,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,12 +24,10 @@ import com.example.signboard2.R;
 import com.example.signboard2.utils.imagesteganographylibrary.Text.AsyncTaskCallback.TextDecodingCallback;
 import com.example.signboard2.utils.imagesteganographylibrary.Text.AsyncTaskCallback.TextEncodingCallback;
 import com.example.signboard2.utils.imagesteganographylibrary.Text.ImageSteganography;
-import com.example.signboard2.utils.imagesteganographylibrary.Text.TextDecoding;
 import com.example.signboard2.utils.imagesteganographylibrary.Text.TextEncoding;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
 public class SteganoActivity extends AppCompatActivity implements TextEncodingCallback, TextDecodingCallback {
@@ -84,12 +80,10 @@ public class SteganoActivity extends AppCompatActivity implements TextEncodingCa
             @Override
             public void onClick(View v) {
                 imgV.invalidate();
-                BitmapDrawable drawable = (BitmapDrawable) imgV.getDrawable();
-                Bitmap bitmap = drawable.getBitmap();
-
-                imageSteganography = new ImageSteganography("123",
-                        "123",
-                        bitmap);
+//                BitmapDrawable drawable = (BitmapDrawable) imgV.getDrawable();
+//                Bitmap bitmap = drawable.getBitmap();
+                Bitmap bitmap =BitmapFactory.decodeFile(root+"/saved_images/Image-dat9725.png");
+                imageSteganography = new ImageSteganography(bitmap,"123");
                 TextEncoding textEncoding = new TextEncoding(SteganoActivity.this,
                         SteganoActivity.this);
                 textEncoding.execute(imageSteganography);
@@ -98,23 +92,6 @@ public class SteganoActivity extends AppCompatActivity implements TextEncodingCa
             }
         });
 
-        btnDecode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imgV.invalidate();
-//                BitmapDrawable drawable = (BitmapDrawable) imgV.getDrawable();
-//                Bitmap bitmap = drawable.getBitmap();
-                String root = Environment.getExternalStorageDirectory().toString();
-                Bitmap bitmap =BitmapFactory.decodeFile(root+"/saved_images/Image-9867.png");
-                imgV.setImageBitmap(bitmap);
-                ImageSteganography imageSteganography = new ImageSteganography("123",
-                        bitmap);
-                TextDecoding textDecoding = new TextDecoding(SteganoActivity.this,
-                        SteganoActivity.this);
-                textDecoding.execute(imageSteganography);
-
-            }
-        });
         String d = getDeviceName()+"__"+System.currentTimeMillis()+"__"+"20.9911808,105.8504704"+"đạt";
 
             byte[] bytes = d.getBytes();
@@ -190,22 +167,16 @@ public class SteganoActivity extends AppCompatActivity implements TextEncodingCa
                 Log.d("xxxx", "SaveImage: sadf sd ");
             }
         }
-
-
-
-
-
         Random generator = new Random();
         int n = 10000;
         n = generator.nextInt(n);
-        String fname = "Image-"+ n +".png";
+        String fname = "Image-datnd" +".png";
         File file = new File (myDir, fname);
         if (file.exists ())
             file.delete ();
-//        file.mkdirs();
         try {
             FileOutputStream out = new FileOutputStream(file);
-            finalBitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
+            finalBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
             out.flush();
             out.close();
 

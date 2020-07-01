@@ -28,6 +28,13 @@
           {{item.type|taskTypeText}}
         </v-chip>
       </template>
+      <template v-slot:item.status="{ item }">
+        <v-chip class="ma-2" :color="item.status|taskStatusColor" label text-color="white">
+            <!-- <v-icon dense small left>{{task.status|taskTypeIcon}}</v-icon> -->
+            {{item.status|taskStatusText}}
+          </v-chip>
+        
+      </template>
       <template v-slot:item.com_link="{ item }">
         <v-btn-toggle dense color="#033">
           <router-link :to="'/party-a/tasks/'+item._id+'/detail'">
@@ -58,12 +65,8 @@ export default {
         { text: "Loại nhiệm vụ", value: "type", align: "center" },
         { text: "Người thực hiện", value: "accs" },
         { text: "Thời gian thực hiện", value: "times" },
-        {
-          text: "Người tạo",
-          align: "start",
-          value: "name"
-        },
-        { text: "Trạng thái", value: "province" },
+        
+        { text: "Trạng thái", value: "status" },
         { text: "Links", value: "com_link", align: "center" },
         { text: "Acctions", value: "com_ac", align: "center" }
       ],
@@ -81,7 +84,7 @@ export default {
           })
           .join(", ");
       } else if (task.type == "fee") {
-        return task.fee_task.feeDetail
+        return task.fee_task.fee_detail
           .map(function(item) {
             return item["place_rental"].name;
           })

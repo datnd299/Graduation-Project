@@ -50,28 +50,7 @@
         </div>
       </div>
       <v-text-field v-model="task.check_task_report.note" outlined label="Báo cáo"></v-text-field>
-      <div 
-        >
-        <v-btn
-              color="red"
-              dark
-              class="ma-2"
-              large
-            
-            >
-              <v-icon small="" left>fas fa-ban</v-icon>&nbsp;  Không duyệt nhiệm vụ
-            </v-btn>
-    
-        <v-btn style="float:right"
-              color="teal"
-              dark
-              class="ma-2"
-              large
-            
-            >
-              <v-icon small="" left>fas fa-check-square</v-icon>&nbsp;  Duyệt nhiệm vụ
-            </v-btn>
-        </div>
+
     </v-card>
   </div>
 </template>

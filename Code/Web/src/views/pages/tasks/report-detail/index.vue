@@ -13,11 +13,21 @@
       <check-task :task="task" v-if="task.type=='check'"></check-task>
       <report-task :task="task" v-if="task.type=='report'"></report-task>
     </v-card>
-    <div style="margin-top:10px" v-if="task">
+    <div style="margin-top:10px" >
         <setup-report :task="task" v-if="task.type=='setup'"></setup-report>
         <fee-report :task="task" v-if="task.type=='fee'"></fee-report>
         <check-report :task="task" v-if="task.type=='check'"></check-report>
         <report-report :task="task" v-if="task.type=='report'"></report-report>
+        
+        <v-card class="mx-auto" style="padding:20px" outlined v-if="role()=='partyAAdmin'">
+        <v-btn :loading="approving" @click="approve(0)" v-if="task.status>0" color="red" dark class="ma-2" large>
+          <v-icon small left>fas fa-ban</v-icon>&nbsp; Không duyệt nhiệm vụ
+        </v-btn>
+
+        <v-btn :loading="approving" @click="approve(3)" v-if="task.status>0" style="float:right" color="teal" dark class="ma-2" large>
+          <v-icon small left>fas fa-check-square</v-icon>&nbsp; Duyệt nhiệm vụ
+        </v-btn>
+        </v-card>
     </div>
     
   </div>
@@ -38,6 +48,9 @@ import ReportReport from './components/ReportReport'
 import {BASE_API} from '@/utils/base'
 
 import { SET_BREADCRUMB } from "@/store/breadcrumbs.module";
+import {approveTask} from'@/api/task/task'
+
+import {GetRole} from '@/utils/auth'
 export default {
   computed: {
     tId() {
@@ -57,14 +70,30 @@ export default {
   data() {
     return {
       task: {},
-      isLoading:false
+      isLoading:false,
+      approving:false
     };
   },
   methods:{
+    role(){
+      console.log(GetRole());
+      
+      return GetRole();
+    },
     getUrl(imgs){
       return BASE_API+'file/get/'+imgs[0]
     },
-
+    approve(status){
+      this.approving = true;
+      approveTask({
+        id:this.task._id,
+        status:status
+      }).then(res=>{
+        console.log(res);
+        this.approving = false;
+        this.task.status = status;
+      })
+    }
  
   },
   created() {
