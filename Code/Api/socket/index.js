@@ -64,8 +64,17 @@ var ioEvents = function (io) {
 					
 					
 					 var socks = await Socket.find({acc: {$in: accs}});
-					 
+					 mess =mess.toObject();
 					 socks.forEach(e => {
+						 
+						 if(e.acc.toString()==socket.acc._id.toString()){
+							 mess.s = 'me'
+				
+							 
+						 }else{
+					
+							mess.s = null
+						 }
 						io.to(e.socket).emit('newMessageSended',mess);
 					 });
 					 
@@ -100,8 +109,19 @@ var ioEvents = function (io) {
 					
 					
 					 var socks = await Socket.find({acc: {$in: accs}});
-					 
+					 mess =mess.toObject();
 					 socks.forEach(e => {
+						
+				
+							
+							if(e.acc.toString()==socket.acc._id.toString()){
+								mess.s = 'me'
+				   
+								
+							}else{
+					   
+							   mess.s = null
+							}
 						io.to(e.socket).emit('newMessageSended',mess);
 					 });
 				}

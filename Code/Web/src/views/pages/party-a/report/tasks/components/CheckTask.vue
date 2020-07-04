@@ -29,24 +29,18 @@
         >
           <div style="font-weight:bold">Biển quảng cáo: {{sb.s_id.name}}</div>
           <div>
-            <v-carousel height="150" hide-delimiter-background show-arrows-on-hover>
+            <v-carousel height="220" hide-delimiter-background show-arrows-on-hover>
               <v-carousel-item v-for="(img, index) in sb.imgs" :key="index" >
-                  <div>
-<img style="width: 100%;
-    object-fit: contain;" class="white--text align-end" height="150" :src="getUrl(img.name)">
-                   <div style="margin-left:5px">
-                      {{img.device}} - Cách mốc khoảng 50m
-                      <i style="color:purple" class="fas fa-map-marked-alt"></i>
-                    </div>
-                  </div>
+                  
+                  <ImageViewer :location="task.check_task.place_rental.lat_lng" :img="img"></ImageViewer>
                 
                  
               </v-carousel-item>
             </v-carousel>
             
             <b style="font-weight:bold">Đánh giá của nhân viên</b>
-            <v-rating small background-color="orange lighten-3" color="orange"></v-rating>
-            <div>Chất lượng biển tốt</div>
+            <v-rating small="" readonly="" v-model="sb.rating" background-color="orange lighten-3" color="orange"></v-rating>
+              <div>{{sb.note}}</div>
           </div>
         </div>
       </div>
@@ -54,6 +48,7 @@
   </v-card>
 </template>
 <script>
+import ImageViewer from '@/views/pages/tasks/components/ImageViewer.vue'
 import { BASE_API } from "@/utils/base";
 export default {
   props: {
@@ -62,6 +57,9 @@ export default {
       required: true
     }
   },
+  components:{
+      ImageViewer
+    },
   methods: {
     getUrl(img) {
       return BASE_API + "file/get/" + img;

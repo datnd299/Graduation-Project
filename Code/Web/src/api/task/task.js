@@ -29,3 +29,11 @@ export function approveTask(data) {
     data: data
   })
 }
+
+export function getTaskByPlace(data) {
+  return request({
+    url: 'tasks/get-by-place',
+    method: 'post',
+    data: data
+  })
+}

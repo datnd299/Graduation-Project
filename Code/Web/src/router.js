@@ -126,7 +126,7 @@ export default new Router({
               path: "/party-a/report/signboards",
               name: "party-a-report-signboards",
               component: () => import("@/views/pages/party-a/report/signboards/ReportAll.vue")
-            },
+            }, 
             {
               path: "/party-a/report/place/:id/tasks",
               name: "party-a-report-place-task",

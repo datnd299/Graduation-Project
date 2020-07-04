@@ -18,23 +18,19 @@
     margin-top: 10px;"
           >
             <div style="font-weight:bold">Biển quảng cáo: {{sb.s_id.name}}</div>
-            <div>
-              <v-row>
-                <v-col v-for="(img, index) in sb.imgs" :key="index" xs="12" sm="12" md="12">
-                  <v-card class="mx-auto" max-width="300">
-                    <v-img class="white--text align-end" height="150" :src="getUrl(img.name)">
-                      <!-- <v-card-title style="color:black"></v-card-title> -->
-                    </v-img>
-                    <div style="margin-left:5px">
-                      {{img.device}} - Cách mốc khoảng 50m
-                      <i style="color:purple" class="fas fa-map-marked-alt"></i>
-                    </div>
-                  </v-card>
-                </v-col>
-              </v-row>
+            <div style="margin-top:20px">
+              
+              <v-carousel height="220" hide-delimiter-background show-arrows-on-hover>
+              <v-carousel-item v-for="(img, index) in sb.imgs" :key="index" >
+                <ImageViewer :location="task.report_task.place_rental.lat_lng" :img="img"></ImageViewer>
+                  
+                
+                 
+              </v-carousel-item>
+            </v-carousel>
               <b style="font-weight:bold">Đánh giá của đối tác</b>
-              <v-rating small="" background-color="orange lighten-3" color="orange"></v-rating>
-              <div>Biển tốt</div>
+              <v-rating small="" readonly="" v-model="sb.rating" background-color="orange lighten-3" color="orange"></v-rating>
+              <div>{{sb.note}}</div>
             </div>
           </div>
         </v-card-text>
@@ -43,12 +39,16 @@
 </template>
 <script>
 import {BASE_API} from '@/utils/base'
+import ImageViewer from '@/views/pages/tasks/components/ImageViewer.vue'
 export default {
     props:{
         task:{
             type:Object,
             required:true,
         }
+    },
+    components:{
+      ImageViewer
     },
     methods:{
         getUrl(img){

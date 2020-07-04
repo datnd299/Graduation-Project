@@ -1,6 +1,7 @@
 const AppError = require('../../utils/appError');
 const PlaceRental = require('../../models/place/placeRental');
 const PlaceForRent = require('../../models/place/placeForRent');
+const Task = require('../../models/task/task');
 const PartyA = require('../../models/user/partyA');
 const PartyB = require('../../models/user/partyB');
 const notificationController = require('../../controllers/notification/notificationController')
@@ -117,6 +118,81 @@ exports.getMyPlaces = async (req, res, next) => {
               
               e.pt_a_name = e.place_id.owner.name;
           })
+        
+        res.status(200).json({
+            status: 'success',
+            data: places
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+exports.getMyPlacesReport = async (req, res, next) => {
+    try {
+        const ptA = await PartyA.findOne({ "accs": req.acc._id});
+        places = await PlaceRental.find({ "party_renter": ptA._id }).populate({
+            path : 'signboards',
+        })
+        places = JSON.parse(JSON.stringify(places));
+        
+        var tasks = await Task.find({ pt_a: ptA, });
+        places.forEach(p=>{
+            p.report ={
+                fee:0,
+                task:0,
+                img:0,
+
+            }
+        })
+        places.forEach((p,pI)=>{
+            tasks.forEach((t,index)=>{
+            
+                if(t.fee_task){
+                 
+                    for(let i in t.fee_task.fee_detail){
+                        if(t.fee_task.fee_detail[i].place_rental.toString()==p._id.toString()){
+                            console.log('a');
+                            
+                            p.report.task+=1;
+                            p.report.fee +=t.fee_task.fee_detail[i].amount;
+                           
+                        }
+                    }
+                   
+                }
+                else if(t.report_task_report){
+                    if(t.report_task.place_rental.toString()==p._id.toString()){
+                        p.report.task+=1;
+                        t.report_task_report.signboards.forEach(sb=>{
+                            if(sb.imgs.length){
+                                p.report.img+=sb.imgs.length
+                            }
+                            
+                        })
+                    }
+                }
+                else if(t.check_task_report){
+     
+                    t.check_task_report.place_rental.forEach(pl=>{
+                        if(pl.pl_id.toString()==p._id.toString()){
+                            p.report.task+=1;
+                            pl.signboards.forEach(sb=>{
+                                p.report.img+=sb.imgs.length
+                            })
+                            
+                        }
+                    })
+                    
+                }else if(t.setup_task_report){
+                    if(t.setup_task.place_rental.toString()==p._id.toString()){
+                        p.report.task+=1;
+                        t.setup_task_report.signboards.forEach(sb=>{
+                            p.report.img+=sb.imgs.length;
+                        })
+                    }
+                }
+            })
+        })
         
         res.status(200).json({
             status: 'success',

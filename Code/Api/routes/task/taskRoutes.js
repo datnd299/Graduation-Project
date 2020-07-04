@@ -15,4 +15,6 @@ router.post('/get-by-id', taskController.getTaskById);
 router.post('/report', taskController.reportTask);
 router.post('/approve', taskController.approveTask);
 
+router.post('/get-by-place', taskController.getTasksByPlace);
+
 module.exports = router;

@@ -83,9 +83,20 @@ exports.createNew = async (req, res, next) => {
             }
         }
         var task = await Task.create(taskInfo);
-
-        if (task.type == 'report' && task.report_task.repeat_type == 'repeat') {
-            scheduleTask(task);
+        
+        // console.log(task);
+        
+        if (task.type == 'report') {
+            if(task.report_task.repeat_type == 'repeat'){
+                scheduleTask(task);
+            }
+            if(task.report_task.repeat_type != 'repeat'||!task.report_task.repeat_detail.random){
+                // console.log('a');
+                
+                sendNewTaskToB(task.report_task.place_rental,task);
+            }
+           
+            
         }
         res.status(200).json({
             status: 'success',
@@ -125,11 +136,7 @@ exports.reportTask = async (req, res, next) => {
   
           
             req.body.report.forEach(rp=>{
-               
-                
                 task.fee_task.fee_detail.forEach(fd=>{
-                    
-                    
                     if(fd.place_rental._id.toString()==rp.pl_id){
                         console.log('a');
                         if (!fd.report.em_confirm||!fd.report.pt_confirm) {
@@ -282,7 +289,7 @@ exports.getAllOfMyPT = async (req, res, next) => {
                 path: 'report_task_report.signboards.s_id'
             }).populate({
                 path: 'report_task_report.signboards.imgs'
-            }).sort([['start', -1]])
+            }).sort([['createdAt', -1]])
         } else if (acc.role == 'partyAEm') {
             task = await Task.find({ pt_a: ptA, type: { $ne: 'report' } }).populate('acc_created').populate({
                 path: 'setup_task.accs',
@@ -297,7 +304,7 @@ exports.getAllOfMyPT = async (req, res, next) => {
                 path: 'fee_task.accs',
             }).populate({
                 path: 'fee_task.fee_detail.place_rental',
-            });
+            }).sort([['createdAt', -1]]);
             task = task.filter(e => {
                 if (e.setup_task) {
                     var al = false;
@@ -344,11 +351,132 @@ exports.getAllOfMyPT = async (req, res, next) => {
                 populate:{
                     path:'place_id'
                 }
-            });
+            }).sort([['createdAt', -1]]);
            
         }
 
         
+        
+
+        res.status(200).json({
+            status: 'success',
+            data: task,
+            acc: req.acc
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+exports.getTasksByPlace = async (req, res, next) => {
+    try {
+        var plID = req.body.id;
+        var acc = req.acc;
+        var ptA = null;
+        var ptB = null;
+        if (acc.role.includes('partyAAdmin')) {
+            ptA = await PartyA.findOne({ "accs": acc._id });
+            if (!ptA) {
+                return next(new AppError(200, 'fail', 'Bạn không có quyền xem'), req, res, next);
+            }
+        } else {
+            ptB = await PartyB.findOne({ "accs": acc._id });
+
+
+        }
+
+        var task = null;
+        if (acc.role == 'partyAAdmin') {
+            task = await Task.find({ pt_a: ptA, }).populate('acc_created').populate({
+                path: 'setup_task.accs',
+            }).populate({
+                path: 'setup_task.place_rental',
+            }).populate({
+                path: 'setup_task_report.signboards.s_id',
+            }).populate({
+                path: 'check_task.accs',
+            }).populate({
+                path: 'check_task.place_rental',
+      
+                populate: {
+                    path: 'signboards',
+                    model: Signboard
+                }
+            }).populate({
+                path: 'check_task_report.place_rental.pl_id',
+         
+            }).populate({
+                path: 'check_task_report.place_rental.signboards.s_id',
+            }).populate({
+                path: 'check_task_report.place_rental.signboards.imgs',
+            }).populate({
+                path: 'fee_task.accs',
+            }).populate({
+                path: 'fee_task.fee_detail.place_rental',
+
+            }).populate({
+                path: 'report_task.place_rental',
+                populate: {
+                    path: 'signboards',
+
+                }
+            }).populate({
+                path: 'report_task.place_rental',
+
+                populate: {
+                    path: 'place_id',
+                    populate: {
+                        path: 'owner'
+                    }
+                },
+
+            }).populate({
+                path: 'report_task_report.signboards.s_id'
+            }).populate({
+                path: 'report_task_report.signboards.imgs'
+            }).sort([['start', -1]])
+        }
+
+        task = JSON.parse(JSON.stringify(task));
+    //    task = task.toObject();
+        
+        task.forEach((t,index)=>{
+        
+            if(t.fee_task){
+                var del = true;
+                for(let i in t.fee_task.fee_detail){
+                    if(t.fee_task.fee_detail[i].place_rental._id.toString()==plID){
+                         t.fee_task.fee_detail = t.fee_task.fee_detail[i];
+                        del = false;
+                        break;
+                    }
+                }
+                if(del){
+                    task= task.slice(index,1);
+                }
+            }
+            else if(t.report_task){
+                if(t.report_task.place_rental._id.toString()!=plID){
+                    task= task.slice(index,1);
+                }
+            }
+            else if(t.check_task){
+                var del = true;
+                for(let i in t.check_task.place_rental){
+                    if(t.check_task.place_rental[i]._id.toString()==plID){
+                         t.check_task.place_rental = t.check_task.place_rental[i];
+                        del = false;
+                        break;
+                    }
+                }
+                if(del){
+                    task= task.slice(index,1);
+                }
+            }else if(t.setup_task){
+                if(t.setup_task.place_rental._id.toString()!=plID){
+                    task= task.slice(index,1);
+                }
+            }
+        })
         
 
         res.status(200).json({
@@ -499,6 +627,8 @@ async function scheduleTask(task, done) {
     }
     if(task.status!=-1){
         if(task.status==-2){
+            console.log('a');
+            
             task.status==1;
             await task.save();
         }
@@ -550,7 +680,7 @@ async function scheduleTask(task, done) {
             scheduleTask(newTask._id.toString(), done);
         });
         (async function () {
-              notiTime = (new Date((new Date()).getTime() + 2 * 1000));
+            //   notiTime = (new Date((new Date()).getTime() + 4 * 1000));
             await agenda.start();
             await agenda.schedule(notiTime, jobName);
 

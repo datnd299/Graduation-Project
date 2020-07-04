@@ -7,7 +7,7 @@ const AppError = require('./../../utils/appError');
 const SImage = require('../../models/image/sImage');
 const agenda = require('../../utils/agenda');
 const latLngSchema = require('../../models/other/latLng')
-
+var util= require('util');
 
 const uuid = require('uuid')
 const uuidv4 = uuid.v4
@@ -25,7 +25,7 @@ const saveFile = (file,name) => {
 }
 function getMessage(bytes){
   var bStr = new Uint8Array(bytes);
-  var string = new TextDecoder("utf-8").decode(bStr);
+  var string = new util.TextDecoder("utf-8").decode(bStr);
   if(string.length>3){
       if(!string.includes('@!#')) return false;
   }
@@ -101,7 +101,7 @@ async function handleFile (id,job,done){
       console.log(message);
       
         var usingRows = Math.ceil(Buffer.byteLength(message, 'utf8')*8/3/img.bitmap.width);
-        var md5Val = md5Bitmap(img,usingRows);
+         var md5Val = md5Bitmap(img,usingRows);
         var data = getHiddenData(message);
         if(data.hash!=md5Val){
           sImage.status = 0;

@@ -14,3 +14,11 @@ export function getPlaces(data) {
     data: data,
   })
 }
+export function getPlacesReport(data) {
+  return request({
+    url: 'party-a/places/get-places-report',
+    method: 'post',
+    data: data,
+  })
+}
+

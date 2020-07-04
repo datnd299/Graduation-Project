@@ -42,9 +42,10 @@ Vue.use(VueLodash, { lodash: lodash })
 
 import VueSocketIO from 'vue-socket.io'
 import SocketIO from "socket.io-client"
+ import {BASE_URL} from './utils/base.js'
 
 
-const socketInstance = SocketIO('http://103.35.64.5:8086', {
+const socketInstance = SocketIO(BASE_URL, {
   transports: ['websocket']
 });
 socketInstance.on('newMessageSended', () => {

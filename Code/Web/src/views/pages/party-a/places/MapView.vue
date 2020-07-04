@@ -25,7 +25,9 @@
                 hide-details
               ></v-checkbox>
               <v-list-item-subtitle style="margin-left:20px">Chi phí: {{item.price|numberF}} / {{item.time_unit|timeUnitText}}</v-list-item-subtitle>
-              <v-list-item-subtitle style="margin-left:20px">Đã trả: 10,000,000đ</v-list-item-subtitle>
+              <v-list-item-subtitle style="margin-left:20px">Đã trả: {{item.report.fee|numberF}}đ</v-list-item-subtitle>
+              <v-list-item-subtitle style="margin-left:20px">Nhiệm vụ: {{item.report.task}}, Hình ảnh: {{item.report.img}}</v-list-item-subtitle>
+             
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -63,8 +65,9 @@
             <b>• {{currentPlace.price|numberF}} / {{currentPlace.time_unit|timeUnitText}}</b>
           </div>
           <div>
-              <b>• Đã trả: 5,000,000đ</b>
+              <b>• Đã trả: {{currentPlace.report.fee|numberF}}đ</b>
             </div>
+            
       </div>
       </gmap-info-window>
         <gmap-marker v-for="(item, index) in tableDataFiltered" :key="index"
@@ -77,7 +80,7 @@
   </v-card>
 </template>
 <script>
-import { getPlaces } from "@/api/party-a/place";
+import { getPlacesReport } from "@/api/party-a/place";
 import { BASE_API } from "@/utils/base";
 export default {
   data() {
@@ -124,7 +127,7 @@ export default {
   },
   created() {
     this.isLoading = true;
-    getPlaces().then(res => {
+    getPlacesReport().then(res => {
         res.data.forEach(e=>{
             e.choosed = true;
         })

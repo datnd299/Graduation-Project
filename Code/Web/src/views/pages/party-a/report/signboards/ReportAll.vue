@@ -24,7 +24,8 @@
                 :color="item.color.name"
                 hide-details
               ></v-checkbox>
-              <v-list-item-subtitle style="margin-left:20px">Số biển: 2 - Chi phí: 10,000,000đ</v-list-item-subtitle>
+              <v-list-item-subtitle style="margin-left:20px">Số biển: {{item.report.num}} - Chi phí: {{item.report.fee|numberF}}đ</v-list-item-subtitle>
+              <v-list-item-subtitle style="margin-left:20px">Nhiệm vụ: {{item.report.task}} - Hình ảnh: {{item.report.img}}</v-list-item-subtitle>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -46,10 +47,10 @@
             <div style="max-height:100px">
               <img style="    max-height: 100px;
     width: 100%;
-    object-fit: contain;" :src="getFile(currentPlace.s.imgs[0])" alt="">
+    object-fit: contain;" :src="getFile(currentPlace.sb.imgs[0])" alt="">
             </div>
             <div>
-              <b>• {{currentPlace.s.name}}</b>
+              <b>• {{currentPlace.sb.name}}</b>
             </div>
             <div>
               <b>• {{currentPlace.name}}</b>
@@ -70,20 +71,24 @@
             </div>
           </div>
         </gmap-info-window>
-        <gmap-marker
-          v-for="(item, index) in places"
-          :key="index"
-          :icon="{ url: item.s.urlIcon}"
+        <template v-for="(item, index) in places" >
+          <gmap-marker
+            v-if="item.sb.choosed"
+           :key="index"
+         
+          :icon="{ url: item.urlIcon}"
           :position="{ lat: item.lat_lng.lat, lng: item.lat_lng.lng }"
           @click="clickMarker(item,index)"
         ></gmap-marker>
+        </template>
+        
       </GmapMap>
     </div>
   </v-card>
 </template>
 <script>
-import { getSignboards } from "@/api/party-a/signboard";
-import { getPlaces } from "@/api/party-a/place";
+import { allSignboardsReport } from "@/api/party-a/signboard";
+
 import { ColorLst } from "@/utils/mapping";
 import { BASE_API } from "@/utils/base";
 export default {
@@ -128,41 +133,23 @@ export default {
   },
   created() {
     this.isLoading = true;
-    getSignboards().then(res => {
-      res.data.forEach((e, i) => {
-        e.choosed = true;
-        e.color = ColorLst[i];
+    var sef = this;
+    allSignboardsReport().then(res => {
+      res.data.forEach((sb, i) => {
+        sb.choosed = true;
+        sb.color = ColorLst[i];
+        sb.places.forEach(p=>{
+          p.sb = sb;
+          p.urlIcon =
+                    "/map/marker/" + sb.color.name.replace(" ", "_") + ".svg";
+          sef.places.push(p);
+        })
       });
       this.isLoading = false;
       this.tableData = res.data;
-      getPlaces().then(res2 => {
-        res2.data.forEach(e => {
-          if (e.signboards) {
-            e.signboards.forEach(s1 => {
-              res.data.forEach(s2 => {
-                if (s1._id == s2._id) {
-                  s1.color = s2.color;
-                  console.log(
-                    "/map/marker/" + s1.color.name.replace(" ", "_") + ".svg"
-                  );
-
-                  s1.urlIcon =
-                    "/map/marker/" + s1.color.name.replace(" ", "_") + ".svg";
-                }
-              });
-            });
-          }
-        });
-        this.places = [];
-        res2.data.forEach(e => {
-          if (e.signboards) {
-            e.signboards.forEach(s => {
-              e.s = s;
-              this.places.push(e);
-            });
-          }
-        });
-      });
+     
+     
+    
     });
   }
 };

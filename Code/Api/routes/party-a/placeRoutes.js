@@ -12,4 +12,5 @@ router.use(authController.protect);
 router.post('/rent-place', placeController.rentPlace);
 router.post('/get-details', placeController.getDetail);
 router.post('/get-places', placeController.getMyPlaces);
+router.post('/get-places-report', placeController.getMyPlacesReport);
 module.exports = router;

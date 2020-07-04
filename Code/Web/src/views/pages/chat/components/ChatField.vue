@@ -59,7 +59,7 @@
               label="Nhập tin nhắn"
               @keyup.enter.exact="sendMessage($event)"
             >
-              <v-select
+              <!-- <v-select
                 style="    margin-top: -16px;
     width: 275px;"
                 slot="append-outer"
@@ -67,8 +67,8 @@
                 label="Tư cách"
                 v-model="role"
                 outlined
-              >
-                <v-btn
+              > -->
+                <!-- <v-btn
                   style="    font-size: 35px;
     margin-top: -11px;"
                   large
@@ -77,7 +77,7 @@
                   slot="prepend"
                 >
                   <i class="fas fa-paperclip"></i>
-                </v-btn>
+                </v-btn> -->
                 <v-btn
                   slot="append-outer"
                   style="    margin-top: -16px;
@@ -90,7 +90,7 @@
                 >
                   <i class="fas fa-paper-plane"></i>
                 </v-btn>
-              </v-select>
+              <!-- </v-select> -->
             </v-textarea>
           </div>
         </div>
