@@ -26,15 +26,7 @@
             <div>
               <v-row>
                 <v-col v-for="(img, index) in sb.imgs" :key="index" xs="12" sm="6" md="4">
-                  <v-card class="mx-auto" max-width="300">
-                    <v-img class="white--text align-end" height="150" :src="getUrl(img.name)">
-                      <!-- <v-card-title style="color:black"></v-card-title> -->
-                    </v-img>
-                    <div style="margin-left:5px">
-                      {{img.device}} - Cách mốc 50m
-                      <i style="color:purple" class="fas fa-map-marked-alt"></i>
-                    </div>
-                  </v-card>
+                  <ImageViewer :location="pl.pl_id.lat_lng" :img="img"></ImageViewer>
                 </v-col>
               </v-row>
               <b style="font-weight:bold">Đánh giá của nhân viên</b>
@@ -55,6 +47,7 @@
   </div>
 </template>
 <script>
+import ImageViewer from '../../components/ImageViewer'
 import {BASE_API} from '@/utils/base'
 export default {
   props: {
@@ -65,6 +58,9 @@ export default {
       },
       required: true
     }
+  },
+  components:{
+    ImageViewer,
   },
   methods:{
     getUrl(img){
