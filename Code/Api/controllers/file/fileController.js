@@ -179,6 +179,8 @@ for(let id in req.files){
   files[id] = sImage;
 }
 
+console.log("file uploaded");
+
 res.status(200).json({
   status: 'success',
   data: files

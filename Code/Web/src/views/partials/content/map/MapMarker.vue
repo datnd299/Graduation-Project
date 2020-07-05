@@ -81,7 +81,10 @@ export default {
       this.input.lat = this.location.location.lat;
       this.input.lng = this.location.location.lng;
      this.input.name = this.location.address;
-     this.center= { lat: this.location.location.lat, lng: this.location.location.lng };
+     if(this.location.location.lat&&this.location.location.lng){
+       this.center= { lat: this.location.location.lat, lng: this.location.location.lng };
+     }
+     
     }
   },
 

@@ -6,7 +6,7 @@
               </v-img>
               <div style="margin-left:5px">
                   <template v-if="img.status==2">
-                      {{img.device}} - Cách mốc {{getDistance()}}m
+                      {{img.device}} - <span v-if="img.lat_lng.lat!==0">Cách mốc {{getDistance()}}m</span> <span style="color:red" v-else>Vị trí giả</span>&nbsp;
                       <a target="_blank" :href="'https://www.google.com/maps/search/?api=1&query='+img.lat_lng.lat+','+img.lat_lng.lng"><i style="color:purple" class="fas fa-map-marked-alt"></i></a> &nbsp;
                   </template>
                   <template v-else>
@@ -33,8 +33,11 @@
           <div>
               • Tên thiết bị: {{img.device}}
           </div>
-          <div>
-              • Cách mốc: {{getDistance()}}m <span v-if="img.lat_lng.lat<0">Vị trí giả</span>
+          <div v-if="img.lat_lng.lat!==0">
+              • Cách mốc: {{getDistance()}}m
+          </div>
+          <div style="color:red" v-else>
+              • Vị trí giả
           </div>
           <div>
               • Thời gian chụp: {{Date.parse(img.time).add({ hours: 15 }).toString("dd/MM/yyyy HH:mm")}}
@@ -74,6 +77,9 @@ export default {
             return BASE_API + "file/get/" + img;
         },
         getDistance(){
+            if (this.img.lat_lng.lat===0) {
+                return 'Vị trí giả'
+            }
             return calcCrow(this.location.lat,this.location.lng,this.img.lat_lng.lat,this.img.lat_lng.lng);
         },
         viewImage(){

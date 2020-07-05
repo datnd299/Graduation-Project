@@ -42,7 +42,7 @@ export default {
     created(){
         this.$store.dispatch(SET_BREADCRUMB, [
       { title: "Đối tác", route: "" },
-      { title: "Điểm treo của tôi", route: "/party-b/places-for-rent" }
+      { title: "Địa điểm của tôi", route: "/party-b/places-for-rent" }
       
     ]);
     this.fetchData();

@@ -3,13 +3,13 @@
     <div>
       <router-link to="/qr-scanner">
       <v-btn large color="primary">
-        <v-icon small="" left="">fas fa-plus</v-icon>Thêm điểm treo của đối tác
+        <v-icon small="" left="">fas fa-plus</v-icon>Thêm Địa điểm của đối tác
       </v-btn>
     </router-link>
 <router-link style="float:right" to="/party-a/places/map" >
       
       <v-btn large color="primary">
-      Bản đồ điểm treo
+      Bản đồ Địa điểm
     </v-btn>
     </router-link>
     </div>
@@ -85,7 +85,7 @@ export default {
       isLoading: false,
       headers: [
         {
-          text: "Điểm treo",
+          text: "Địa điểm",
           align: "start",
           value: "name"
         },
@@ -113,7 +113,7 @@ export default {
     });
     this.$store.dispatch(SET_BREADCRUMB, [
       { title: "Bên thuê", route: "/party-a" },
-      { title: "Điểm treo", route: "/party-a/places" }
+      { title: "Địa điểm", route: "/party-a/places" }
     ]);
   }
 };

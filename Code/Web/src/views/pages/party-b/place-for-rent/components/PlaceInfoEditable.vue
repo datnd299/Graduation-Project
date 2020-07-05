@@ -6,10 +6,10 @@
       </v-card>
     </v-dialog>
     <v-card class="mx-auto" style="padding:20px" outlined>
-      <v-list-item-title class="headline mb-1">Nhập thông tin điểm treo</v-list-item-title>
+      <v-list-item-title class="headline mb-1">Nhập thông tin địa điểm</v-list-item-title>
       <br />
       <br />
-      <v-form ref="form" v-model="valid">
+      <v-form ref="form" >
         <v-text-field outlined v-model="form.name" :counter="150" label="Tên địa điểm" required></v-text-field>
         <div>
           <v-text-field outlined v-model="form.address" label="Địa chỉ" required>
@@ -61,7 +61,7 @@
      
         </v-text-field>
         <div style="width:100%">
-          <v-file-input outlined accept="image/*" chips multiple v-model="form.files" label="Ảnh điểm treo">
+          <v-file-input outlined accept="image/*" chips multiple v-model="form.files" label="Ảnh Địa điểm">
           
           </v-file-input>
           <div v-if="form.files" class="image-input-preview">
@@ -90,7 +90,7 @@ export default {
   created() {
     this.$store.dispatch(SET_BREADCRUMB, [
       { title: "Đối tác", route: "" },
-      { title: "Thêm điểm treo", route: "/party-b/new-place-for-rent" }
+      { title: "Thêm Địa điểm", route: "/party-b/new-place-for-rent" }
     ]);
   },
   components: {

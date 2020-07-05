@@ -65,7 +65,7 @@ export default {
       isLoading: false,
       headers: [
         {
-          text: "Điểm treo",
+          text: "Địa điểm",
           align: "start",
           value: "place_name"
         },

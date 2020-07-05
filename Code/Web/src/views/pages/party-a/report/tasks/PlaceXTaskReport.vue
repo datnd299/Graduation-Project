@@ -57,7 +57,7 @@ export default {
         this.fetchData()
         this.$store.dispatch(SET_BREADCRUMB, [
       { title: "Bên thuê", route: "/party-a" },
-      { title: "Điểm treo", route: "/party-a/places" },
+      { title: "Địa điểm", route: "/party-a/places" },
       { title: "Nhà hàng Phúc Lộc", route: "/party-a/places" },
       { title: "DS Nhiệm vụ", route: "/party-a/places" }
     ]);

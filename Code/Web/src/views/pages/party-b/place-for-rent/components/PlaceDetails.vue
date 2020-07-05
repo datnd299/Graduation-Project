@@ -6,7 +6,7 @@
       </v-card>
     </v-dialog>
     <v-card class="mx-auto" style="padding:20px" outlined>
-      <v-list-item-title class="headline mb-1">Chi tiết điểm treo</v-list-item-title>
+      <v-list-item-title class="headline mb-1">Chi tiết Địa điểm</v-list-item-title>
       <br />
       <br />
 
@@ -406,7 +406,7 @@ export default {
         this.form2.timeUnit = this.placeB.time_unit;
 
         this.$store.dispatch(SET_BREADCRUMB, [
-          { title: "Điểm treo", route: "" },
+          { title: "Địa điểm", route: "" },
           {
             title: res.data.pl_b.name,
             route: "/place/" + this.pId + "/details"

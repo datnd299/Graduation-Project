@@ -4,7 +4,7 @@
       <template v-slot:prepend>
         <v-list-item one-line>
           <v-list-item-content>
-            <v-list-item-title>Điểm treo</v-list-item-title>
+            <v-list-item-title>Địa điểm</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </template>

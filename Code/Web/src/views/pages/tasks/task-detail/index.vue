@@ -41,7 +41,7 @@
           v-model="form.places"
           :multiple="form.type!='setup'&&form.type!='report'"
           :items="placeLstSelecst"
-          label="Điểm treo"
+          label="Địa điểm"
           outlined
         ></v-select>
         <v-select

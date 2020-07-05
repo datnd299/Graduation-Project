@@ -81,10 +81,10 @@
         "role":"2"
       },
       {
-        "title": "Điểm treo",
+        "title": "Địa điểm",
         "root": true,
         "page": "party-a/places",
-        "translate": "Điểm treo",
+        "translate": "Địa điểm",
         "role":"2"
       },
 
@@ -107,10 +107,10 @@
         "role":"4"
       },
       {
-        "title": "Điểm treo của bạn",
+        "title": "Địa điểm của bạn",
         "root": true,
         "page": "party-b/places-for-rent",
-        "translate": "Điểm treo của bạn",
+        "translate": "Địa điểm của bạn",
         "role":"4"
       },
       {

@@ -19,7 +19,7 @@
         >Thực hiện: Đối tác {{task.report_task.place_rental.place_id.owner.name}}</span>
       </div>
       <div>
-        <span class="span-bold">Tại điểm treo: {{task.report_task.place_rental.name}}</span>
+        <span class="span-bold">Tại Địa điểm: {{task.report_task.place_rental.name}}</span>
         <v-btn icon color="purple" small>
           <v-icon dense small>fas fa-map</v-icon>
         </v-btn>
