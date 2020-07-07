@@ -1,0 +1,1 @@
+{"_id":{"$oid":"5ef33ea75178e943a02395df"},"status":{"$numberInt":"1"},"pt_a":{"$oid":"5ef2f7f65af9364378326645"},"pt_b":{"$oid":"5ef2f9925af936437832664d"},"createdAt":{"$date":{"$numberLong":"1592999591734"}},"updatedAt":{"$date":{"$numberLong":"1592999591734"}},"__v":{"$numberInt":"0"}}
